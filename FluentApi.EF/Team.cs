@@ -19,7 +19,7 @@ namespace FluentApi.EF
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }

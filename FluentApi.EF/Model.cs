@@ -22,14 +22,6 @@ namespace FluentApi.EF
             modelBuilder.Entity<Employee>()
                 .HasOptional(e => e.ContactInfo)
                 .WithRequired(e => e.Employee);
-
-            modelBuilder.Entity<Team>()
-                .HasOptional(team => team.Employees)
-                .WithRequired();
-
-            modelBuilder.Entity<Project>()
-                .HasOptional(project => project.Teams)
-                .WithRequired();
         }
     }
 }
