@@ -76,5 +76,10 @@ namespace FluentApit.Tests
             bool projectHasTeam = team.Name == t.Name && affiliatedProject.Name == p.Name;
             Assert.IsTrue(projectHasTeam);
         }
+        [TestMethod]
+        public void InvalidOperationExceptionOnCreateUnaffiliatedContactInfo()
+        {
+
+        }
     }
 }
