@@ -32,5 +32,18 @@ namespace FluentApit.Tests
 
             Assert.AreEqual(newcount, count + 1);
         }
+
+        [TestMethod]
+        public void UpdateProject()
+        {
+            Model model = new Model();
+            Project p = model.Projects.Find(1);
+            string oldDescription = p.Description;
+            p.Description = ((new Random()).Next(0,Int32.MaxValue)).ToString();
+            model.SaveChanges();
+            var newP = model.Projects.Find(1);
+
+            Assert.AreNotEqual(oldDescription, newP);
+        }
     }
 }
