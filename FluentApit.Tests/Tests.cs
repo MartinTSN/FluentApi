@@ -1,14 +1,16 @@
 ﻿using System;
+using FluentApi.EF;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluentApit.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class Tests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetAllProjects()
         {
+            Model model = new Model();
         }
     }
 }
