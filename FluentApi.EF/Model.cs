@@ -25,7 +25,7 @@ namespace FluentApi.EF
 
             modelBuilder.Entity<Project>()
                 .HasMany(e => e.Teams)
-                .WithRequired(e => e.Project)
+                .WithOptional(e => e.Project)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()
@@ -33,5 +33,6 @@ namespace FluentApi.EF
                 .WithRequired(e => e.Team)
                 .WillCascadeOnDelete(false);
         }
+
     }
 }

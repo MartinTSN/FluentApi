@@ -45,5 +45,15 @@ namespace FluentApit.Tests
 
             Assert.AreNotEqual(oldDescription, newP);
         }
+        [TestMethod]
+        public void CreateUnaffiliatedTeam()
+        {
+            Team t = new Team();
+            t.Name = "A team";
+            Model model = new Model();
+            model.Teams.Add(t);
+            model.SaveChanges();
+
+        }
     }
 }
