@@ -23,16 +23,13 @@ namespace FluentApi.EF
                 .HasOptional(e => e.ContactInfo)
                 .WithRequired(e => e.Employee);
 
-            modelBuilder.Entity<Project>()
-                .HasMany(e => e.Teams)
-                .WithOptional(e => e.Project)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Team>()
-                .HasMany(e => e.Employees)
-                .WithRequired(e => e.Team)
-                .WillCascadeOnDelete(false);
-        }
+                .HasOptional(team => team.Employees)
+                .WithRequired();
 
+            modelBuilder.Entity<Project>()
+                .HasOptional(project => project.Teams)
+                .WithRequired();
+        }
     }
 }

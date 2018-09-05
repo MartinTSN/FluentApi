@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentApi.EF", "FluentApi.EF\FluentApi.EF.csproj", "{D99044B3-6536-4F32-BFF9-93D7A4FDB376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentApit.Tests", "FluentApit.Tests\FluentApit.Tests.csproj", "{C7E088F2-8CE5-43AA-A4C4-DE9CE4083D06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentApi.Tests", "FluentApit.Tests\FluentApi.Tests.csproj", "{C7E088F2-8CE5-43AA-A4C4-DE9CE4083D06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
