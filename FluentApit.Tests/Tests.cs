@@ -55,5 +55,26 @@ namespace FluentApit.Tests
             model.SaveChanges();
 
         }
+
+        [TestMethod]
+        public void CreateAffiliatedTeam()
+        {
+            Team t = new Team();
+            t.Name = "b Team";
+            Project p = new Project();
+            p.Name = "B Team Project";
+            List<Team> demTeams = new List<Team>();
+            demTeams.Add(t);
+            p.Teams = demTeams;
+            Model model = new Model();
+            model.Projects.Add(p);
+            model.SaveChanges();
+
+            Team team = model.Teams.Where(someteam => someteam.Name == "b Team").FirstOrDefault();
+            Project affiliatedProject = team.Project;
+
+            bool projectHasTeam = team.Name == t.Name && affiliatedProject.Name == p.Name;
+            Assert.IsTrue(projectHasTeam);
+        }
     }
 }
