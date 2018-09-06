@@ -11,12 +11,18 @@ namespace FluentApi.Gui
     public partial class EmployeeUserControl : UserControl
     {
         protected Model model;
+        private Employee selectedEmployee;
 
         public EmployeeUserControl()
         {
             InitializeComponent();
             model = new Model();
             dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
+
+        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
         }
     }
 }
