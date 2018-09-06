@@ -11,6 +11,7 @@ namespace FluentApi.Gui
     public partial class EmployeeUserControl : UserControl
     {
         protected Model model;
+
         public EmployeeUserControl()
         {
             InitializeComponent();
