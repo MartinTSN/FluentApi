@@ -2,6 +2,7 @@
 
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FluentApi.Gui
 {
@@ -23,20 +24,23 @@ namespace FluentApi.Gui
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
-            textBoxEmployeeName.Text = selectedEmployee.Name;
-            datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
-            if (selectedEmployee.ContactInfo != null)
+            if (selectedEmployee != null)
             {
-                textBoxMail.Text = selectedEmployee.ContactInfo.Email;
-                textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
-            }
-            else
-            {
-                textBoxMail.Text = string.Empty;
-                textBoxPhoneNumber.Text = string.Empty;
-                buttonUpdateContactInfo.IsEnabled = false;
-            }
 
+                buttonUpdateEmployee.IsEnabled = true;
+                buttonAddEmployee.IsEnabled = false;
+                textBoxEmployeeName.Text = selectedEmployee.Name;
+                if (selectedEmployee.ContactInfo != null)
+                {
+                    textBoxMail.Text = selectedEmployee.ContactInfo.Email;
+                    textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
+                }
+                else
+                {
+                    textBoxEmployeeName.Text = selectedEmployee.Name;
+                    datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
+                }
+            }
         }
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -51,12 +55,21 @@ namespace FluentApi.Gui
 
         private void Button_Update_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (selectedEmployee.Name != textBoxEmployeeName.Text)
+                if (selectedEmployee != null)
+                {
+                    selectedEmployee.Name = textBoxEmployeeName.Text;
+                    if (textBoxEmployeeName.Text != selectedEmployee.Name)
+                    {
+                        selectedEmployee.Name = textBoxEmployeeName.Text;
+                    }
+                    model.SaveChanges();
+                    dataGridEmployees.ItemsSource = model.Employees.ToList();
+                }
         }
-
         private void Button_Update_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
+
         }
 
         private void Button_Add_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -66,6 +79,21 @@ namespace FluentApi.Gui
             newContactInfo.Phone = textBoxPhoneNumber.Text;
             model.ContactInfos.Add(newContactInfo);
             model.SaveChanges();
+        }
+
+        private void DataGrid_Employees_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (dataGridEmployees.SelectedItem != null)
+            {
+                if (e.Key == Key.Escape)
+                {
+                    dataGridEmployees.SelectedItem = selectedEmployee = null;
+                    buttonAddEmployee.IsEnabled = true;
+                    buttonUpdateEmployee.IsEnabled = false;
+                    textBoxEmployeeName.Text = string.Empty;
+                    textBoxEmployeeName.Focus();
+                }
+            }
         }
     }
 }

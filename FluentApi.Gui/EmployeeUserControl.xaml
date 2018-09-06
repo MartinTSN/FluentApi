@@ -20,7 +20,8 @@
                           x:Name="dataGridEmployees"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
-                          SelectionChanged="DataGrid_Employees_SelectionChanged">
+                          SelectionChanged="DataGrid_Employees_SelectionChanged"
+                          KeyDown="DataGrid_Employees_KeyDown">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Navn"
                                             Binding="{Binding Name}" />
