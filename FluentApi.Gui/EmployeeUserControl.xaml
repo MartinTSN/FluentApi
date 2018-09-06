@@ -17,7 +17,11 @@
             <Grid>
                 <DataGrid Margin="10"
                           x:Name="dataGridEmployees">
-
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Navn" />
+                        <DataGridTextColumn Header="Mail" />
+                        <DataGridTextColumn Header="Telefon" />
+                    </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </GroupBox>
