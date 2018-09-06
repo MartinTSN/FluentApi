@@ -23,6 +23,10 @@ namespace FluentApi.Gui
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            textBoxEmployeeName.Text = selectedEmployee.Name;
+            textBoxMail.Text = selectedEmployee.ContactInfo.Email;
+            textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
+            datePickerEmployeeStartDate.DisplayDate = selectedEmployee.
         }
     }
 }

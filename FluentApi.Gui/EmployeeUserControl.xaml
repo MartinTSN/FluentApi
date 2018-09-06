@@ -72,7 +72,8 @@
                         <DatePicker Grid.Column="1"
                                     Grid.Row="1"
                                     Margin="3"
-                                    x:Name="datePickerEmployeeStartDate" />
+                                    x:Name="datePickerEmployeeStartDate"
+                                    FirstDayOfWeek="Monday" />
                     </Grid>
                     <Button Content="Opdater/Gem Ny"
                             Width="125"

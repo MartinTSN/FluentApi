@@ -13,6 +13,8 @@ namespace FluentApi.EF
         [StringLength(100)]
         public string Name { get; set; }
 
+        public virtual DateTime EmploymentDate { get; set; }
+
         public int? TeamId { get; set; }
 
         public virtual ContactInfo ContactInfo { get; set; }
