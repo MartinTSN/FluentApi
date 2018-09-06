@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FluentApi.Gui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Project Management Software"
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow"
+        Height="900"
+        Width="1600">
+    <DockPanel Background="AliceBlue">
+        <Menu DockPanel.Dock="Top"
+              Padding="5">
+            <MenuItem Header="_Filer">
+                <MenuItem Header="Luk" />
+            </MenuItem>
+            <MenuItem Header="_Hjælp">
+                <MenuItem Header="Om" />
+            </MenuItem>
+        </Menu>
+        <StatusBar Background="RoyalBlue"
+                   DockPanel.Dock="Bottom">
+            <TextBlock  Foreground="AntiqueWhite"
+                        Text="Klar."
+                        x:Name="textBlockStatusBar" />
+
+        </StatusBar>
+        <TabControl Margin="2">
+            <TabItem Header="Ansatte"
+                     Padding="2">
+
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
