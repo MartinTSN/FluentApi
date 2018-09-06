@@ -12,7 +12,9 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Margin="10"
+
+        <GroupBox Grid.Column="0"
+                  Margin="10"
                   Header=" Oversigt ">
             <Grid>
                 <DataGrid Margin="10"
@@ -27,6 +29,58 @@
                                             Binding="{Binding ContactInfo.Phone}" />
                     </DataGrid.Columns>
                 </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1"
+                  Header=" Detaljer "
+                  Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Margin="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="Navn:"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               HorizontalAlignment="Right" />
+                        <TextBox Margin="3"
+                                 Grid.Column="1"
+                                 Text=""
+                                 x:Name="textBoxEmployeeName" />
+                        <Label Content="Ansættelses dato:"
+                               Grid.Column="0"
+                               Grid.Row="1"
+                               HorizontalAlignment="Right" />
+                        <DatePicker Grid.Column="1"
+                                    Grid.Row="1"  Margin="3" x:Name="datePickerEmployeeStartDate"/>
+                    </Grid>
+                    <Button Content="Opdater/Gem Ny"
+                            Width="125"
+                            HorizontalAlignment="Right"
+                            x:Name="buttonUpdateEmployee"
+                            Margin="0,100,0,0" />
+                </StackPanel>
+                <Line Grid.Row="1"
+                      Stroke="Gray"
+                      StrokeThickness="5"
+                      X1="0"
+                      Y1="10"
+                      X2="1000"
+                      Y2="10" />
             </Grid>
         </GroupBox>
     </Grid>
