@@ -23,6 +23,7 @@ namespace FluentApi.Gui
         public MainWindow()
         {
             InitializeComponent();
+            userControlEmployees.Content = new EmployeeUserControl();
         }
     }
 }
