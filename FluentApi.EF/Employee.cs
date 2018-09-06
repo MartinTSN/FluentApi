@@ -11,9 +11,41 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return Name;
+            }
+            set
+            {
+                if (value == null || value == "")
+                {
+                    throw new ArgumentNullException("The name must be set.");
+                }
+                if (value.Length > 100 || value.Length < 2)
+                {
+                    throw new ArgumentOutOfRangeException("The name must be above 2 chars and under 100.");
+                }
+                Name = value;
+            }
+        }
 
-        public virtual DateTime EmploymentDate { get; set; }
+        public DateTime EmploymentDate
+        {
+            get
+            {
+                return EmploymentDate;
+            }
+            set
+            {
+                if (value.Date == null)
+                {
+                    throw new ArgumentNullException("The date must be set");
+                }
+                EmploymentDate = value;
+            }
+        }
 
         public int? TeamId { get; set; }
 

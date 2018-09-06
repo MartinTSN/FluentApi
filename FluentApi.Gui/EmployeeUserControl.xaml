@@ -41,46 +41,51 @@
                     <RowDefinition Height="20" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Margin="10"
-                            Grid.Row="0"
-                            DataContext="selectedEmployee">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Content="Navn:"
-                               Grid.Column="0"
-                               Grid.Row="0"
-                               HorizontalAlignment="Right" />
-                        <TextBox DataContext="selectedEmployee"
-                                 Margin="3"
-                                 Grid.Column="1"
-                                 Text="{Binding Name}"
-                                 x:Name="textBoxEmployeeName" />
-                        <Label Content="Ansættelses dato:"
-                               Grid.Column="0"
-                               Grid.Row="1"
-                               HorizontalAlignment="Right" />
-                        <DatePicker Grid.Column="1"
-                                    Grid.Row="1"
-                                    Margin="3"
-                                    x:Name="datePickerEmployeeStartDate"
-                                    FirstDayOfWeek="Monday" />
-                    </Grid>
-                    <Button Content="Opdater/Gem Ny"
-                            Width="125"
-                            HorizontalAlignment="Right"
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Navn:"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalAlignment="Right" />
+                    <TextBox DataContext="selectedEmployee"
+                             Margin="3"
+                             Grid.Column="1"
+                             Text="{Binding Name}"
+                             x:Name="textBoxEmployeeName" />
+                    <Label Content="Ansættelses dato:"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           HorizontalAlignment="Right" />
+                    <DatePicker Grid.Column="1"
+                                Grid.Row="1"
+                                Margin="3"
+                                x:Name="datePickerEmployeeStartDate"
+                                FirstDayOfWeek="Monday" />
+                    <Button Grid.Column="2"
+                            Grid.Row="2"
+                            Content="Gem Ny"
+                            Margin="5"
+                            x:Name="buttonAddEmployee"
+                            Click="Button_Create_Employee_Click" />
+                    <Button Grid.Column="3"
+                            Grid.Row="3"
+                            Margin="5"
+                            Content="Opdater"
                             x:Name="buttonUpdateEmployee"
-                            Margin="0,100,0,0" />
-                </StackPanel>
+                            Click="Button_Update_Employee_Click" />
+                </Grid>
+
+
 
                 <Line Grid.Row="1"
                       Stroke="Gray"
@@ -89,46 +94,50 @@
                       Y1="10"
                       X2="1000"
                       Y2="10" />
-                <StackPanel Margin="10"
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Mail:"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalAlignment="Right" />
+                    <TextBox DataContext="selectedEmployee"
+                             Margin="3"
+                             Grid.Column="1"
+                             Text="{Binding ContactInfo.Mail}"
+                             x:Name="textBoxMail" />
+                    <Label Content="TelefonNummer:"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           HorizontalAlignment="Right" />
+                    <TextBox Text="{Binding ContactInfo.Phone}"
+                             Margin="3"
+                             Grid.Column="1"
+                             Grid.Row="1"
+                             x:Name="textBoxPhoneNumber" />
+                    <Button Content="Gem Ny"
+                            Grid.Column="2"
                             Grid.Row="2"
-                            DataContext="selectedEmployee">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Content="Mail:"
-                               Grid.Column="0"
-                               Grid.Row="0"
-                               HorizontalAlignment="Right" />
-                        <TextBox DataContext="selectedEmployee"
-                                 Margin="3"
-                                 Grid.Column="1"
-                                 Text="{Binding ContactInfo.Mail}"
-                                 x:Name="textBoxMail" />
-                        <Label Content="TelefonNummer:"
-                               Grid.Column="0"
-                               Grid.Row="1"
-                               HorizontalAlignment="Right" />
-                        <TextBox Text="{Binding ContactInfo.Phone}"
-                                 Margin="3"
-                                 Grid.Column="1"
-                                 Grid.Row="1"
-                                 x:Name="textBoxPhoneNumber" />
-                    </Grid>
-                    <Button Content="Opdater/Gem Ny"
-                            Width="125"
-                            HorizontalAlignment="Right"
-                            Margin="0,100,0,0"
-                            x:Name="buttonUpdateContactInfo" />
-                </StackPanel>
+                            Margin="5"
+                            x:Name="buttonAddContactInfo"
+                            Click="Button_Add_ContactInfo_Click" />
+                    <Button Content="Opdater"
+                            Grid.Column="3"
+                            Grid.Row="2"
+                            Margin="5"
+                            x:Name="buttonUpdateContactInfo"
+                            Click="Button_Update_ContactInfo_Click" />
+                </Grid>
+
             </Grid>
         </GroupBox>
     </Grid>
