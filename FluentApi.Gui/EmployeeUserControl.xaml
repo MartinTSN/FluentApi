@@ -12,7 +12,6 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
-
         <GroupBox Grid.Column="0"
                   Margin="10"
                   Header=" Oversigt ">
