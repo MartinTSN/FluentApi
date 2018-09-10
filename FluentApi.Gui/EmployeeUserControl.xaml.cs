@@ -32,7 +32,6 @@ namespace FluentApi.Gui
                 textBoxEmployeeLastName.Text = selectedEmployee.LastName;
                 datePickerEmployeeBirthday.SelectedDate = selectedEmployee.BirthDay;
                 datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
-                textBoxEmployeeCPRNumber.Text = selectedEmployee.CPRNumber;
                 textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
                 if (selectedEmployee.ContactInfo != null)
                 {
@@ -55,12 +54,15 @@ namespace FluentApi.Gui
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            Random random = new Random();
+            int odd = 1 + 2 * random.Next(1000,9999);
             Employee newEmployee = new Employee();
             newEmployee.FirstName = textBoxEmployeeFirstName.Text;
             newEmployee.LastName = textBoxEmployeeLastName.Text;
             newEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
             newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
-
+            newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + odd;
+            newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
             model.Employees.Add(newEmployee);
             model.SaveChanges();
             ReloadDataGridEmployees();
@@ -78,9 +80,13 @@ namespace FluentApi.Gui
                 {
                     selectedEmployee.LastName = textBoxEmployeeLastName.Text;
                 }
+                if (datePickerEmployeeBirthday.SelectedDate != selectedEmployee.BirthDay)
+                {
+                    selectedEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
+                }
                 if (datePickerEmployeeStartDate.SelectedDate != selectedEmployee.EmploymentDate)
                 {
-                    selectedEmployee.EmploymentDate = Convert.ToDateTime(datePickerEmployeeStartDate.SelectedDate);
+                    selectedEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
                 }
                 model.SaveChanges();
                 ReloadDataGridEmployees();
