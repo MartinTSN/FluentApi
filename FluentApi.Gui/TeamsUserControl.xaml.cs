@@ -28,8 +28,7 @@ namespace FluentApi.Gui
         {
             InitializeComponent();
             model = new Model();
-            //dataGridTeams.ItemsSource = model.Teams.ToList();
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
+            dataGridTeams.ItemsSource = model.Teams.ToList();
 
         }
 
@@ -37,9 +36,20 @@ namespace FluentApi.Gui
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
             dataGridEmployees.ItemsSource = selectedTeam.Employees;
+            buttonShowAllEmployees.IsEnabled = true;
+            buttonShowOnTeam.IsEnabled = true;
 
-            
         }
 
+        private void Button_ShowAllEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
+
+        private void Button_ShowOnTeam_Click(object sender, RoutedEventArgs e)
+        {
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+            dataGridEmployees.ItemsSource = selectedTeam.Employees;
+        }
     }
 }

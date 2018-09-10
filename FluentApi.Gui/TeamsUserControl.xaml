@@ -67,10 +67,10 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
@@ -78,8 +78,28 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    
+                    <Button Grid.Row="3"
+                            Grid.Column="0"
+                            Content="Vis alle Employees"
+                            Margin="3"
+                            x:Name="buttonShowAllEmployees"
+                            IsEnabled="False"
+                            Click="Button_ShowAllEmployees_Click" />
+                    <Button Grid.Row="3"
+                            Grid.Column="1"
+                            Content="Vis Employees På team"
+                            Margin="3"
+                            x:Name="buttonShowOnTeam"
+                            IsEnabled="False"
+                            Click="Button_ShowOnTeam_Click" />
                 </Grid>
+                <Line Grid.Row="1"
+                      Stroke="Gray"
+                      StrokeThickness="5"
+                      X1="0"
+                      Y1="10"
+                      X2="1000"
+                      Y2="10" />
             </Grid>
         </GroupBox>
     </Grid>
