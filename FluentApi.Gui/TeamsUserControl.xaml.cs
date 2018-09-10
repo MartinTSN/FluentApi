@@ -12,19 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FluentApi.EF;
 
 namespace FluentApi.Gui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TeamsUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TeamsUserControl : UserControl
     {
-        public MainWindow()
+        public TeamsUserControl()
         {
             InitializeComponent();
-            userControlEmployees.Content = new EmployeeUserControl();
-            userControlTeams.Content = new TeamsUserControl();
         }
     }
 }

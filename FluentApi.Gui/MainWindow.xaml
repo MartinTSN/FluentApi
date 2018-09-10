@@ -30,11 +30,11 @@
         <TabControl Margin="2">
             <TabItem Header="Ansatte"
                      Padding="15,5">
-                <UserControl x:Name="userControlEmployees"></UserControl>
+                <UserControl x:Name="userControlEmployees" />
             </TabItem>
             <TabItem Header="Teams"
                      Padding="15,5">
-
+                <UserControl x:Name="userControlTeams" />
             </TabItem>
             <TabItem Header="Projekter"
                      Padding="15,5">
