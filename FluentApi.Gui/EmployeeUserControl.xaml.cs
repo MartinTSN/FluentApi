@@ -134,5 +134,24 @@ namespace FluentApi.Gui
                 buttonUpdateEmployee.IsEnabled = true;
             }
         }
+
+        private void TextBox_Mail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textBoxMail.Text == string.Empty)
+            {
+                buttonAddContactInfo.IsEnabled = false;
+                buttonUpdateContactInfo.IsEnabled = false;
+            }
+            else if (selectedEmployee.ContactInfo == null)
+            {
+                buttonAddContactInfo.IsEnabled = true;
+                buttonUpdateContactInfo.IsEnabled = false;
+            }
+            else
+            {
+                buttonAddContactInfo.IsEnabled = false;
+                buttonUpdateContactInfo.IsEnabled = true;
+            }
+        }
     }
 }

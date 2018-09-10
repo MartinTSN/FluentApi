@@ -116,7 +116,8 @@
                              Margin="3"
                              Grid.Column="1"
                              Text="{Binding ContactInfo.Mail}"
-                             x:Name="textBoxMail" />
+                             x:Name="textBoxMail"
+                             TextChanged="TextBox_Mail_TextChanged" />
                     <Label Content="TelefonNummer:"
                            Grid.Column="0"
                            Grid.Row="1"
