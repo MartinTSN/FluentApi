@@ -1,5 +1,5 @@
 ﻿using FluentApi.EF;
-
+using System;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -54,7 +54,6 @@ namespace FluentApi.Gui
             model.Employees.Add(newEmployee);
             model.SaveChanges();
             ReloadDataGridEmployees();
-
         }
 
         private void Button_Update_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -73,7 +72,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxMail.Text != selectedEmployee.ContactInfo.Email)
+                if (textBoxMail.Text != selectedEmployee.ContactInfo.Email || selectedEmployee.ContactInfo.Email == null)
                 {
                     selectedEmployee.ContactInfo.Email = textBoxMail.Text;
                 }
@@ -106,8 +105,28 @@ namespace FluentApi.Gui
                     buttonAddEmployee.IsEnabled = true;
                     buttonUpdateEmployee.IsEnabled = false;
                     textBoxEmployeeName.Text = string.Empty;
+                    datePickerEmployeeStartDate.SelectedDate = null;
                     textBoxEmployeeName.Focus();
                 }
+            }
+        }
+
+        private void TextBox_EmployeeName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textBoxEmployeeName.Text == string.Empty)
+            {
+                buttonAddEmployee.IsEnabled = false;
+                buttonUpdateEmployee.IsEnabled = false;
+            }
+            else if (selectedEmployee == null)
+            {
+                buttonAddEmployee.IsEnabled = true;
+                buttonUpdateEmployee.IsEnabled = false;
+            }
+            else
+            {
+                buttonAddEmployee.IsEnabled = false;
+                buttonUpdateEmployee.IsEnabled = true;
             }
         }
     }
