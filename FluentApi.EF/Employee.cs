@@ -11,7 +11,8 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public DateTime EmploymentDate { get; set; }
 

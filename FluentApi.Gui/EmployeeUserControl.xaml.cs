@@ -28,7 +28,8 @@ namespace FluentApi.Gui
             {
                 buttonUpdateEmployee.IsEnabled = true;
                 buttonAddEmployee.IsEnabled = false;
-                textBoxEmployeeName.Text = selectedEmployee.Name;
+                textBoxEmployeeFirstName.Text = selectedEmployee.FirstName;
+                textBoxEmployeeLastName.Text = selectedEmployee.LastName;
                 datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
                 if (selectedEmployee.ContactInfo != null)
                 {
@@ -50,7 +51,8 @@ namespace FluentApi.Gui
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Employee newEmployee = new Employee();
-            newEmployee.Name = textBoxEmployeeName.Text;
+            newEmployee.FirstName = textBoxEmployeeFirstName.Text;
+            newEmployee.LastName = textBoxEmployeeLastName.Text;
             model.Employees.Add(newEmployee);
             model.SaveChanges();
             ReloadDataGridEmployees();
@@ -60,9 +62,13 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxEmployeeName.Text != selectedEmployee.Name)
+                if (textBoxEmployeeFirstName.Text != selectedEmployee.FirstName)
                 {
-                    selectedEmployee.Name = textBoxEmployeeName.Text;
+                    selectedEmployee.FirstName = textBoxEmployeeFirstName.Text;
+                }
+                if (textBoxEmployeeLastName.Text != selectedEmployee.LastName)
+                {
+                    selectedEmployee.LastName = textBoxEmployeeLastName.Text;
                 }
                 if (datePickerEmployeeStartDate.SelectedDate != selectedEmployee.EmploymentDate)
                 {
@@ -109,16 +115,17 @@ namespace FluentApi.Gui
                     dataGridEmployees.SelectedItem = selectedEmployee = null;
                     buttonAddEmployee.IsEnabled = true;
                     buttonUpdateEmployee.IsEnabled = false;
-                    textBoxEmployeeName.Text = string.Empty;
+                    textBoxEmployeeFirstName.Text = string.Empty;
+                    textBoxEmployeeLastName.Text = string.Empty;
                     datePickerEmployeeStartDate.SelectedDate = null;
-                    textBoxEmployeeName.Focus();
+                    textBoxEmployeeFirstName.Focus();
                 }
             }
         }
 
-        private void TextBox_EmployeeName_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_EmployeeFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxEmployeeName.Text == string.Empty)
+            if (textBoxEmployeeFirstName.Text == string.Empty)
             {
                 buttonAddEmployee.IsEnabled = false;
                 buttonUpdateEmployee.IsEnabled = false;
