@@ -17,16 +17,17 @@ namespace FluentApi.EF
         public string LastName { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? BirthDay { get; set; }
+        public DateTime BirthDay { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime EmploymentDate { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string CPRNumber { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Salary { get; set; }
+        public decimal Salary { get; set; }
 
         public int? TeamId { get; set; }
 

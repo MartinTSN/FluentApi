@@ -30,7 +30,10 @@ namespace FluentApi.Gui
                 buttonAddEmployee.IsEnabled = false;
                 textBoxEmployeeFirstName.Text = selectedEmployee.FirstName;
                 textBoxEmployeeLastName.Text = selectedEmployee.LastName;
+                datePickerEmployeeBirthday.SelectedDate = selectedEmployee.BirthDay;
                 datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
+                textBoxEmployeeCPRNumber.Text = selectedEmployee.CPRNumber;
+                textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
                 if (selectedEmployee.ContactInfo != null)
                 {
                     textBoxMail.Text = selectedEmployee.ContactInfo.Email;
@@ -55,6 +58,9 @@ namespace FluentApi.Gui
             Employee newEmployee = new Employee();
             newEmployee.FirstName = textBoxEmployeeFirstName.Text;
             newEmployee.LastName = textBoxEmployeeLastName.Text;
+            newEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
+            newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
+
             model.Employees.Add(newEmployee);
             model.SaveChanges();
             ReloadDataGridEmployees();
