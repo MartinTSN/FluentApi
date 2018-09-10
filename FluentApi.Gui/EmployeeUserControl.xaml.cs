@@ -29,11 +29,11 @@ namespace FluentApi.Gui
                 buttonUpdateEmployee.IsEnabled = true;
                 buttonAddEmployee.IsEnabled = false;
                 textBoxEmployeeName.Text = selectedEmployee.Name;
+                datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
                 if (selectedEmployee.ContactInfo != null)
                 {
                     textBoxMail.Text = selectedEmployee.ContactInfo.Email;
                     textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
-                    datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
                 }
                 else
                 {
@@ -138,6 +138,25 @@ namespace FluentApi.Gui
         private void TextBox_Mail_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (textBoxMail.Text == string.Empty)
+            {
+                buttonAddContactInfo.IsEnabled = false;
+                buttonUpdateContactInfo.IsEnabled = false;
+            }
+            else if (selectedEmployee.ContactInfo == null)
+            {
+                buttonAddContactInfo.IsEnabled = true;
+                buttonUpdateContactInfo.IsEnabled = false;
+            }
+            else
+            {
+                buttonAddContactInfo.IsEnabled = false;
+                buttonUpdateContactInfo.IsEnabled = true;
+            }
+        }
+
+        private void TextBox_PhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textBoxPhoneNumber.Text == string.Empty)
             {
                 buttonAddContactInfo.IsEnabled = false;
                 buttonUpdateContactInfo.IsEnabled = false;

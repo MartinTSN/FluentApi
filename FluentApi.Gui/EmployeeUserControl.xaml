@@ -126,7 +126,8 @@
                              Margin="3"
                              Grid.Column="1"
                              Grid.Row="1"
-                             x:Name="textBoxPhoneNumber" />
+                             x:Name="textBoxPhoneNumber"
+                             TextChanged="TextBox_PhoneNumber_TextChanged" />
                     <Button Content="Gem Ny"
                             Grid.Column="2"
                             Grid.Row="2"
