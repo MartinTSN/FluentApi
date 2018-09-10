@@ -9,6 +9,7 @@ namespace FluentApi.EF
     [Table("ContactInfos")]
     public partial class ContactInfo
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

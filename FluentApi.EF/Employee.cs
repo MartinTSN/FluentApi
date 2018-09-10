@@ -12,9 +12,21 @@ namespace FluentApi.EF
 
         [StringLength(100)]
         public string FirstName { get; set; }
+
+        [StringLength(100)]
         public string LastName { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? BirthDay { get; set; }
+
+        [Column(TypeName = "date")]
         public DateTime EmploymentDate { get; set; }
+
+        [StringLength(100)]
+        public string CPRNumber { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? Salary { get; set; }
 
         public int? TeamId { get; set; }
 

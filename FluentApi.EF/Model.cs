@@ -20,6 +20,10 @@ namespace FluentApi.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>()
+                .Property(e => e.Salary)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Employee>()
                 .HasOptional(e => e.ContactInfo)
                 .WithRequired(e => e.Employee);
         }
