@@ -72,7 +72,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxMail.Text != selectedEmployee.ContactInfo.Email || selectedEmployee.ContactInfo.Email == null)
+                if (textBoxMail.Text != selectedEmployee.ContactInfo.Email)
                 {
                     selectedEmployee.ContactInfo.Email = textBoxMail.Text;
                 }
@@ -91,6 +91,7 @@ namespace FluentApi.Gui
             newContactInfo.Email = textBoxMail.Text;
             newContactInfo.Phone = textBoxPhoneNumber.Text;
             model.ContactInfos.Add(newContactInfo);
+            selectedEmployee.ContactInfo = newContactInfo;
             model.SaveChanges();
             ReloadDataGridEmployees();
         }
