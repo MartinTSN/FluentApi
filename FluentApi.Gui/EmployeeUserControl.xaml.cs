@@ -26,7 +26,6 @@ namespace FluentApi.Gui
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
             if (selectedEmployee != null)
             {
-
                 buttonUpdateEmployee.IsEnabled = true;
                 buttonAddEmployee.IsEnabled = false;
                 textBoxEmployeeName.Text = selectedEmployee.Name;
@@ -38,8 +37,9 @@ namespace FluentApi.Gui
                 }
                 else
                 {
-                    textBoxMail.Text = string.Empty;
-                    textBoxPhoneNumber.Text = string.Empty;
+                    textBoxMail.Text = String.Empty;
+                    textBoxPhoneNumber.Text = String.Empty;
+                    buttonUpdateContactInfo.IsEnabled = false;
                 }
             }
         }
@@ -63,6 +63,10 @@ namespace FluentApi.Gui
                 if (textBoxEmployeeName.Text != selectedEmployee.Name)
                 {
                     selectedEmployee.Name = textBoxEmployeeName.Text;
+                }
+                if (datePickerEmployeeStartDate.SelectedDate != selectedEmployee.EmploymentDate)
+                {
+                    selectedEmployee.EmploymentDate = Convert.ToDateTime(datePickerEmployeeStartDate.SelectedDate);
                 }
                 model.SaveChanges();
                 ReloadDataGridEmployees();
