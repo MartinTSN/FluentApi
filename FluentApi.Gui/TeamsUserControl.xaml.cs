@@ -28,7 +28,7 @@ namespace FluentApi.Gui
         {
             InitializeComponent();
             model = new Model();
-            dataGridTeams.ItemsSource = model.Teams.ToList();
+            //dataGridTeams.ItemsSource = model.Teams.ToList();
             dataGridEmployees.ItemsSource = model.Employees.ToList();
 
         }
@@ -37,6 +37,8 @@ namespace FluentApi.Gui
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
             dataGridEmployees.ItemsSource = selectedTeam.Employees;
+
+            
         }
 
     }
