@@ -1,17 +1,86 @@
 ﻿<UserControl x:Class="FluentApi.Gui.TeamsUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FluentApi.Gui"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left"
-                   Margin="334,201,0,0"
-                   TextWrapping="Wrap"
-                   Text="TextBlock"
-                   VerticalAlignment="Top" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0"
+                  Margin="10"
+                  Header="Oversigt">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <DataGrid Margin="10"
+                          x:Name="dataGridTeams"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          Grid.Row="0"
+                          SelectionChanged="DataGrid_Teams_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Team Name"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Beskrivelse"
+                                            Binding="{Binding Description}" />
+                        <DataGridTextColumn Header="Start Dato"
+                                            Binding="{Binding StartDate}" />
+                        <DataGridTextColumn Header="Slut Dato"
+                                            Binding="{Binding ExpectedEndDate}" />
+                    </DataGrid.Columns>
 
+                </DataGrid>
+                <DataGrid Margin="10"
+                          x:Name="dataGridEmployees"
+                          AutoGenerateColumns="False"
+                          Grid.Row="1"
+                          IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Firstname"
+                                            Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Lastname"
+                                            Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="Salary"
+                                            Binding="{Binding Salary}" />
+                        <DataGridTextColumn Header="Mail"
+                                            Binding="{Binding ContactInfo.Email}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1"
+                  Header="Detaljer"
+                  Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    
+                </Grid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

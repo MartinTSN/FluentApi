@@ -21,9 +21,23 @@ namespace FluentApi.Gui
     /// </summary>
     public partial class TeamsUserControl : UserControl
     {
+        protected Model model;
+        private Team selectedTeam;
+        private Employee selectedEmployee;
         public TeamsUserControl()
         {
             InitializeComponent();
+            model = new Model();
+            dataGridTeams.ItemsSource = model.Teams.ToList();
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
+
         }
+
+        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+            dataGridEmployees.ItemsSource = selectedTeam.Employees;
+        }
+
     }
 }

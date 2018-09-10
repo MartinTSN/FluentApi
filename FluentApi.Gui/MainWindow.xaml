@@ -32,7 +32,7 @@
                      Padding="15,5">
                 <UserControl x:Name="userControlEmployees" />
             </TabItem>
-            <TabItem Header="Teams"
+            <TabItem Header="Hold"
                      Padding="15,5">
                 <UserControl x:Name="userControlTeams" />
             </TabItem>
