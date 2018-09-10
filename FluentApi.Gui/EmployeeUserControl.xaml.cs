@@ -34,14 +34,18 @@ namespace FluentApi.Gui
                 {
                     textBoxMail.Text = selectedEmployee.ContactInfo.Email;
                     textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
+                    datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
                 }
                 else
                 {
-                    textBoxEmployeeName.Text = selectedEmployee.Name;
-                    datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
+                    textBoxMail.Text = string.Empty;
+                    textBoxPhoneNumber.Text = string.Empty;
                 }
             }
         }
+
+        private void ReloadDataGridEmployees()
+            => dataGridEmployees.ItemsSource = model.Employees.ToList();
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -49,27 +53,37 @@ namespace FluentApi.Gui
             newEmployee.Name = textBoxEmployeeName.Text;
             model.Employees.Add(newEmployee);
             model.SaveChanges();
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
+            ReloadDataGridEmployees();
 
         }
 
         private void Button_Update_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (selectedEmployee.Name != textBoxEmployeeName.Text)
-                if (selectedEmployee != null)
+            if (selectedEmployee != null)
+            {
+                if (textBoxEmployeeName.Text != selectedEmployee.Name)
                 {
                     selectedEmployee.Name = textBoxEmployeeName.Text;
-                    if (textBoxEmployeeName.Text != selectedEmployee.Name)
-                    {
-                        selectedEmployee.Name = textBoxEmployeeName.Text;
-                    }
-                    model.SaveChanges();
-                    dataGridEmployees.ItemsSource = model.Employees.ToList();
                 }
+                model.SaveChanges();
+                ReloadDataGridEmployees();
+            }
         }
         private void Button_Update_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (selectedEmployee != null)
+            {
+                if (textBoxMail.Text != selectedEmployee.ContactInfo.Email)
+                {
+                    selectedEmployee.ContactInfo.Email = textBoxMail.Text;
+                }
+                if (textBoxPhoneNumber.Text != selectedEmployee.ContactInfo.Phone)
+                {
+                    selectedEmployee.ContactInfo.Phone = textBoxPhoneNumber.Text;
+                }
+                model.SaveChanges();
+                ReloadDataGridEmployees();
+            }
         }
 
         private void Button_Add_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -79,6 +93,7 @@ namespace FluentApi.Gui
             newContactInfo.Phone = textBoxPhoneNumber.Text;
             model.ContactInfos.Add(newContactInfo);
             model.SaveChanges();
+            ReloadDataGridEmployees();
         }
 
         private void DataGrid_Employees_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
