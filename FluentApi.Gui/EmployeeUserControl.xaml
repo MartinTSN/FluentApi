@@ -23,7 +23,7 @@
                           SelectionChanged="DataGrid_Employees_SelectionChanged"
                           KeyDown="DataGrid_Employees_KeyDown">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Navn"
+                        <DataGridTextColumn Header="Name"
                                             Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Mail"
                                             Binding="{Binding ContactInfo.Email}" />
@@ -63,7 +63,8 @@
                              Grid.Column="1"
                              Text="{Binding Name}"
                              x:Name="textBoxEmployeeName"
-                             TextChanged="TextBox_EmployeeName_TextChanged" />
+                             TextChanged="TextBox_EmployeeName_TextChanged">
+                    </TextBox>
                     <Label Content="Ansættelses dato:"
                            Grid.Column="0"
                            Grid.Row="1"
