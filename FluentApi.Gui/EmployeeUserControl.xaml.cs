@@ -46,7 +46,9 @@ namespace FluentApi.Gui
         }
 
         private void ReloadDataGridEmployees()
-            => dataGridEmployees.ItemsSource = model.Employees.ToList();
+        {
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -115,8 +117,8 @@ namespace FluentApi.Gui
                     dataGridEmployees.SelectedItem = selectedEmployee = null;
                     buttonAddEmployee.IsEnabled = true;
                     buttonUpdateEmployee.IsEnabled = false;
-                    textBoxEmployeeFirstName.Text = string.Empty;
-                    textBoxEmployeeLastName.Text = string.Empty;
+                    textBoxEmployeeFirstName.Text = String.Empty;
+                    textBoxEmployeeLastName.Text = String.Empty;
                     datePickerEmployeeStartDate.SelectedDate = null;
                     textBoxEmployeeFirstName.Focus();
                 }
@@ -125,7 +127,25 @@ namespace FluentApi.Gui
 
         private void TextBox_EmployeeFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxEmployeeFirstName.Text == string.Empty)
+            if (textBoxEmployeeFirstName.Text == String.Empty)
+            {
+                buttonAddEmployee.IsEnabled = false;
+                buttonUpdateEmployee.IsEnabled = false;
+            }
+            else if (selectedEmployee == null)
+            {
+                buttonAddEmployee.IsEnabled = true;
+                buttonUpdateEmployee.IsEnabled = false;
+            }
+            else
+            {
+                buttonAddEmployee.IsEnabled = false;
+                buttonUpdateEmployee.IsEnabled = true;
+            }
+        }
+        private void TextBox_EmployeeLastName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textBoxEmployeeLastName.Text == String.Empty)
             {
                 buttonAddEmployee.IsEnabled = false;
                 buttonUpdateEmployee.IsEnabled = false;
@@ -144,7 +164,7 @@ namespace FluentApi.Gui
 
         private void TextBox_Mail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxMail.Text == string.Empty)
+            if (textBoxMail.Text == String.Empty)
             {
                 buttonAddContactInfo.IsEnabled = false;
                 buttonUpdateContactInfo.IsEnabled = false;
@@ -163,7 +183,7 @@ namespace FluentApi.Gui
 
         private void TextBox_PhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxPhoneNumber.Text == string.Empty)
+            if (textBoxPhoneNumber.Text == String.Empty)
             {
                 buttonAddContactInfo.IsEnabled = false;
                 buttonUpdateContactInfo.IsEnabled = false;
