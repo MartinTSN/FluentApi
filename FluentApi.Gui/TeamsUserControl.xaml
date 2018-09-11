@@ -25,7 +25,8 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          SelectionChanged="DataGrid_Teams_SelectionChanged">
+                          SelectionChanged="DataGrid_Teams_SelectionChanged"
+                          KeyDown="DataGrid_Teams_KeyDown">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team Name"
                                             Binding="{Binding Name}" />
@@ -131,7 +132,8 @@
                             Grid.Column="3"
                             Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonAddTeam">
+                            x:Name="buttonAddTeam"
+                            Click="Button_AddTeam_Click">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Tilføj Team</TextBlock>
                     </Button>

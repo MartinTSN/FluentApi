@@ -52,13 +52,12 @@ namespace FluentApi.Gui
                     datePickerStartDate.SelectedDate = selectedTeam.StartDate;
                     datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
                     buttonEditTeam.IsEnabled = true;
+                    buttonAddTeam.IsEnabled = false;
                 }
                 else
                 {
-                    dataGridTeams.ItemsSource = null;
+                   dataGridTeams.ItemsSource = null;
                 }
-                dataGridTeams.SelectedItem = null;
-                ReloadDataGridTeams();
             }
         }
 
@@ -101,6 +100,10 @@ namespace FluentApi.Gui
                         break;
                     }
                 }
+                if (selectedTeam.Employees.Count == 0)
+                {
+                    selectedTeam.Employees.Add(selectedEmployee);
+                }
                 model.SaveChanges();
                 dataGridTeams.SelectedItem = selectedTeam;
                 dataGridEmployees.ItemsSource = selectedTeam.Employees;
@@ -108,7 +111,6 @@ namespace FluentApi.Gui
                 dataGridEmployees.SelectedItem = selectedEmployee = null;
                 buttonAddToTeam.IsEnabled = false;
                 buttonRemoveFromTeam.IsEnabled = true;
-
             }
         }
 
@@ -133,6 +135,34 @@ namespace FluentApi.Gui
                 dataGridEmployees.ItemsSource = selectedTeam.Employees;
                 buttonRemoveFromTeam.IsEnabled = false;
             }
+        }
+
+        private void DataGrid_Teams_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                dataGridTeams.SelectedItem = selectedTeam = null;
+                buttonAddTeam.IsEnabled = true;
+                buttonEditTeam.IsEnabled = false;
+                textBoxTeamName.Text = String.Empty;
+                textBoxDescription.Text = String.Empty;
+                datePickerStartDate.SelectedDate = null;
+                datePickerEndDate.SelectedDate = null;
+                textBoxTeamName.Focus();
+                ReloadDataGridTeams();
+            }
+        }
+
+        private void Button_AddTeam_Click(object sender, RoutedEventArgs e)
+        {
+            Team newTeam = new Team();
+            newTeam.Name = textBoxTeamName.Text;
+            newTeam.Description = textBoxDescription.Text;
+            newTeam.StartDate = datePickerStartDate.SelectedDate.GetValueOrDefault();
+            newTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.GetValueOrDefault();
+            model.Teams.Add(newTeam);
+            model.SaveChanges();
+            ReloadDataGridTeams();
         }
     }
 }
