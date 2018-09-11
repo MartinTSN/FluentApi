@@ -92,6 +92,7 @@ namespace FluentApi.Gui
                 ReloadDataGridEmployees();
             }
         }
+
         private void Button_Update_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (selectedEmployee != null)
@@ -155,6 +156,7 @@ namespace FluentApi.Gui
                 buttonUpdateEmployee.IsEnabled = true;
             }
         }
+
         private void TextBox_EmployeeLastName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (textBoxEmployeeLastName.Text == String.Empty)

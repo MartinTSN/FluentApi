@@ -47,18 +47,29 @@ namespace FluentApi.Gui
                     buttonAddToTeam.IsEnabled = false;
                     buttonRemoveFromTeam.IsEnabled = true;
 
-                    textBoxTeamName.Text = selectedTeam.Name;
-                    textBoxDescription.Text = selectedTeam.Description;
-                    datePickerStartDate.SelectedDate = selectedTeam.StartDate;
-                    datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
-                    buttonEditTeam.IsEnabled = true;
-                    buttonAddTeam.IsEnabled = false;
-                }
-                else
-                {
-                   dataGridTeams.ItemsSource = null;
+
                 }
             }
+            if (selectedTeam != null)
+            {
+                textBoxTeamName.Text = selectedTeam.Name;
+                textBoxDescription.Text = selectedTeam.Description;
+                datePickerStartDate.SelectedDate = selectedTeam.StartDate;
+                datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
+                textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                buttonEditTeam.IsEnabled = true;
+                buttonAddTeam.IsEnabled = false;
+            }
+        }
+
+        private decimal GetTeamSalary()
+        {
+            decimal teamSalary = 0;
+            foreach (Employee employee in selectedTeam.Employees)
+            {
+                teamSalary += employee.Salary;
+            }
+            return teamSalary;
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -141,9 +152,11 @@ namespace FluentApi.Gui
         {
             if (e.Key == Key.Escape)
             {
-                dataGridTeams.SelectedItem = selectedTeam = null;
+                dataGridTeams.SelectedItem = null;
                 buttonAddTeam.IsEnabled = true;
                 buttonEditTeam.IsEnabled = false;
+                buttonAddToTeam.IsEnabled = false;
+                buttonRemoveFromTeam.IsEnabled = false;
                 textBoxTeamName.Text = String.Empty;
                 textBoxDescription.Text = String.Empty;
                 datePickerStartDate.SelectedDate = null;
@@ -158,11 +171,38 @@ namespace FluentApi.Gui
             Team newTeam = new Team();
             newTeam.Name = textBoxTeamName.Text;
             newTeam.Description = textBoxDescription.Text;
-            newTeam.StartDate = datePickerStartDate.SelectedDate.GetValueOrDefault();
-            newTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.GetValueOrDefault();
+            newTeam.StartDate = datePickerStartDate.SelectedDate.Value;
+            newTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
             model.Teams.Add(newTeam);
             model.SaveChanges();
             ReloadDataGridTeams();
+        }
+
+        private void Button_EditTeam_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBoxTeamName.Text != selectedTeam.Name)
+            {
+                selectedTeam.Name = textBoxTeamName.Text;
+            }
+            if (textBoxDescription.Text != selectedTeam.Description)
+            {
+                selectedTeam.Description = textBoxDescription.Text;
+            }
+            if (datePickerStartDate.SelectedDate != selectedTeam.StartDate)
+            {
+                selectedTeam.StartDate = datePickerStartDate.SelectedDate.Value;
+            }
+            if (datePickerEndDate.SelectedDate != selectedTeam.ExpectedEndDate)
+            {
+                selectedTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
+            }
+            model.SaveChanges();
+            ReloadDataGridTeams();
+        }
+
+        private void Button_ShowAvailableEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            dataGridEmployees.ItemsSource = model.Employees.Where(employees => employees.TeamId == null).ToList();
         }
     }
 }
