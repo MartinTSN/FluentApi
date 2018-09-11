@@ -205,4 +205,4 @@ namespace FluentApi.Gui
             dataGridEmployees.ItemsSource = model.Employees.Where(employees => employees.TeamId == null).ToList();
         }
     }
-}
+} 
