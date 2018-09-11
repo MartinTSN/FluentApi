@@ -41,18 +41,32 @@ namespace FluentApi.Gui
             }
             else
             {
-                if (selectedTeam == null)
+                if (selectedTeam != null)
                 {
-                    dataGridTeams.ItemsSource = null;
+                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    buttonAddToTeam.IsEnabled = false;
+                    buttonRemoveFromTeam.IsEnabled = true;
+
+                    textBoxTeamName.Text = selectedTeam.Name;
+                    textBoxDescription.Text = selectedTeam.Description;
+                    datePickerStartDate.SelectedDate = selectedTeam.StartDate;
+                    datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
+                    buttonEditTeam.IsEnabled = true;
                 }
                 else
                 {
-                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    dataGridTeams.ItemsSource = null;
                 }
                 dataGridTeams.SelectedItem = null;
                 ReloadDataGridTeams();
             }
         }
+
+        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+        }
+
         private void ReloadDataGridTeams()
         {
             dataGridTeams.ItemsSource = model.Teams.ToList();
@@ -69,11 +83,7 @@ namespace FluentApi.Gui
             dataGridTeams.SelectedItem = null;
             dataGridEmployees.SelectedItem = null;
             buttonAddToTeam.IsEnabled = false;
-        }
-
-        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            buttonRemoveFromTeam.IsEnabled = false;
         }
 
         private void Button_AddToTeam_Click(object sender, RoutedEventArgs e)
@@ -88,11 +98,17 @@ namespace FluentApi.Gui
                     if (selectedEmployee != employee)
                     {
                         selectedTeam.Employees.Add(selectedEmployee);
+                        break;
                     }
                 }
                 model.SaveChanges();
-                ReloadDataGridTeams();
-                ReloadDataGridEmployees();
+                dataGridTeams.SelectedItem = selectedTeam;
+                dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                dataGridTeams.SelectedItem = selectedTeam = null;
+                dataGridEmployees.SelectedItem = selectedEmployee = null;
+                buttonAddToTeam.IsEnabled = false;
+                buttonRemoveFromTeam.IsEnabled = true;
+
             }
         }
 
@@ -107,11 +123,15 @@ namespace FluentApi.Gui
                     if (selectedEmployee == employee)
                     {
                         selectedTeam.Employees.Remove(selectedEmployee);
+                        break;
                     }
                 }
                 model.SaveChanges();
-                ReloadDataGridTeams();
+                dataGridTeams.SelectedItem = selectedTeam;
+                dataGridEmployees.SelectedItem = selectedEmployee = null;
                 ReloadDataGridEmployees();
+                dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                buttonRemoveFromTeam.IsEnabled = false;
             }
         }
     }
