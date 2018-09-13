@@ -166,6 +166,16 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
+                    <Label Content="Projekt Buget:"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalAlignment="Right"
+                           Margin="3" />
+                    <TextBox Margin="3"
+                             Grid.Column="1"
+                             Grid.Row="0"
+                             IsReadOnly="True"
+                             x:Name="textBoxProjectBuget" />
                     <Button Grid.Row="2"
                             Grid.Column="0"
                             Margin="3"

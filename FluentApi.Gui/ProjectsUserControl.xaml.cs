@@ -69,10 +69,7 @@ namespace FluentApi.Gui
                 textBoxBudgetLimit.Text = selectedProject.BudgetLimit.ToString();
                 buttonEditProject.IsEnabled = true;
                 buttonAddProject.IsEnabled = false;
-                if (selectedTeam != null)
-                {
-                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
-                }
+                textBoxProjectBuget.Text = GetProjectPayments().ToString();
             }
         }
 
@@ -90,16 +87,25 @@ namespace FluentApi.Gui
         private decimal GetProjectPayments()
         {
             decimal projectPayments = 0;
+            decimal teamSalary = 0;
             foreach (Team team in selectedProject.Teams)
             {
-                projectPayments += GetTeamSalary();
+                foreach (Employee employee in team.Employees)
+                {
+                    teamSalary += employee.Salary;
+                }
             }
+            projectPayments += teamSalary;
             return projectPayments;
         }
 
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
+            if (selectedTeam != null)
+            {
+                textBoxTeamSalary.Text = GetTeamSalary().ToString();
+            }
         }
 
         private void Button_AddProject_Click(object sender, RoutedEventArgs e)
@@ -193,7 +199,9 @@ namespace FluentApi.Gui
                 ReloadDataGridTeams();
                 dataGridTeams.ItemsSource = selectedProject.Teams;
                 buttonRemoveFromProject.IsEnabled = false;
+                textBoxProjectBuget.Text = GetProjectPayments().ToString();
             }
         }
+        
     }
 }
