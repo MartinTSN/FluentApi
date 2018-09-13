@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace FluentApi.Gui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProjectsUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProjectsUserControl : UserControl
     {
-        public MainWindow()
+        public ProjectsUserControl()
         {
             InitializeComponent();
-            userControlEmployees.Content = new EmployeeUserControl();
-            userControlTeams.Content = new TeamsUserControl();
-            userControlProjects.Content = new EmployeeUserControl();
         }
     }
 }

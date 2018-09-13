@@ -38,7 +38,7 @@
             </TabItem>
             <TabItem Header="Projekter"
                      Padding="15,5">
-
+                <UserControl x:Name="userControlProjects" />
             </TabItem>
         </TabControl>
     </DockPanel>

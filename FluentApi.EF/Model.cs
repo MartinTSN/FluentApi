@@ -26,6 +26,10 @@ namespace FluentApi.EF
             modelBuilder.Entity<Employee>()
                 .HasOptional(e => e.ContactInfo)
                 .WithRequired(e => e.Employee);
+
+            modelBuilder.Entity<Project>()
+                .Property(e => e.BudgetLimit)
+                .HasPrecision(19, 4);
         }
     }
 }
