@@ -5,17 +5,45 @@ namespace FluentApi.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
+    using System.Text.RegularExpressions;
 
     public partial class Employee
     {
+        /// <summary>
+        /// The Employee FirstName value is stored here.
+        /// </summary>
         private string firstName;
+        /// <summary>
+        /// The Employee LastName value is stored here.
+        /// </summary>
         private string lastName;
+        /// <summary>
+        /// The Employee BirthDay/date is stored here.
+        /// </summary>
         private DateTime birthDay;
+        /// <summary>
+        /// The Employee Hiredate is stored here.
+        /// </summary>
         private DateTime employementDate;
+        /// <summary>
+        /// The Employee CPRBnumber is stored here.
+        /// </summary>
+        /// <remarks>Is used with the ContactInfo Birthday.</remarks>
         private string cprNumber;
+        /// <summary>
+        /// The Employee Salary is stored here.
+        /// </summary>
         private decimal salary;
+
         public int Id { get; set; }
 
+        /// <summary>
+        /// Takes the FirstName value and validates it. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref = "ArgumentNullException" > Thrown when the FirstName is null.</exception>
+        /// <exception cref = "ArgumentOutOfRangeException" > Throws when the Firstname is under 2 or over 100 characters.</exception>
+        /// <exception cref = "ArgumentException" > Thrown when the Firstname has a number.</exception>
         [StringLength(100)]
         public string FirstName
         {
@@ -29,18 +57,24 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The Firstname must be set");
                 }
-                if (value.Length < 2)
+                if (value.Length < 2 || value.Length > 100)
                 {
-                    throw new ArgumentOutOfRangeException("The Firstname must be over 2 characters");
+                    throw new ArgumentOutOfRangeException("The Firstname must be over 2 and under 100 characters");
                 }
-                else
+                if (value.All(Char.IsNumber))
                 {
-                    firstName = value;
+                    throw new ArgumentException("There cant be any numbers in the value");
                 }
-
+                firstName = value;
             }
         }
 
+        /// <summary>
+        /// Takes the LastName value and validates it. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref = "ArgumentNullException" > Thrown when the Lastname is null.</exception>
+        /// <exception cref = "ArgumentOutOfRangeException" > Throws when the Lastname is under 2 or over 100 characters.</exception>
+        /// <exception cref = "ArgumentException" > Throws when the Lastname has a number.</exception>
         [StringLength(100)]
         public string LastName
         {
@@ -54,17 +88,23 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The Lastname must be set");
                 }
-                if (value.Length < 2)
+                if (value.Length < 2 || value.Length > 100)
                 {
-                    throw new ArgumentOutOfRangeException("The Lastname must be over 2 characters");
+                    throw new ArgumentOutOfRangeException("The Lastname must be over 2 and under 100 characters");
                 }
-                else
+                if (value.All(Char.IsNumber))
                 {
-                    lastName = value;
+                    throw new ArgumentException("The name must not have any numbers");
                 }
+                lastName = value;
             }
         }
 
+        /// <summary>
+        /// Takes the BirthDay value and validates it. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws when the value is over 70 or under 18.</exception>
         [Column(TypeName = "date")]
         public DateTime BirthDay
         {
@@ -78,11 +118,11 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The birthDay must be set.");
                 }
-                if (value.Year < (DateTime.Now.Year - 18))
+                if (value.Year >= (DateTime.Now.Year - 18))
                 {
                     throw new ArgumentOutOfRangeException("The date must be atleast 18 years old.");
                 }
-                if (value.Year > (DateTime.Now.Year - 70))
+                if (value.Year <= (DateTime.Now.Year - 70))
                 {
                     throw new ArgumentOutOfRangeException("The date must be under 70 years ago.");
                 }
@@ -90,6 +130,11 @@ namespace FluentApi.EF
             }
         }
 
+        /// <summary>
+        /// Takes the EmployementDate and validates it. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws when the value is in the future.</exception>
         [Column(TypeName = "date")]
         public DateTime EmploymentDate
         {
@@ -103,14 +148,19 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The date must be set");
                 }
-                //if (value.Year)
-                //{
-
-                //}
+                if (value.Year < DateTime.Now.Year)
+                {
+                    throw new ArgumentOutOfRangeException("You cannot hire a person in the future.");
+                }
                 employementDate = value;
             }
         }
 
+        /// <summary>
+        /// Takes the CPR Number and validates it. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
+        /// <exception cref="FormatException">Thrown when the last 4 characters is not numbers</exception>
         [Required]
         [StringLength(100)]
         public string CPRNumber
@@ -125,15 +175,34 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The value must be set.");
                 }
-                if (value.Substring(value.Length - 4))
+                if (!value.Substring(value.Length - 4).All(Char.IsNumber))
                 {
-
+                    throw new FormatException("The CPR must be 4 numbers");
                 }
+                cprNumber = value;
             }
         }
 
+        /// <summary>
+        /// Takes the Salary value and validates it. Returns an exception is something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws when the value is negative.</exception>
         [Column(TypeName = "money")]
-        public decimal Salary { get; set; }
+        public decimal Salary
+        {
+            get
+            {
+                return salary;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("The value must be positive");
+                }
+                salary = value;
+            }
+        }
 
         public int? TeamId { get; set; }
 
