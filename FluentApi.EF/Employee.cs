@@ -135,6 +135,7 @@ namespace FluentApi.EF
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Throws when the value is in the future.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws when the value is older than their age.</exception>
         [Column(TypeName = "date")]
         public DateTime EmploymentDate
         {
@@ -148,9 +149,13 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The date must be set");
                 }
-                if (value.Year < DateTime.Now.Year)
+                if (value.Year > DateTime.Now.Year)
                 {
                     throw new ArgumentOutOfRangeException("You cannot hire a person in the future.");
+                }
+                if (value.Year < BirthDay.Year)
+                {
+                    throw new ArgumentOutOfRangeException("You cannot hire a person before they're born.");
                 }
                 employementDate = value;
             }

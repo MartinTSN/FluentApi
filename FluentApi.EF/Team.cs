@@ -16,16 +16,18 @@ namespace FluentApi.EF
 
         public int Id { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? ExpectedEndDate { get; set; }
+        public DateTime ExpectedEndDate { get; set; }
 
         public int? ProjectId { get; set; }
 
