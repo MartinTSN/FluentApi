@@ -24,7 +24,8 @@
                           x:Name="dataGridProjects"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
-                          Grid.Row="0">
+                          Grid.Row="0"
+                          SelectionChanged="DataGrid_Projects_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Projekt Navn"
                                             Binding="{Binding Name}" />
@@ -33,14 +34,15 @@
                         <DataGridTextColumn Header="Start Dato"
                                             Binding="{Binding StartDate}" />
                         <DataGridTextColumn Header="Slut Dato"
-                                            Binding="{Binding ExpectedEndDate}" />
+                                            Binding="{Binding EndDate}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <DataGrid Margin="10"
                           x:Name="dataGridTeams"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
-                          Grid.Row="1">
+                          Grid.Row="1"
+                          SelectionChanged="DataGrid_Teams_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team Navn"
                                             Binding="{Binding Name}" />
@@ -83,7 +85,7 @@
                     <TextBox Margin="3"
                              Grid.Column="1"
                              Text="{Binding TeamName}"
-                             x:Name="textBoxTeamName" />
+                             x:Name="textBoxProjectName" />
                     <Label Content="Beskrivelse:"
                            Grid.Column="0"
                            Grid.Row="1"
@@ -130,7 +132,8 @@
                             Grid.Column="2"
                             Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonEditProject">
+                            x:Name="buttonEditProject"
+                            Click="Button_EditProject_Click">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Rediger Projekt</TextBlock>
                     </Button>
@@ -138,7 +141,8 @@
                             Grid.Column="3"
                             Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonAddProject">
+                            x:Name="buttonAddProject"
+                            Click="Button_AddProject_Click">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Tilføj Projekt</TextBlock>
                     </Button>
@@ -162,6 +166,20 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
+                    <Button Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="3"
+                            x:Name="buttonShowAllTeams">
+                        <TextBlock TextAlignment="Center"
+                                   TextWrapping="Wrap">Vis alle Teams</TextBlock>
+                    </Button>
+                    <Button Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="3"
+                            x:Name="buttonShowAvailableTeams">
+                        <TextBlock TextAlignment="Center"
+                                   TextWrapping="Wrap">Vis alle ledige Teams</TextBlock>
+                    </Button>
                     <Label Content="Team total Løn:"
                            Grid.Column="2"
                            Grid.Row="0"
@@ -172,6 +190,24 @@
                              Grid.Row="0"
                              IsReadOnly="True"
                              x:Name="textBoxTeamSalary" />
+                    <Button Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="3"
+                            IsEnabled="False"
+                            x:Name="buttonAddToProject"
+                            Click="Button_AddToProject_Click">
+                        <TextBlock TextAlignment="Center"
+                                   TextWrapping="Wrap">Tilføj Team til projekt</TextBlock>
+                    </Button>
+                    <Button Grid.Row="2"
+                            Grid.Column="3"
+                            Margin="3"
+                            IsEnabled="False"
+                            x:Name="buttonRemoveFromProject"
+                            Click="Button_RemoveFromProject_Click">
+                        <TextBlock TextAlignment="Center"
+                                   TextWrapping="Wrap">Fjern Team fra Projekt</TextBlock>
+                    </Button>
                 </Grid>
             </Grid>
         </GroupBox>
