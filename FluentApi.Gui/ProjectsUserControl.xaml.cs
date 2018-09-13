@@ -73,7 +73,6 @@ namespace FluentApi.Gui
             }
         }
 
-
         private decimal GetTeamSalary()
         {
             decimal teamSalary = 0;
@@ -87,15 +86,15 @@ namespace FluentApi.Gui
         private decimal GetProjectPayments()
         {
             decimal projectPayments = 0;
-            decimal teamSalary = 0;
+            decimal teamSalaries = 0;
             foreach (Team team in selectedProject.Teams)
             {
                 foreach (Employee employee in team.Employees)
                 {
-                    teamSalary += employee.Salary;
+                    teamSalaries += employee.Salary;
                 }
             }
-            projectPayments += teamSalary;
+            projectPayments += teamSalaries;
             return projectPayments;
         }
 
@@ -140,7 +139,7 @@ namespace FluentApi.Gui
             {
                 selectedProject.EndDate = datePickerEndDate.SelectedDate.Value;
             }
-            if (textBoxBudgetLimit.Text != selectedProject.BudgetLimit.ToString() && Decimal.Parse(textBoxBudgetLimit.Text) < GetProjectPayments())
+            if (textBoxBudgetLimit.Text != selectedProject.BudgetLimit.ToString() && Decimal.Parse(textBoxBudgetLimit.Text) > GetProjectPayments())
             {
                 selectedProject.BudgetLimit = Decimal.Parse(textBoxBudgetLimit.Text);
             }
@@ -154,23 +153,32 @@ namespace FluentApi.Gui
             selectedTeam = dataGridTeams.SelectedItem as Team;
             selectedProject = dataGridProjects.SelectedItem as Project;
 
-            if (selectedTeam != null && selectedProject != null)
+            if (GetTeamSalary() > (selectedProject.BudgetLimit - GetProjectPayments()))
             {
-                foreach (Team team in selectedProject.Teams)
+                MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen");
+            }
+            else
+            {
+                if (selectedTeam != null && selectedProject != null)
                 {
-                    if (selectedTeam != team)
+                    foreach (Team team in selectedProject.Teams)
+                    {
+                        if (selectedTeam != team)
+                        {
+                            selectedProject.Teams.Add(selectedTeam);
+                            break;
+                        }
+                    }
+                    if (selectedProject.Teams.Count == 0)
                     {
                         selectedProject.Teams.Add(selectedTeam);
-                        break;
                     }
                 }
-                if (selectedProject.Teams.Count == 0)
-                {
-                    selectedProject.Teams.Add(selectedTeam);
-                }
+
                 model.SaveChanges();
                 dataGridProjects.SelectedItem = selectedProject;
                 dataGridTeams.ItemsSource = selectedProject.Teams;
+                textBoxProjectBuget.Text = GetProjectPayments().ToString();
                 dataGridProjects.SelectedItem = selectedProject = null;
                 dataGridTeams.SelectedItem = selectedTeam = null;
                 buttonAddToProject.IsEnabled = false;
@@ -202,6 +210,39 @@ namespace FluentApi.Gui
                 textBoxProjectBuget.Text = GetProjectPayments().ToString();
             }
         }
-        
+
+        private void Button_ShowAllTeams_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadDataGridTeams();
+            dataGridProjects.SelectedItem = null;
+            dataGridTeams.SelectedItem = null;
+            buttonAddToProject.IsEnabled = false;
+            buttonRemoveFromProject.IsEnabled = false;
+        }
+
+        private void Button_ShowAvailableTeams_Click(object sender, RoutedEventArgs e)
+        {
+            dataGridTeams.ItemsSource = model.Teams.Where(teams => teams.ProjectId == null).ToList();
+        }
+
+        private void DataGrid_Projects_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                dataGridProjects.SelectedItem = null;
+                buttonAddProject.IsEnabled = true;
+                buttonEditProject.IsEnabled = false;
+                buttonAddToProject.IsEnabled = false;
+                buttonRemoveFromProject.IsEnabled = false;
+                textBoxProjectName.Text = String.Empty;
+                textBoxDescription.Text = String.Empty;
+                datePickerStartDate.SelectedDate = null;
+                datePickerEndDate.SelectedDate = null;
+                textBoxBudgetLimit.Text = String.Empty;
+                textBoxProjectBuget.Text = String.Empty;
+                textBoxProjectName.Focus();
+                ReloadDataGridTeams();
+            }
+        }
     }
 }

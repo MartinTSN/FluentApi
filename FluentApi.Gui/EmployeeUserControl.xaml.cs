@@ -33,6 +33,7 @@ namespace FluentApi.Gui
                 datePickerEmployeeBirthday.SelectedDate = selectedEmployee.BirthDay;
                 datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
                 textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
+                textBoxCPR.Text = selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4);
                 if (selectedEmployee.ContactInfo != null)
                 {
                     textBoxMail.Text = selectedEmployee.ContactInfo.Email;
@@ -54,14 +55,12 @@ namespace FluentApi.Gui
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Random random = new Random();
-            int odd = 1 + 2 * random.Next(1000,9999);
             Employee newEmployee = new Employee();
             newEmployee.FirstName = textBoxEmployeeFirstName.Text;
             newEmployee.LastName = textBoxEmployeeLastName.Text;
             newEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
             newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
-            newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + odd;
+            newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
             newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
             model.Employees.Add(newEmployee);
             model.SaveChanges();
@@ -87,6 +86,10 @@ namespace FluentApi.Gui
                 if (datePickerEmployeeStartDate.SelectedDate != selectedEmployee.EmploymentDate)
                 {
                     selectedEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
+                }
+                if (textBoxCPR.Text != selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4))
+                {
+                    selectedEmployee.CPRNumber = selectedEmployee.BirthDay.ToString("dd") + selectedEmployee.BirthDay.ToString("MM") + selectedEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
                 }
                 model.SaveChanges();
                 ReloadDataGridEmployees();
@@ -140,20 +143,23 @@ namespace FluentApi.Gui
 
         private void TextBox_EmployeeFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxEmployeeFirstName.Text == String.Empty)
+            if (selectedEmployee != null)
             {
-                buttonAddEmployee.IsEnabled = false;
-                buttonUpdateEmployee.IsEnabled = false;
-            }
-            else if (selectedEmployee == null)
-            {
-                buttonAddEmployee.IsEnabled = true;
-                buttonUpdateEmployee.IsEnabled = false;
-            }
-            else
-            {
-                buttonAddEmployee.IsEnabled = false;
-                buttonUpdateEmployee.IsEnabled = true;
+                if (textBoxEmployeeFirstName.Text == String.Empty)
+                {
+                    buttonAddEmployee.IsEnabled = false;
+                    buttonUpdateEmployee.IsEnabled = false;
+                }
+                else if (selectedEmployee == null)
+                {
+                    buttonAddEmployee.IsEnabled = true;
+                    buttonUpdateEmployee.IsEnabled = false;
+                }
+                else
+                {
+                    buttonAddEmployee.IsEnabled = false;
+                    buttonUpdateEmployee.IsEnabled = true;
+                }
             }
         }
 
@@ -178,39 +184,89 @@ namespace FluentApi.Gui
 
         private void TextBox_Mail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxMail.Text == String.Empty)
+            if (selectedEmployee != null)
             {
-                buttonAddContactInfo.IsEnabled = false;
-                buttonUpdateContactInfo.IsEnabled = false;
-            }
-            else if (selectedEmployee.ContactInfo == null)
-            {
-                buttonAddContactInfo.IsEnabled = true;
-                buttonUpdateContactInfo.IsEnabled = false;
-            }
-            else
-            {
-                buttonAddContactInfo.IsEnabled = false;
-                buttonUpdateContactInfo.IsEnabled = true;
+                if (textBoxMail.Text == String.Empty)
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else if (selectedEmployee.ContactInfo == null)
+                {
+                    buttonAddContactInfo.IsEnabled = true;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
+                }
             }
         }
 
         private void TextBox_PhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxPhoneNumber.Text == String.Empty)
+            if (selectedEmployee != null)
             {
-                buttonAddContactInfo.IsEnabled = false;
-                buttonUpdateContactInfo.IsEnabled = false;
+                if (textBoxPhoneNumber.Text == String.Empty)
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else if (selectedEmployee.ContactInfo == null)
+                {
+                    buttonAddContactInfo.IsEnabled = true;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
+                }
             }
-            else if (selectedEmployee.ContactInfo == null)
+        }
+
+        private void TextBox_EmployeeSalary_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (selectedEmployee != null)
             {
-                buttonAddContactInfo.IsEnabled = true;
-                buttonUpdateContactInfo.IsEnabled = false;
+                if (textBoxEmployeeSalary.Text == String.Empty)
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else if (selectedEmployee.ContactInfo == null)
+                {
+                    buttonAddContactInfo.IsEnabled = true;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
+                }
             }
-            else
+        }
+
+        private void TextBox_CPR_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (selectedEmployee != null)
             {
-                buttonAddContactInfo.IsEnabled = false;
-                buttonUpdateContactInfo.IsEnabled = true;
+                if (textBoxCPR.Text == String.Empty)
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else if (selectedEmployee.ContactInfo == null)
+                {
+                    buttonAddContactInfo.IsEnabled = true;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
+                }
             }
         }
     }
