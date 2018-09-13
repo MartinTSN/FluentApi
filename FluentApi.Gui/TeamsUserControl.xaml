@@ -118,7 +118,7 @@
                                 Grid.Row="1"
                                 Margin="3"
                                 FirstDayOfWeek="Monday"
-                                SelectedDate="{Binding [ExpectedEndDate]}"
+                                SelectedDate="{Binding ExpectedEndDate}"
                                 x:Name="datePickerEndDate" />
                     <Button Grid.Row="2"
                             Grid.Column="2"
