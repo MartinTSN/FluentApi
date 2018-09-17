@@ -19,7 +19,14 @@ namespace FluentApi.Gui
         {
             InitializeComponent();
             model = new Model();
-            ReloadDataGridEmployees();
+            try
+            {
+                ReloadDataGridEmployees();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,14 +65,7 @@ namespace FluentApi.Gui
 
         private void ReloadDataGridEmployees()
         {
-            try
-            {
                 dataGridEmployees.ItemsSource = model.Employees.ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK,MessageBoxImage.Stop);
-            }
         }
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)

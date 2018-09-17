@@ -35,12 +35,26 @@ namespace FluentApi.Gui
 
         private void ReloadDataGridProject()
         {
-            dataGridProjects.ItemsSource = model.Projects.ToList();
+            try
+            {
+                dataGridProjects.ItemsSource = model.Projects.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void ReloadDataGridTeams()
         {
-            dataGridTeams.ItemsSource = model.Teams.ToList();
+            try
+            {
+                dataGridTeams.ItemsSource = model.Teams.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,14 +76,21 @@ namespace FluentApi.Gui
             }
             if (selectedProject != null)
             {
-                textBoxProjectName.Text = selectedProject.Name;
-                textBoxDescription.Text = selectedProject.Description;
-                datePickerStartDate.SelectedDate = selectedProject.StartDate;
-                datePickerEndDate.SelectedDate = selectedProject.EndDate;
-                textBoxBudgetLimit.Text = selectedProject.BudgetLimit.ToString();
-                buttonEditProject.IsEnabled = true;
-                buttonAddProject.IsEnabled = false;
-                textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                try
+                {
+                    textBoxProjectName.Text = selectedProject.Name;
+                    textBoxDescription.Text = selectedProject.Description;
+                    datePickerStartDate.SelectedDate = selectedProject.StartDate;
+                    datePickerEndDate.SelectedDate = selectedProject.EndDate;
+                    textBoxBudgetLimit.Text = selectedProject.BudgetLimit.ToString();
+                    buttonEditProject.IsEnabled = true;
+                    buttonAddProject.IsEnabled = false;
+                    textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
@@ -103,21 +124,58 @@ namespace FluentApi.Gui
             selectedTeam = dataGridTeams.SelectedItem as Team;
             if (selectedTeam != null)
             {
-                textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                try
+                {
+                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
         private void Button_AddProject_Click(object sender, RoutedEventArgs e)
         {
-            Project newProject = new Project();
-            newProject.Name = textBoxProjectName.Text;
-            newProject.Description = textBoxDescription.Text;
-            newProject.StartDate = datePickerStartDate.SelectedDate.Value;
-            newProject.EndDate = datePickerEndDate.SelectedDate.Value;
-            newProject.BudgetLimit = Decimal.Parse(textBoxBudgetLimit.Text);
-            model.Projects.Add(newProject);
-            model.SaveChanges();
-            ReloadDataGridProject();
+            if (!Validator.IsNameValid(textBoxProjectName.Text))
+            {
+
+            }
+            else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
+            {
+
+            }
+            else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
+            {
+
+            }
+            else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
+            {
+
+            }
+            else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxBudgetLimit.Text)))
+            {
+
+            }
+            else
+            {
+                try
+                {
+                    Project newProject = new Project();
+                    newProject.Name = textBoxProjectName.Text;
+                    newProject.Description = textBoxDescription.Text;
+                    newProject.StartDate = datePickerStartDate.SelectedDate.Value;
+                    newProject.EndDate = datePickerEndDate.SelectedDate.Value;
+                    newProject.BudgetLimit = Decimal.Parse(textBoxBudgetLimit.Text);
+                    model.Projects.Add(newProject);
+                    model.SaveChanges();
+                    ReloadDataGridProject();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme det nye projekt. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
         }
 
         private void Button_EditProject_Click(object sender, RoutedEventArgs e)

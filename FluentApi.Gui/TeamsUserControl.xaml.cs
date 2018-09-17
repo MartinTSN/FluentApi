@@ -28,8 +28,15 @@ namespace FluentApi.Gui
         {
             InitializeComponent();
             model = new Model();
-            ReloadDataGridTeams();
-            ReloadDataGridEmployees();
+            try
+            {
+                ReloadDataGridTeams();
+                ReloadDataGridEmployees();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,7 +69,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
 
             }
@@ -85,31 +92,24 @@ namespace FluentApi.Gui
 
         private void ReloadDataGridTeams()
         {
-            try
-            {
-                dataGridTeams.ItemsSource = model.Teams.ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
-            }
+            dataGridTeams.ItemsSource = model.Teams.ToList();
         }
 
         private void ReloadDataGridEmployees()
         {
-            try
-            {
-                dataGridEmployees.ItemsSource = model.Employees.ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
-            }
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
         }
 
         private void Button_ShowAllEmployees_Click(object sender, RoutedEventArgs e)
         {
-            ReloadDataGridEmployees();
+            try
+            {
+                ReloadDataGridEmployees();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
             dataGridTeams.SelectedItem = null;
             dataGridEmployees.SelectedItem = null;
             buttonAddToTeam.IsEnabled = false;
@@ -196,7 +196,14 @@ namespace FluentApi.Gui
                 datePickerStartDate.SelectedDate = null;
                 datePickerEndDate.SelectedDate = null;
                 textBoxTeamName.Focus();
-                ReloadDataGridTeams();
+                try
+                {
+                    ReloadDataGridTeams();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
