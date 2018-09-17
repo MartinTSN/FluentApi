@@ -46,19 +46,25 @@ namespace FluentApi.Gui
                     dataGridEmployees.ItemsSource = selectedTeam.Employees;
                     buttonAddToTeam.IsEnabled = false;
                     buttonRemoveFromTeam.IsEnabled = true;
-
-
                 }
             }
             if (selectedTeam != null)
             {
-                textBoxTeamName.Text = selectedTeam.Name;
-                textBoxDescription.Text = selectedTeam.Description;
-                datePickerStartDate.SelectedDate = selectedTeam.StartDate;
-                datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
-                textBoxTeamSalary.Text = GetTeamSalary().ToString();
-                buttonEditTeam.IsEnabled = true;
-                buttonAddTeam.IsEnabled = false;
+                try
+                {
+                    textBoxTeamName.Text = selectedTeam.Name;
+                    textBoxDescription.Text = selectedTeam.Description;
+                    datePickerStartDate.SelectedDate = selectedTeam.StartDate;
+                    datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
+                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                    buttonEditTeam.IsEnabled = true;
+                    buttonAddTeam.IsEnabled = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+
             }
         }
 
@@ -79,12 +85,26 @@ namespace FluentApi.Gui
 
         private void ReloadDataGridTeams()
         {
-            dataGridTeams.ItemsSource = model.Teams.ToList();
+            try
+            {
+                dataGridTeams.ItemsSource = model.Teams.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void ReloadDataGridEmployees()
         {
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
+            try
+            {
+                dataGridEmployees.ItemsSource = model.Employees.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void Button_ShowAllEmployees_Click(object sender, RoutedEventArgs e)
@@ -103,25 +123,32 @@ namespace FluentApi.Gui
 
             if (selectedEmployee != null && selectedTeam != null)
             {
-                foreach (Employee employee in selectedTeam.Employees)
+                try
                 {
-                    if (selectedEmployee != employee)
+                    foreach (Employee employee in selectedTeam.Employees)
+                    {
+                        if (selectedEmployee != employee)
+                        {
+                            selectedTeam.Employees.Add(selectedEmployee);
+                            break;
+                        }
+                    }
+                    if (selectedTeam.Employees.Count == 0)
                     {
                         selectedTeam.Employees.Add(selectedEmployee);
-                        break;
                     }
+                    model.SaveChanges();
+                    dataGridTeams.SelectedItem = selectedTeam;
+                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    dataGridTeams.SelectedItem = selectedTeam = null;
+                    dataGridEmployees.SelectedItem = selectedEmployee = null;
+                    buttonAddToTeam.IsEnabled = false;
+                    buttonRemoveFromTeam.IsEnabled = true;
                 }
-                if (selectedTeam.Employees.Count == 0)
+                catch (Exception ex)
                 {
-                    selectedTeam.Employees.Add(selectedEmployee);
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
-                model.SaveChanges();
-                dataGridTeams.SelectedItem = selectedTeam;
-                dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                dataGridTeams.SelectedItem = selectedTeam = null;
-                dataGridEmployees.SelectedItem = selectedEmployee = null;
-                buttonAddToTeam.IsEnabled = false;
-                buttonRemoveFromTeam.IsEnabled = true;
             }
         }
 
@@ -131,20 +158,27 @@ namespace FluentApi.Gui
             selectedTeam = dataGridTeams.SelectedItem as Team;
             if (selectedEmployee != null && selectedTeam != null)
             {
-                foreach (Employee employee in selectedTeam.Employees)
+                try
                 {
-                    if (selectedEmployee == employee)
+                    foreach (Employee employee in selectedTeam.Employees)
                     {
-                        selectedTeam.Employees.Remove(selectedEmployee);
-                        break;
+                        if (selectedEmployee == employee)
+                        {
+                            selectedTeam.Employees.Remove(selectedEmployee);
+                            break;
+                        }
                     }
+                    model.SaveChanges();
+                    dataGridTeams.SelectedItem = selectedTeam;
+                    dataGridEmployees.SelectedItem = selectedEmployee = null;
+                    ReloadDataGridEmployees();
+                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    buttonRemoveFromTeam.IsEnabled = false;
                 }
-                model.SaveChanges();
-                dataGridTeams.SelectedItem = selectedTeam;
-                dataGridEmployees.SelectedItem = selectedEmployee = null;
-                ReloadDataGridEmployees();
-                dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                buttonRemoveFromTeam.IsEnabled = false;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
@@ -168,41 +202,103 @@ namespace FluentApi.Gui
 
         private void Button_AddTeam_Click(object sender, RoutedEventArgs e)
         {
-            Team newTeam = new Team();
-            newTeam.Name = textBoxTeamName.Text;
-            newTeam.Description = textBoxDescription.Text;
-            newTeam.StartDate = datePickerStartDate.SelectedDate.Value;
-            newTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
-            model.Teams.Add(newTeam);
-            model.SaveChanges();
-            ReloadDataGridTeams();
+            if (!Validator.IsNameValid(textBoxTeamName.Text))
+            {
+                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
+            {
+                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
+            {
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
+            {
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                try
+                {
+                    Team newTeam = new Team();
+                    newTeam.Name = textBoxTeamName.Text;
+                    newTeam.Description = textBoxDescription.Text;
+                    newTeam.StartDate = datePickerStartDate.SelectedDate.Value;
+                    newTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
+                    model.Teams.Add(newTeam);
+                    model.SaveChanges();
+                    ReloadDataGridTeams();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme det nye team. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
         }
 
         private void Button_EditTeam_Click(object sender, RoutedEventArgs e)
         {
-            if (textBoxTeamName.Text != selectedTeam.Name)
+            if (selectedTeam != null)
             {
-                selectedTeam.Name = textBoxTeamName.Text;
+                if (!Validator.IsNameValid(textBoxTeamName.Text))
+                {
+                    MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
+                {
+                    MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
+                {
+                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
+                {
+                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    try
+                    {
+                        if (textBoxTeamName.Text != selectedTeam.Name)
+                        {
+                            selectedTeam.Name = textBoxTeamName.Text;
+                        }
+                        if (textBoxDescription.Text != selectedTeam.Description)
+                        {
+                            selectedTeam.Description = textBoxDescription.Text;
+                        }
+                        if (datePickerStartDate.SelectedDate != selectedTeam.StartDate)
+                        {
+                            selectedTeam.StartDate = datePickerStartDate.SelectedDate.Value;
+                        }
+                        if (datePickerEndDate.SelectedDate != selectedTeam.ExpectedEndDate)
+                        {
+                            selectedTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
+                        }
+                        model.SaveChanges();
+                        ReloadDataGridTeams();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere det valgte team. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                }
             }
-            if (textBoxDescription.Text != selectedTeam.Description)
-            {
-                selectedTeam.Description = textBoxDescription.Text;
-            }
-            if (datePickerStartDate.SelectedDate != selectedTeam.StartDate)
-            {
-                selectedTeam.StartDate = datePickerStartDate.SelectedDate.Value;
-            }
-            if (datePickerEndDate.SelectedDate != selectedTeam.ExpectedEndDate)
-            {
-                selectedTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
-            }
-            model.SaveChanges();
-            ReloadDataGridTeams();
         }
 
         private void Button_ShowAvailableEmployees_Click(object sender, RoutedEventArgs e)
         {
-            dataGridEmployees.ItemsSource = model.Employees.Where(employees => employees.TeamId == null).ToList();
+            try
+            {
+                dataGridEmployees.ItemsSource = model.Employees.Where(employees => employees.TeamId == null).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
     }
-} 
+}

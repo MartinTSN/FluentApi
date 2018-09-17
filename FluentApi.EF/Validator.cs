@@ -170,7 +170,7 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (d.Date > DateTime.Now.Date)
+            else if (d.Date > DateTime.Now.Date.AddDays(1))
             {
                 return false;
             }
