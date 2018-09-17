@@ -122,17 +122,21 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The birthDay must be set.");
+                //}
+                //if (value.Year >= (DateTime.Now.Year - 18))
+                //{
+                //    throw new ArgumentOutOfRangeException("The date must be atleast 18 years old.");
+                //}
+                //if (value.Year <= (DateTime.Now.Year - 70))
+                //{
+                //    throw new ArgumentOutOfRangeException("The date must be under 70 years ago.");
+                //}
+                if (!Validator.IsBirthDayValid(value))
                 {
-                    throw new ArgumentNullException("The birthDay must be set.");
-                }
-                if (value.Year >= (DateTime.Now.Year - 18))
-                {
-                    throw new ArgumentOutOfRangeException("The date must be atleast 18 years old.");
-                }
-                if (value.Year <= (DateTime.Now.Year - 70))
-                {
-                    throw new ArgumentOutOfRangeException("The date must be under 70 years ago.");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 birthDay = value;
             }
@@ -153,17 +157,25 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The date must be set");
+                //}
+                //if (value.Year > DateTime.Now.Year)
+                //{
+                //    throw new ArgumentOutOfRangeException("You cannot hire a person in the future.");
+                //}
+                //if (value.Year < BirthDay.Year)
+                //{
+                //    throw new ArgumentOutOfRangeException("You cannot hire a person before they're born.");
+                //}
+                if (!Validator.IsEmploymentDateValid(value))
                 {
-                    throw new ArgumentNullException("The date must be set");
+                    throw new ArgumentException("Invalid value provided");
                 }
-                if (value.Year > DateTime.Now.Year)
+                if (!Validator.IsBirthDayEmploymentDateValid(BirthDay, value))
                 {
-                    throw new ArgumentOutOfRangeException("You cannot hire a person in the future.");
-                }
-                if (value.Year < BirthDay.Year)
-                {
-                    throw new ArgumentOutOfRangeException("You cannot hire a person before they're born.");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 employementDate = value;
             }
@@ -184,13 +196,17 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The value must be set.");
+                //}
+                //if (!value.Substring(value.Length - 4).All(Char.IsNumber))
+                //{
+                //    throw new FormatException("The CPR must be 4 numbers");
+                //}
+                if (!Validator.IsCPRNumberValid(value))
                 {
-                    throw new ArgumentNullException("The value must be set.");
-                }
-                if (!value.Substring(value.Length - 4).All(Char.IsNumber))
-                {
-                    throw new FormatException("The CPR must be 4 numbers");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 cprNumber = value;
             }
@@ -209,9 +225,13 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value < 0)
+                //if (value < 0)
+                //{
+                //    throw new ArgumentOutOfRangeException("The value must be positive");
+                //}
+                if (!Validator.IsMoneyValid(value))
                 {
-                    throw new ArgumentOutOfRangeException("The value must be positive");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 salary = value;
             }

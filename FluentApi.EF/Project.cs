@@ -38,17 +38,21 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The Name must be set");
+                //}
+                //if (value.Length < 2 || value.Length > 100)
+                //{
+                //    throw new ArgumentOutOfRangeException("The Name must be over 2 and under 100 characters");
+                //}
+                //if (value.All(Char.IsNumber))
+                //{
+                //    throw new FormatException("There cant be any numbers in the value");
+                //}
+                if (!Validator.IsNameValid(value))
                 {
-                    throw new ArgumentNullException("The Name must be set");
-                }
-                if (value.Length < 2 || value.Length > 100)
-                {
-                    throw new ArgumentOutOfRangeException("The Name must be over 2 and under 100 characters");
-                }
-                if (value.All(Char.IsNumber))
-                {
-                    throw new FormatException("There cant be any numbers in the value");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 name = value;
             }
@@ -68,13 +72,17 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The value must be set");
+                //}
+                //if (value.All(Char.IsNumber))
+                //{
+                //    throw new FormatException("The value must not have any numbers");
+                //}
+                if (!Validator.IsDescriptionValid(value))
                 {
-                    throw new ArgumentNullException("The value must be set");
-                }
-                if (value.All(Char.IsNumber))
-                {
-                    throw new FormatException("The value must not have any numbers");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 description = value;
             }
@@ -94,13 +102,17 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The value must be set");
+                //}
+                //if (value.Date > DateTime.Now.Date)
+                //{
+                //    throw new ArgumentOutOfRangeException("The value must not be in the future");
+                //}
+                if (!Validator.IsStartDateValid(value))
                 {
-                    throw new ArgumentNullException("The value must be set");
-                }
-                if (value.Date > DateTime.Now.Date)
-                {
-                    throw new ArgumentOutOfRangeException("The value must not be in the future");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 startDate = value;
             }
@@ -120,13 +132,17 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The value must be set");
+                //}
+                //if (value.Date < DateTime.Now.Date)
+                //{
+                //    throw new ArgumentOutOfRangeException("The value must not be in the past");
+                //}
+                if (!Validator.IsEndDateValid(value))
                 {
-                    throw new ArgumentNullException("The value must be set");
-                }
-                if (value.Date < DateTime.Now.Date)
-                {
-                    throw new ArgumentOutOfRangeException("The value must not be in the past");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 endDate = value;
             }
@@ -145,9 +161,13 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value < 0)
+                //if (value < 0)
+                //{
+                //    throw new ArgumentOutOfRangeException("The value must be positive");
+                //}
+                if (!Validator.IsMoneyValid(value))
                 {
-                    throw new ArgumentOutOfRangeException("The value must be positive");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 budgetLimit = value;
             }

@@ -58,7 +58,7 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (!s.All(c => Char.IsLetter(c) && Char.IsSeparator(c)))
+            else if (s.All(Char.IsNumber))
             {
                 return false;
             }
@@ -98,7 +98,7 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (d.Year < new DateTime(01, 01, 1950).Year)
+            else if (d.Year < new DateTime(1950).Year)
             {
                 return false;
             }
@@ -110,15 +110,7 @@ namespace FluentApi.EF
 
         public static bool IsBirthDayEmploymentDateValid(DateTime birthday, DateTime EmploymentDate)
         {
-            if (!IsBirthDayValid(birthday))
-            {
-                return false;
-            }
-            else if (!IsEmploymentDateValid(EmploymentDate))
-            {
-                return false;
-            }
-            else if (EmploymentDate.Year < birthday.Year)
+            if (EmploymentDate.Year < birthday.Year)
             {
                 return false;
             }
@@ -162,7 +154,7 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (!s.All(c => Char.IsLetter(c) && Char.IsSeparator(c)))
+            else if (s.All(c => Char.IsLetter(c) && Char.IsSeparator(c)))
             {
                 return false;
             }
@@ -188,7 +180,7 @@ namespace FluentApi.EF
             }
         }
 
-        public static bool IsEndDateValud(DateTime d)
+        public static bool IsEndDateValid(DateTime d)
         {
             if (d == null)
             {

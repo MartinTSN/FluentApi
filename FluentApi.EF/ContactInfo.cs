@@ -31,21 +31,25 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value.Length < 10)
+                //if (value.Length < 10)
+                //{
+                //    throw new ArgumentOutOfRangeException("The Mail must be over 10 characters.");
+                //}
+                //if (!value.EndsWith(".com") && !value.EndsWith(".net") && !value.EndsWith(".dk"))
+                //{
+                //    throw new FormatException("The mail must end with .com .net or .dk");
+                //}
+                //if (value.EndsWith("@.com") || value.EndsWith("@.net") || value.EndsWith("@.dk"))
+                //{
+                //    throw new FormatException("You must write something between the @ and the domain ending");
+                //}
+                //if (!value.Contains("@"))
+                //{
+                //    throw new FormatException("There must be an at (@) symbol in the mail.");
+                //}
+                if (!Validator.IsEmailValid(value))
                 {
-                    throw new ArgumentOutOfRangeException("The Mail must be over 10 characters.");
-                }
-                if (!value.EndsWith(".com") && !value.EndsWith(".net") && !value.EndsWith(".dk"))
-                {
-                    throw new FormatException("The mail must end with .com .net or .dk");
-                }
-                if (value.EndsWith("@.com") || value.EndsWith("@.net") || value.EndsWith("@.dk"))
-                {
-                    throw new FormatException("You must write something between the @ and the domain ending");
-                }
-                if (!value.Contains("@"))
-                {
-                    throw new FormatException("There must be an at (@) symbol in the mail.");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 email = value;
             }
@@ -65,13 +69,17 @@ namespace FluentApi.EF
             }
             set
             {
-                if (!value.All(Char.IsNumber))
+                //if (!value.All(Char.IsNumber))
+                //{
+                //    throw new FormatException("The value must be a number");
+                //}
+                //if (value.Length < 8)
+                //{
+                //    throw new ArgumentOutOfRangeException("The value must be atleast 8 numbers long");
+                //}
+                if (!Validator.IsPhoneValid(value))
                 {
-                    throw new FormatException("The value must be a number");
-                }
-                if (value.Length < 8)
-                {
-                    throw new ArgumentOutOfRangeException("The value must be atleast 8 numbers long");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 phone = value;
             }

@@ -218,6 +218,7 @@ namespace FluentApi.Gui
             dataGridTeams.SelectedItem = null;
             buttonAddToProject.IsEnabled = false;
             buttonRemoveFromProject.IsEnabled = false;
+            textBoxTeamSalary.Text = String.Empty;
         }
 
         private void Button_ShowAvailableTeams_Click(object sender, RoutedEventArgs e)

@@ -56,21 +56,30 @@ namespace FluentApi.Gui
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (true)
+            if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
             {
-
+                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
-            Employee newEmployee = new Employee();
-            newEmployee.FirstName = textBoxEmployeeFirstName.Text;
-            newEmployee.LastName = textBoxEmployeeLastName.Text;
-            newEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
-            newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
-            newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
-            newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
-            model.Employees.Add(newEmployee);
-            model.SaveChanges();
-            ReloadDataGridEmployees();
+            else
+            {
+                try
+                {
+                    Employee newEmployee = new Employee();
+                    newEmployee.FirstName = textBoxEmployeeFirstName.Text;
+                    newEmployee.LastName = textBoxEmployeeLastName.Text;
+                    newEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
+                    newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
+                    newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
+                    newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
+                    model.Employees.Add(newEmployee);
+                    model.SaveChanges();
+                    ReloadDataGridEmployees();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye ansatte. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                } 
+            }
         }
 
         private void Button_Update_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
