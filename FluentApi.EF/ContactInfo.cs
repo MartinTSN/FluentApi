@@ -22,7 +22,7 @@ namespace FluentApi.EF
         /// <exception cref="FormatException">Throws when the mail doesnt end with: .com .net or .dk</exception>
         /// <exception cref="FormatException">Throws when teh mail doesnt have anything between the @ and the domain ending.</exception>
         /// <exception cref="FormatException">Throws when the mail doesnt contain a @.</exception>
-        [StringLength(50)]
+        [StringLength(100)]
         public string Email
         {
             get

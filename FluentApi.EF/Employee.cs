@@ -53,17 +53,21 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The Firstname must be set");
+                //}
+                //if (value.Length < 2 || value.Length > 100)
+                //{
+                //    throw new ArgumentOutOfRangeException("The Firstname must be over 2 and under 100 characters");
+                //}
+                //if (value.All(Char.IsNumber))
+                //{
+                //    throw new ArgumentException("There cant be any numbers in the value");
+                //}
+                if (!Validator.IsNameValid(value))
                 {
-                    throw new ArgumentNullException("The Firstname must be set");
-                }
-                if (value.Length < 2 || value.Length > 100)
-                {
-                    throw new ArgumentOutOfRangeException("The Firstname must be over 2 and under 100 characters");
-                }
-                if (value.All(Char.IsNumber))
-                {
-                    throw new ArgumentException("There cant be any numbers in the value");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 firstName = value;
             }
@@ -84,17 +88,21 @@ namespace FluentApi.EF
             }
             set
             {
-                if (value == null)
+                //if (value == null)
+                //{
+                //    throw new ArgumentNullException("The Lastname must be set");
+                //}
+                //if (value.Length < 2 || value.Length > 100)
+                //{
+                //    throw new ArgumentOutOfRangeException("The Lastname must be over 2 and under 100 characters");
+                //}
+                //if (value.All(Char.IsNumber))
+                //{
+                //    throw new ArgumentException("The name must not have any numbers");
+                //}
+                if (!Validator.IsNameValid(value))
                 {
-                    throw new ArgumentNullException("The Lastname must be set");
-                }
-                if (value.Length < 2 || value.Length > 100)
-                {
-                    throw new ArgumentOutOfRangeException("The Lastname must be over 2 and under 100 characters");
-                }
-                if (value.All(Char.IsNumber))
-                {
-                    throw new ArgumentException("The name must not have any numbers");
+                    throw new ArgumentException("Invalid value provided");
                 }
                 lastName = value;
             }

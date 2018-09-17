@@ -1,6 +1,7 @@
 ﻿using FluentApi.EF;
 using System;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -55,6 +56,11 @@ namespace FluentApi.Gui
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (true)
+            {
+
+            }
+
             Employee newEmployee = new Employee();
             newEmployee.FirstName = textBoxEmployeeFirstName.Text;
             newEmployee.LastName = textBoxEmployeeLastName.Text;

@@ -29,7 +29,7 @@ namespace FluentApi.EF
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value is under 2 or over 50 characters.</exception>
         /// <exception cref="FormatException">Thrown when any character is a number.</exception>
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Name
         {
             get
@@ -42,9 +42,9 @@ namespace FluentApi.EF
                 {
                     throw new ArgumentNullException("The Name must be set");
                 }
-                if (value.Length < 2 || value.Length > 50)
+                if (value.Length < 2 || value.Length > 100)
                 {
-                    throw new ArgumentOutOfRangeException("The Name must be over 2 and under 50 characters");
+                    throw new ArgumentOutOfRangeException("The Name must be over 2 and under 100 characters");
                 }
                 if (value.All(Char.IsNumber))
                 {

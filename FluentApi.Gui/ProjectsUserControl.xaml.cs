@@ -240,6 +240,7 @@ namespace FluentApi.Gui
                 datePickerEndDate.SelectedDate = null;
                 textBoxBudgetLimit.Text = String.Empty;
                 textBoxProjectBuget.Text = String.Empty;
+                textBoxTeamSalary.Text = String.Empty;
                 textBoxProjectName.Focus();
                 ReloadDataGridTeams();
             }
