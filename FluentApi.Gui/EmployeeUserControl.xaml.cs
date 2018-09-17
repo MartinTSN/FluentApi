@@ -19,7 +19,7 @@ namespace FluentApi.Gui
         {
             InitializeComponent();
             model = new Model();
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
+            ReloadDataGridEmployees();
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -27,31 +27,45 @@ namespace FluentApi.Gui
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
             if (selectedEmployee != null)
             {
-                buttonUpdateEmployee.IsEnabled = true;
-                buttonAddEmployee.IsEnabled = false;
-                textBoxEmployeeFirstName.Text = selectedEmployee.FirstName;
-                textBoxEmployeeLastName.Text = selectedEmployee.LastName;
-                datePickerEmployeeBirthday.SelectedDate = selectedEmployee.BirthDay;
-                datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
-                textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
-                textBoxCPR.Text = selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4);
-                if (selectedEmployee.ContactInfo != null)
+                try
                 {
-                    textBoxMail.Text = selectedEmployee.ContactInfo.Email;
-                    textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
+                    buttonUpdateEmployee.IsEnabled = true;
+                    buttonAddEmployee.IsEnabled = false;
+                    textBoxEmployeeFirstName.Text = selectedEmployee.FirstName;
+                    textBoxEmployeeLastName.Text = selectedEmployee.LastName;
+                    datePickerEmployeeBirthday.SelectedDate = selectedEmployee.BirthDay;
+                    datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
+                    textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
+                    textBoxCPR.Text = selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4);
+                    if (selectedEmployee.ContactInfo != null)
+                    {
+                        textBoxMail.Text = selectedEmployee.ContactInfo.Email;
+                        textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
+                    }
+                    else
+                    {
+                        textBoxMail.Text = String.Empty;
+                        textBoxPhoneNumber.Text = String.Empty;
+                        buttonUpdateContactInfo.IsEnabled = false;
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    textBoxMail.Text = String.Empty;
-                    textBoxPhoneNumber.Text = String.Empty;
-                    buttonUpdateContactInfo.IsEnabled = false;
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at vælge personen. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
 
         private void ReloadDataGridEmployees()
         {
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
+            try
+            {
+                dataGridEmployees.ItemsSource = model.Employees.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK,MessageBoxImage.Stop);
+            }
         }
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -59,6 +73,30 @@ namespace FluentApi.Gui
             if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
             {
                 MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsNameValid(textBoxEmployeeLastName.Text))
+            {
+                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsBirthDayValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault()))
+            {
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsEmploymentDateValid(datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
+            {
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsBirthDayEmploymentDateValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault(), datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
+            {
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsCPRNumberValid(textBoxCPR.Text))
+            {
+                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxEmployeeSalary.Text)))
+            {
+                MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -78,7 +116,7 @@ namespace FluentApi.Gui
                 catch (Exception)
                 {
                     MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye ansatte. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
-                } 
+                }
             }
         }
 
@@ -86,28 +124,66 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxEmployeeFirstName.Text != selectedEmployee.FirstName)
+                if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
                 {
-                    selectedEmployee.FirstName = textBoxEmployeeFirstName.Text;
+                    MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (textBoxEmployeeLastName.Text != selectedEmployee.LastName)
+                else if (!Validator.IsNameValid(textBoxEmployeeLastName.Text))
                 {
-                    selectedEmployee.LastName = textBoxEmployeeLastName.Text;
+                    MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (datePickerEmployeeBirthday.SelectedDate != selectedEmployee.BirthDay)
+                else if (!Validator.IsBirthDayValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault()))
                 {
-                    selectedEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
+                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (datePickerEmployeeStartDate.SelectedDate != selectedEmployee.EmploymentDate)
+                else if (!Validator.IsEmploymentDateValid(datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
                 {
-                    selectedEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
+                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (textBoxCPR.Text != selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4))
+                else if (!Validator.IsBirthDayEmploymentDateValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault(), datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
                 {
-                    selectedEmployee.CPRNumber = selectedEmployee.BirthDay.ToString("dd") + selectedEmployee.BirthDay.ToString("MM") + selectedEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
+                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                model.SaveChanges();
-                ReloadDataGridEmployees();
+                else if (!Validator.IsCPRNumberValid(textBoxCPR.Text))
+                {
+                    MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxEmployeeSalary.Text)))
+                {
+                    MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    try
+                    {
+                        if (textBoxEmployeeFirstName.Text != selectedEmployee.FirstName)
+                        {
+                            selectedEmployee.FirstName = textBoxEmployeeFirstName.Text;
+                        }
+                        if (textBoxEmployeeLastName.Text != selectedEmployee.LastName)
+                        {
+                            selectedEmployee.LastName = textBoxEmployeeLastName.Text;
+                        }
+                        if (datePickerEmployeeBirthday.SelectedDate != selectedEmployee.BirthDay)
+                        {
+                            selectedEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
+                        }
+                        if (datePickerEmployeeStartDate.SelectedDate != selectedEmployee.EmploymentDate)
+                        {
+                            selectedEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
+                        }
+                        if (textBoxCPR.Text != selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4))
+                        {
+                            selectedEmployee.CPRNumber = selectedEmployee.BirthDay.ToString("dd") + selectedEmployee.BirthDay.ToString("MM") + selectedEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
+                        }
+                        model.SaveChanges();
+                        ReloadDataGridEmployees();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den valgte ansat. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                }
             }
         }
 
@@ -115,28 +191,64 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxMail.Text != selectedEmployee.ContactInfo.Email)
+                if (!Validator.IsEmailValid(textBoxMail.Text))
                 {
-                    selectedEmployee.ContactInfo.Email = textBoxMail.Text;
+                    MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (textBoxPhoneNumber.Text != selectedEmployee.ContactInfo.Phone)
+                else if (!Validator.IsPhoneValid(textBoxPhoneNumber.Text))
                 {
-                    selectedEmployee.ContactInfo.Phone = textBoxPhoneNumber.Text;
+                    MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                model.SaveChanges();
-                ReloadDataGridEmployees();
+                else
+                {
+                    try
+                    {
+                        if (textBoxMail.Text != selectedEmployee.ContactInfo.Email)
+                        {
+                            selectedEmployee.ContactInfo.Email = textBoxMail.Text;
+                        }
+                        if (textBoxPhoneNumber.Text != selectedEmployee.ContactInfo.Phone)
+                        {
+                            selectedEmployee.ContactInfo.Phone = textBoxPhoneNumber.Text;
+                        }
+                        model.SaveChanges();
+                        ReloadDataGridEmployees();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den Kontaktinformationen. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                }
             }
         }
 
         private void Button_Add_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ContactInfo newContactInfo = new ContactInfo();
-            newContactInfo.Email = textBoxMail.Text;
-            newContactInfo.Phone = textBoxPhoneNumber.Text;
-            model.ContactInfos.Add(newContactInfo);
-            selectedEmployee.ContactInfo = newContactInfo;
-            model.SaveChanges();
-            ReloadDataGridEmployees();
+            if (!Validator.IsEmailValid(textBoxMail.Text))
+            {
+                MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsPhoneValid(textBoxPhoneNumber.Text))
+            {
+                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                try
+                {
+                    ContactInfo newContactInfo = new ContactInfo();
+                    newContactInfo.Email = textBoxMail.Text;
+                    newContactInfo.Phone = textBoxPhoneNumber.Text;
+                    model.ContactInfos.Add(newContactInfo);
+                    selectedEmployee.ContactInfo = newContactInfo;
+                    model.SaveChanges();
+                    ReloadDataGridEmployees();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye Kontaktinformation. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
         }
 
         private void DataGrid_Employees_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

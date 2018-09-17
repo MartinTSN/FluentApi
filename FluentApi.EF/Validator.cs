@@ -94,11 +94,11 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (d.Year > DateTime.Now.Year)
+            else if (d > DateTime.Now.Date.AddDays(1))
             {
                 return false;
             }
-            else if (d.Year < new DateTime(1950).Year)
+            else if (d < new DateTime(1950, 12, 31))
             {
                 return false;
             }
@@ -110,7 +110,7 @@ namespace FluentApi.EF
 
         public static bool IsBirthDayEmploymentDateValid(DateTime birthday, DateTime EmploymentDate)
         {
-            if (EmploymentDate.Year < birthday.Year)
+            if (EmploymentDate < birthday)
             {
                 return false;
             }
@@ -122,7 +122,7 @@ namespace FluentApi.EF
 
         public static bool IsCPRNumberValid(string s)
         {
-            if (s == null)
+            if (String.IsNullOrWhiteSpace(s))
             {
                 return false;
             }

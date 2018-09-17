@@ -8,7 +8,7 @@ namespace FluentApi.EF
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    public partial class Employee
+    public class Person
     {
         /// <summary>
         /// The Employee FirstName value is stored here.
@@ -18,25 +18,6 @@ namespace FluentApi.EF
         /// The Employee LastName value is stored here.
         /// </summary>
         private string lastName;
-        /// <summary>
-        /// The Employee BirthDay/date is stored here.
-        /// </summary>
-        private DateTime birthDay;
-        /// <summary>
-        /// The Employee Hiredate is stored here.
-        /// </summary>
-        private DateTime employementDate;
-        /// <summary>
-        /// The Employee CPRBnumber is stored here.
-        /// </summary>
-        /// <remarks>Is used with the ContactInfo Birthday.</remarks>
-        private string cprNumber;
-        /// <summary>
-        /// The Employee Salary is stored here.
-        /// </summary>
-        private decimal salary;
-
-        public int Id { get; set; }
 
         /// <summary>
         /// Takes the FirstName value and validates it. Returns an exception if something is wrong.
@@ -107,6 +88,31 @@ namespace FluentApi.EF
                 lastName = value;
             }
         }
+    }
+
+
+    public partial class Employee : Person
+    {
+        
+        /// <summary>
+        /// The Employee BirthDay/date is stored here.
+        /// </summary>
+        private DateTime birthDay;
+        /// <summary>
+        /// The Employee Hiredate is stored here.
+        /// </summary>
+        private DateTime employementDate;
+        /// <summary>
+        /// The Employee CPRBnumber is stored here.
+        /// </summary>
+        /// <remarks>Is used with the ContactInfo Birthday.</remarks>
+        private string cprNumber;
+        /// <summary>
+        /// The Employee Salary is stored here.
+        /// </summary>
+        private decimal salary;
+
+        public int Id { get; set; }
 
         /// <summary>
         /// Takes the BirthDay value and validates it. Returns an exception if something is wrong.
