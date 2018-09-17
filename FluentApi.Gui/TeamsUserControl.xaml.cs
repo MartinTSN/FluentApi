@@ -186,19 +186,20 @@ namespace FluentApi.Gui
         {
             if (e.Key == Key.Escape)
             {
-                dataGridTeams.SelectedItem = null;
-                buttonAddTeam.IsEnabled = true;
-                buttonEditTeam.IsEnabled = false;
-                buttonAddToTeam.IsEnabled = false;
-                buttonRemoveFromTeam.IsEnabled = false;
-                textBoxTeamName.Text = String.Empty;
-                textBoxDescription.Text = String.Empty;
-                datePickerStartDate.SelectedDate = null;
-                datePickerEndDate.SelectedDate = null;
-                textBoxTeamName.Focus();
                 try
                 {
                     ReloadDataGridTeams();
+                    dataGridTeams.SelectedItem = null;
+                    buttonAddTeam.IsEnabled = true;
+                    buttonEditTeam.IsEnabled = false;
+                    buttonAddToTeam.IsEnabled = false;
+                    buttonRemoveFromTeam.IsEnabled = false;
+                    textBoxTeamName.Text = String.Empty;
+                    textBoxDescription.Text = String.Empty;
+                    datePickerStartDate.SelectedDate = null;
+                    datePickerEndDate.SelectedDate = null;
+                    textBoxTeamSalary.Text = String.Empty;
+                    textBoxTeamName.Focus();
                 }
                 catch (Exception ex)
                 {

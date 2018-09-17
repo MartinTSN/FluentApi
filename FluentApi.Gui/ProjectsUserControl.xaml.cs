@@ -29,32 +29,25 @@ namespace FluentApi.Gui
         {
             InitializeComponent();
             model = new Model();
-            ReloadDataGridProject();
-            ReloadDataGridTeams();
+            try
+            {
+                ReloadDataGridProject();
+                ReloadDataGridTeams();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void ReloadDataGridProject()
         {
-            try
-            {
-                dataGridProjects.ItemsSource = model.Projects.ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
-            }
+            dataGridProjects.ItemsSource = model.Projects.ToList();
         }
 
         private void ReloadDataGridTeams()
         {
-            try
-            {
-                dataGridTeams.ItemsSource = model.Teams.ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
-            }
+            dataGridTeams.ItemsSource = model.Teams.ToList();
         }
 
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -97,10 +90,15 @@ namespace FluentApi.Gui
         private decimal GetTeamSalary()
         {
             decimal teamSalary = 0;
-            foreach (Employee employee in selectedTeam.Employees)
+
+            if (selectedTeam != null)
             {
-                teamSalary += employee.Salary;
+                foreach (Employee employee in selectedTeam.Employees)
+                {
+                    teamSalary += employee.Salary;
+                }
             }
+
             return teamSalary;
         }
 
@@ -108,13 +106,18 @@ namespace FluentApi.Gui
         {
             decimal projectPayments = 0;
             decimal teamSalaries = 0;
-            foreach (Team team in selectedProject.Teams)
+
+            if (selectedProject != null)
             {
-                foreach (Employee employee in team.Employees)
+                foreach (Team team in selectedProject.Teams)
                 {
-                    teamSalaries += employee.Salary;
+                    foreach (Employee employee in team.Employees)
+                    {
+                        teamSalaries += employee.Salary;
+                    }
                 }
             }
+
             projectPayments += teamSalaries;
             return projectPayments;
         }
@@ -139,23 +142,23 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
-
+                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
-
+                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxBudgetLimit.Text)))
             {
-
+                MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -179,31 +182,59 @@ namespace FluentApi.Gui
         }
 
         private void Button_EditProject_Click(object sender, RoutedEventArgs e)
-
         {
-            if (textBoxProjectName.Text != selectedProject.Name)
+            if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
-                selectedProject.Name = textBoxProjectName.Text;
+                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            if (textBoxDescription.Text != selectedProject.Description)
+            else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
-                selectedProject.Description = textBoxDescription.Text;
+                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            if (datePickerStartDate.SelectedDate != selectedProject.StartDate)
+            else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                selectedProject.StartDate = datePickerStartDate.SelectedDate.Value;
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            if (datePickerEndDate.SelectedDate != selectedProject.EndDate)
+            else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                selectedProject.EndDate = datePickerEndDate.SelectedDate.Value;
+                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            if (textBoxBudgetLimit.Text != selectedProject.BudgetLimit.ToString() && Decimal.Parse(textBoxBudgetLimit.Text) > GetProjectPayments())
+            else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxBudgetLimit.Text)))
             {
-                selectedProject.BudgetLimit = Decimal.Parse(textBoxBudgetLimit.Text);
+                MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            model.SaveChanges();
-
-            ReloadDataGridProject();
+            else
+            {
+                try
+                {
+                    if (textBoxProjectName.Text != selectedProject.Name)
+                    {
+                        selectedProject.Name = textBoxProjectName.Text;
+                    }
+                    if (textBoxDescription.Text != selectedProject.Description)
+                    {
+                        selectedProject.Description = textBoxDescription.Text;
+                    }
+                    if (datePickerStartDate.SelectedDate != selectedProject.StartDate)
+                    {
+                        selectedProject.StartDate = datePickerStartDate.SelectedDate.Value;
+                    }
+                    if (datePickerEndDate.SelectedDate != selectedProject.EndDate)
+                    {
+                        selectedProject.EndDate = datePickerEndDate.SelectedDate.Value;
+                    }
+                    if (textBoxBudgetLimit.Text != selectedProject.BudgetLimit.ToString() && Decimal.Parse(textBoxBudgetLimit.Text) > GetProjectPayments())
+                    {
+                        selectedProject.BudgetLimit = Decimal.Parse(textBoxBudgetLimit.Text);
+                    }
+                    model.SaveChanges();
+                    ReloadDataGridProject();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere det valgte projekt. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
         }
 
         private void Button_AddToProject_Click(object sender, RoutedEventArgs e)
@@ -219,28 +250,42 @@ namespace FluentApi.Gui
             {
                 if (selectedTeam != null && selectedProject != null)
                 {
-                    foreach (Team team in selectedProject.Teams)
+                    try
                     {
-                        if (selectedTeam != team)
+                        foreach (Team team in selectedProject.Teams)
+                        {
+                            if (selectedTeam != team)
+                            {
+                                selectedProject.Teams.Add(selectedTeam);
+                                break;
+                            }
+                        }
+                        if (selectedProject.Teams.Count == 0)
                         {
                             selectedProject.Teams.Add(selectedTeam);
-                            break;
                         }
                     }
-                    if (selectedProject.Teams.Count == 0)
+                    catch (Exception ex)
                     {
-                        selectedProject.Teams.Add(selectedTeam);
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
 
-                model.SaveChanges();
-                dataGridProjects.SelectedItem = selectedProject;
-                dataGridTeams.ItemsSource = selectedProject.Teams;
-                textBoxProjectBuget.Text = GetProjectPayments().ToString();
-                dataGridProjects.SelectedItem = selectedProject = null;
-                dataGridTeams.SelectedItem = selectedTeam = null;
-                buttonAddToProject.IsEnabled = false;
-                buttonRemoveFromProject.IsEnabled = true;
+                try
+                {
+                    model.SaveChanges();
+                    dataGridProjects.SelectedItem = selectedProject;
+                    dataGridTeams.ItemsSource = selectedProject.Teams;
+                    textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                    dataGridProjects.SelectedItem = selectedProject = null;
+                    dataGridTeams.SelectedItem = selectedTeam = null;
+                    buttonAddToProject.IsEnabled = false;
+                    buttonRemoveFromProject.IsEnabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
@@ -259,29 +304,51 @@ namespace FluentApi.Gui
                         break;
                     }
                 }
-                model.SaveChanges();
-                dataGridProjects.SelectedItem = selectedProject;
-                dataGridTeams.SelectedItem = selectedTeam = null;
-                ReloadDataGridTeams();
-                dataGridTeams.ItemsSource = selectedProject.Teams;
-                buttonRemoveFromProject.IsEnabled = false;
-                textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                try
+                {
+                    model.SaveChanges();
+                    dataGridProjects.SelectedItem = selectedProject;
+                    dataGridTeams.SelectedItem = selectedTeam = null;
+                    ReloadDataGridTeams();
+                    dataGridTeams.ItemsSource = selectedProject.Teams;
+                    buttonRemoveFromProject.IsEnabled = false;
+                    textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
         private void Button_ShowAllTeams_Click(object sender, RoutedEventArgs e)
         {
-            ReloadDataGridTeams();
-            dataGridProjects.SelectedItem = null;
-            dataGridTeams.SelectedItem = null;
-            buttonAddToProject.IsEnabled = false;
-            buttonRemoveFromProject.IsEnabled = false;
-            textBoxTeamSalary.Text = String.Empty;
+            try
+            {
+                ReloadDataGridTeams();
+                dataGridProjects.SelectedItem = null;
+                dataGridTeams.SelectedItem = null;
+                buttonAddToProject.IsEnabled = false;
+                buttonRemoveFromProject.IsEnabled = false;
+                textBoxTeamSalary.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void Button_ShowAvailableTeams_Click(object sender, RoutedEventArgs e)
         {
-            dataGridTeams.ItemsSource = model.Teams.Where(teams => teams.ProjectId == null).ToList();
+            try
+            {
+                dataGridTeams.ItemsSource = model.Teams.Where(teams => teams.ProjectId == null).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void DataGrid_Projects_KeyDown(object sender, KeyEventArgs e)
@@ -301,7 +368,14 @@ namespace FluentApi.Gui
                 textBoxProjectBuget.Text = String.Empty;
                 textBoxTeamSalary.Text = String.Empty;
                 textBoxProjectName.Focus();
-                ReloadDataGridTeams();
+                try
+                {
+                    ReloadDataGridTeams();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
     }

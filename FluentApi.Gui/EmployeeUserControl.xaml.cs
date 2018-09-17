@@ -65,7 +65,7 @@ namespace FluentApi.Gui
 
         private void ReloadDataGridEmployees()
         {
-                dataGridEmployees.ItemsSource = model.Employees.ToList();
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
         }
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -263,6 +263,10 @@ namespace FluentApi.Gui
                     textBoxEmployeeFirstName.Text = String.Empty;
                     textBoxEmployeeLastName.Text = String.Empty;
                     datePickerEmployeeStartDate.SelectedDate = null;
+                    datePickerEmployeeBirthday.SelectedDate = null;
+                    textBoxCPR.Text = String.Empty;
+                    textBoxEmployeeSalary.Text = String.Empty;
+                    buttonAddEmployee.IsEnabled = true;
                     textBoxEmployeeFirstName.Focus();
                 }
             }
