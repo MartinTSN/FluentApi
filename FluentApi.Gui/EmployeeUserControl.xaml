@@ -126,16 +126,16 @@
                              Text=""
                              Grid.Row="2"
                              TextChanged="TextBox_CPR_TextChanged" />
-                    <Button Grid.Column="2"
+                    <Button Grid.Column="3"
                             Grid.Row="3"
-                            Content="Gem Ny"
+                            Content="Tilføj Ansat"
                             Margin="3"
                             x:Name="buttonAddEmployee"
                             Click="Button_Create_Employee_Click" />
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="2"
                             Grid.Row="3"
                             Margin="3"
-                            Content="Opdater"
+                            Content="Rediger Ansat"
                             x:Name="buttonUpdateEmployee"
                             Click="Button_Update_Employee_Click" />
                 </Grid>

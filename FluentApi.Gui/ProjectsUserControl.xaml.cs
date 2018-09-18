@@ -356,6 +356,7 @@ namespace FluentApi.Gui
             if (e.Key == Key.Escape)
             {
                 dataGridProjects.SelectedItem = null;
+                dataGridTeams.SelectedItem = null;
                 buttonAddProject.IsEnabled = true;
                 buttonEditProject.IsEnabled = false;
                 buttonAddToProject.IsEnabled = false;

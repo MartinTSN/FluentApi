@@ -190,6 +190,7 @@ namespace FluentApi.Gui
                 {
                     ReloadDataGridTeams();
                     dataGridTeams.SelectedItem = null;
+                    dataGridEmployees.SelectedItem = null;
                     buttonAddTeam.IsEnabled = true;
                     buttonEditTeam.IsEnabled = false;
                     buttonAddToTeam.IsEnabled = false;

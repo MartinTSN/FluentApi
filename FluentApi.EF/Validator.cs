@@ -98,7 +98,7 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (d < new DateTime(1950, 12, 31))
+            else if (d < new DateTime(1950, 07, 30))
             {
                 return false;
             }
@@ -171,6 +171,10 @@ namespace FluentApi.EF
                 return false;
             }
             else if (d.Date > DateTime.Now.Date.AddDays(1))
+            {
+                return false;
+            }
+            else if (d < new DateTime(1950, 07, 10))
             {
                 return false;
             }
