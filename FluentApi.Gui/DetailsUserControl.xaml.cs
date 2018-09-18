@@ -29,7 +29,49 @@ namespace FluentApi.Gui
         public DetailsUserControl()
         {
             InitializeComponent();
+            model = new Model();
+            try
+            {
+                ReloadDataGridProjects();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+        }
 
+        public void ReloadDataGridProjects()
+        {
+            dataGridProjects.ItemsSource = model.Projects.ToList();
+        }
+
+        public void ReloadDataGridTeams()
+        {
+            dataGridTeams.ItemsSource = model.Teams.ToList();
+        }
+
+        public void ReloadDataGridEmployees()
+        {
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
+
+        private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedProject = dataGridProjects.SelectedItem as Project;
+            dataGridTeams.ItemsSource = selectedProject.Teams;
+            textBoxProjectBudget.Text = selectedProject.BudgetLimit.ToString();
+        }
+
+        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+            dataGridEmployees.ItemsSource = selectedTeam.Employees;
+            textBoxTeamBudget.Text = 
+        }
+
+        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
         }
     }
 }

@@ -30,7 +30,8 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2">
+                          Grid.ColumnSpan="2"
+                          SelectionChanged="DataGrid_Projects_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Projekt Navn"
                                             Binding="{Binding Name}" />
@@ -64,7 +65,8 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2">
+                          Grid.ColumnSpan="2"
+                          SelectionChanged="DataGrid_Teams_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team Navn"
                                             Binding="{Binding Name}" />
@@ -98,7 +100,8 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2">
+                          Grid.ColumnSpan="2"
+                          SelectionChanged="DataGrid_Employees_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Fornavn"
                                             Binding="{Binding FirstName}" />
