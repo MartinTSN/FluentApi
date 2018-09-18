@@ -119,7 +119,7 @@
                                 FirstDayOfWeek="Monday"
                                 SelectedDate="{Binding EndDate}"
                                 x:Name="datePickerEndDate" />
-                    <Label Content="Buget Grænse:"
+                    <Label Content="budget Grænse:"
                            Grid.Column="0"
                            Grid.Row="2"
                            HorizontalAlignment="Right"
@@ -166,7 +166,7 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <Label Content="Projekt Buget:"
+                    <Label Content="Projekt budget:"
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"

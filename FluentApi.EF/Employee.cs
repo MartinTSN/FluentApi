@@ -20,6 +20,24 @@ namespace FluentApi.EF
         private string lastName;
 
         /// <summary>
+        /// Person constructor with everything.
+        /// </summary>
+        /// <param name="firstName">The firstName</param>
+        /// <param name="lastName">The lastName</param>
+        public Person(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
+        /// <summary>
+        /// A parameterless Person constructor
+        /// </summary>
+        public Person()
+        {
+        }
+
+        /// <summary>
         /// Takes the FirstName value and validates it. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref = "ArgumentNullException" > Thrown when the FirstName is null.</exception>
@@ -93,7 +111,7 @@ namespace FluentApi.EF
 
     public partial class Employee : Person
     {
-        
+
         /// <summary>
         /// The Employee BirthDay/date is stored here.
         /// </summary>
@@ -111,6 +129,36 @@ namespace FluentApi.EF
         /// The Employee Salary is stored here.
         /// </summary>
         private decimal salary;
+
+        /// <summary>
+        /// Employee constructor with everything
+        /// </summary>
+        /// <param name="firstName">The firstName</param>
+        /// <param name="lastName">The lastName</param>
+        /// <param name="birthDay">The birthDay</param>
+        /// <param name="employmentDate">The employmentDate</param>
+        /// <param name="cprNumber">The cprNumber</param>
+        /// <param name="salary">The salary</param>
+        /// <remarks>Inheriths from the person constructor with everything</remarks>
+        public Employee(string firstName, string lastName, DateTime birthDay, DateTime employmentDate, string cprNumber, decimal salary)
+            : base(firstName, lastName)
+        {
+            BirthDay = birthDay;
+            EmploymentDate = employmentDate;
+            CPRNumber = cprNumber;
+            Salary = salary;
+        }
+
+        /// <summary>
+        /// A Parameterless Employee constructor
+        /// </summary>
+        /// <remarks>Inherits from the parameterless person constructor</remarks>
+        public Employee()
+            : base()
+        {
+
+        }
+
 
         public int Id { get; set; }
 

@@ -125,6 +125,10 @@ namespace FluentApi.Gui
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
+            if (selectedProject != null)
+            {
+                buttonAddToProject.IsEnabled = true;
+            }
             if (selectedTeam != null)
             {
                 try
@@ -140,6 +144,7 @@ namespace FluentApi.Gui
 
         private void Button_AddProject_Click(object sender, RoutedEventArgs e)
         {
+            bool couldParse = Decimal.TryParse(textBoxBudgetLimit.Text, out decimal d);
             if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
                 MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -150,15 +155,15 @@ namespace FluentApi.Gui
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxBudgetLimit.Text)))
+            else if (!Validator.IsMoneyValid(d))
             {
-                MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede budget-værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -244,7 +249,7 @@ namespace FluentApi.Gui
 
             if (GetTeamSalary() > (selectedProject.BudgetLimit - GetProjectPayments()))
             {
-                MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen");
+                MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen", "Fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
             else
             {
@@ -357,18 +362,22 @@ namespace FluentApi.Gui
             {
                 dataGridProjects.SelectedItem = null;
                 dataGridTeams.SelectedItem = null;
+                textBoxProjectName.Focus();
+                //                                                      TextBoxes
+                textBoxProjectName.Text = String.Empty;
+                textBoxDescription.Text = String.Empty;
+                textBoxBudgetLimit.Text = String.Empty;
+                textBoxProjectBuget.Text = String.Empty;
+                textBoxTeamSalary.Text = String.Empty;
+                //                                                      Datepickers
+                datePickerStartDate.SelectedDate = null;
+                datePickerEndDate.SelectedDate = null;
+                //                                                      Buttons
                 buttonAddProject.IsEnabled = true;
                 buttonEditProject.IsEnabled = false;
                 buttonAddToProject.IsEnabled = false;
                 buttonRemoveFromProject.IsEnabled = false;
-                textBoxProjectName.Text = String.Empty;
-                textBoxDescription.Text = String.Empty;
-                datePickerStartDate.SelectedDate = null;
-                datePickerEndDate.SelectedDate = null;
-                textBoxBudgetLimit.Text = String.Empty;
-                textBoxProjectBuget.Text = String.Empty;
-                textBoxTeamSalary.Text = String.Empty;
-                textBoxProjectName.Focus();
+
                 try
                 {
                     ReloadDataGridTeams();

@@ -196,17 +196,18 @@ namespace FluentApi.Gui
                     ReloadDataGridEmployees();
                     dataGridTeams.SelectedItem = null;
                     dataGridEmployees.SelectedItem = null;
+                    textBoxTeamName.Focus();
 
-                    
+                    //                                          TextBoxes
                     textBoxTeamName.Text = String.Empty;
                     textBoxDescription.Text = String.Empty;
                     textBoxTeamSalary.Text = String.Empty;
 
+                    //                                           Datepicker
                     datePickerStartDate.SelectedDate = null;
                     datePickerEndDate.SelectedDate = null;
-                    
-                    textBoxTeamName.Focus();
 
+                    //                                          Buttons
                     buttonAddTeam.IsEnabled = true;
                     buttonEditTeam.IsEnabled = false;
                     buttonAddToTeam.IsEnabled = false;
@@ -313,6 +314,7 @@ namespace FluentApi.Gui
             try
             {
                 dataGridEmployees.ItemsSource = model.Employees.Where(employees => employees.TeamId == null).ToList();
+                selectedEmployee = null;
             }
             catch (Exception ex)
             {
