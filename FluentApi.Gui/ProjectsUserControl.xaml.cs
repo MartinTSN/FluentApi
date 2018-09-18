@@ -78,7 +78,9 @@ namespace FluentApi.Gui
                     textBoxBudgetLimit.Text = selectedProject.BudgetLimit.ToString();
                     buttonEditProject.IsEnabled = true;
                     buttonAddProject.IsEnabled = false;
+
                     textBoxProjectBuget.Text = GetProjectPayments().ToString();
+
                 }
                 catch (Exception ex)
                 {
@@ -87,38 +89,18 @@ namespace FluentApi.Gui
             }
         }
 
-        private decimal GetTeamSalary()
-        {
-            decimal teamSalary = 0;
-
-            if (selectedTeam != null)
-            {
-                foreach (Employee employee in selectedTeam.Employees)
-                {
-                    teamSalary += employee.Salary;
-                }
-            }
-
-            return teamSalary;
-        }
-
         private decimal GetProjectPayments()
         {
             decimal projectPayments = 0;
-            decimal teamSalaries = 0;
 
             if (selectedProject != null)
             {
                 foreach (Team team in selectedProject.Teams)
                 {
-                    foreach (Employee employee in team.Employees)
-                    {
-                        teamSalaries += employee.Salary;
-                    }
+                    projectPayments += team.Budget;
                 }
             }
 
-            projectPayments += teamSalaries;
             return projectPayments;
         }
 
@@ -133,7 +115,7 @@ namespace FluentApi.Gui
             {
                 try
                 {
-                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                    textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -247,7 +229,7 @@ namespace FluentApi.Gui
             selectedTeam = dataGridTeams.SelectedItem as Team;
             selectedProject = dataGridProjects.SelectedItem as Project;
 
-            if (GetTeamSalary() > (selectedProject.BudgetLimit - GetProjectPayments()))
+            if (selectedTeam.Budget > (selectedProject.BudgetLimit - GetProjectPayments()))
             {
                 MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen", "Fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
@@ -318,7 +300,7 @@ namespace FluentApi.Gui
                     dataGridTeams.ItemsSource = selectedProject.Teams;
                     buttonRemoveFromProject.IsEnabled = false;
                     textBoxProjectBuget.Text = GetProjectPayments().ToString();
-                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                    textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
                 }
                 catch (Exception ex)
                 {

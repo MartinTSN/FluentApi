@@ -63,7 +63,7 @@ namespace FluentApi.Gui
                     textBoxDescription.Text = selectedTeam.Description;
                     datePickerStartDate.SelectedDate = selectedTeam.StartDate;
                     datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
-                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                    textBoxTeamSalary.Text = SetTeamSalary().ToString();
                     buttonEditTeam.IsEnabled = true;
                     buttonAddTeam.IsEnabled = false;
                 }
@@ -75,9 +75,7 @@ namespace FluentApi.Gui
             }
         }
 
-
-
-        private decimal GetTeamSalary()
+        private decimal SetTeamSalary()
         {
             selectedTeam.Budget = 0;
             foreach (Employee employee in selectedTeam.Employees)
@@ -147,7 +145,7 @@ namespace FluentApi.Gui
                     model.SaveChanges();
                     dataGridTeams.SelectedItem = selectedTeam;
                     dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
+                    textBoxTeamSalary.Text = SetTeamSalary().ToString();
                     dataGridEmployees.SelectedItem = selectedEmployee = null;
                     buttonAddToTeam.IsEnabled = false;
                     buttonRemoveFromTeam.IsEnabled = true;

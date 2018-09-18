@@ -138,7 +138,7 @@ namespace FluentApi.EF
 
         public static bool IsMoneyValid(decimal d)
         {
-            if (d <= 0)
+            if (d < 0)
             {
                 return false;
             }
