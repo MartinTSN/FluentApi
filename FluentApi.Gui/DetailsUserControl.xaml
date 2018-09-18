@@ -30,7 +30,12 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2" />
+                          Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Projekt Navn"
+                                            Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
                 <Label Grid.Row="1"
                        Grid.Column="0"
                        Margin="3"
@@ -39,7 +44,7 @@
                 <TextBox Margin="3"
                          Grid.Row="1"
                          Grid.Column="1"
-                         x:Name="textBoxProjectBudget"/>
+                         x:Name="textBoxProjectBudget" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1"
@@ -59,7 +64,12 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2" />
+                          Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Team Navn"
+                                            Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
                 <Label Grid.Row="1"
                        Grid.Column="0"
                        Margin="3"
@@ -88,7 +98,14 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2" />
+                          Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ansat Navn"
+                                            Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Ansat StartDato"
+                                            Binding="{Binding EmploymentDate}" />
+                    </DataGrid.Columns>
+                </DataGrid>
                 <Label Grid.Row="1"
                        Grid.Column="0"
                        Margin="3"
