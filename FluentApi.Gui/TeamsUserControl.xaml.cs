@@ -75,14 +75,17 @@ namespace FluentApi.Gui
             }
         }
 
+
+
         private decimal GetTeamSalary()
         {
-            decimal teamSalary = 0;
+            selectedTeam.Budget = 0;
             foreach (Employee employee in selectedTeam.Employees)
             {
-                teamSalary += employee.Salary;
+                selectedTeam.Budget += employee.Salary;
             }
-            return teamSalary;
+            model.SaveChanges();
+            return selectedTeam.Budget;
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)

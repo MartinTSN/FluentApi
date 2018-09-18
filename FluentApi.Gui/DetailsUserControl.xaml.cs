@@ -66,7 +66,7 @@ namespace FluentApi.Gui
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
             dataGridEmployees.ItemsSource = selectedTeam.Employees;
-            textBoxTeamBudget.Text = 
+            //textBoxTeamBudget.Text = 
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)

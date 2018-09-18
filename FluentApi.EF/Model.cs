@@ -30,6 +30,10 @@ namespace FluentApi.EF
             modelBuilder.Entity<Project>()
                 .Property(e => e.BudgetLimit)
                 .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Team>()
+                .Property(e => e.Budget)
+                .HasPrecision(19, 4);
         }
     }
 }

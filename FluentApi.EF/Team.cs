@@ -13,6 +13,8 @@ namespace FluentApi.EF
         private string description;
         private DateTime startDate;
         private DateTime expectedEndDate;
+        private decimal budget;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Team()
         {
@@ -151,6 +153,28 @@ namespace FluentApi.EF
             }
         }
 
+        /// <summary>
+        /// Takes the BudgetLimit value and validates it. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is negative.</exception>
+        [Column(TypeName = "money")]
+        public decimal Budget
+        {
+            get
+            {
+                return budget;
+            }
+            set
+            {
+                if (!Validator.IsMoneyValid(value))
+                {
+                    throw new ArgumentException("Invalid value provided");
+                }
+                budget = value;
+            }
+        }
+
         public int? ProjectId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -159,3 +183,4 @@ namespace FluentApi.EF
         public virtual Project Project { get; set; }
     }
 }
+
