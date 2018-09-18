@@ -33,9 +33,9 @@
                         <DataGridTextColumn Header="Beskrivelse"
                                             Binding="{Binding Description}" />
                         <DataGridTextColumn Header="Start Dato"
-                                            Binding="{Binding StartDate}" />
+                                            Binding="{Binding StartDate,StringFormat=d}" />
                         <DataGridTextColumn Header="Slut Dato"
-                                            Binding="{Binding ExpectedEndDate}" />
+                                            Binding="{Binding ExpectedEndDate,StringFormat=d}" />
                     </DataGrid.Columns>
 
                 </DataGrid>

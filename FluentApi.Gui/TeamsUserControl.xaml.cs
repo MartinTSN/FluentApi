@@ -189,35 +189,35 @@ namespace FluentApi.Gui
 
         private void DataGrid_Teams_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            if (dataGridTeams.SelectedItem != null)
             {
-                try
+                if (e.Key == Key.Escape)
                 {
-                    ReloadDataGridTeams();
-                    ReloadDataGridEmployees();
-                    dataGridTeams.SelectedItem = null;
-                    dataGridEmployees.SelectedItem = null;
-                    textBoxTeamName.Focus();
-
-                    //                                          TextBoxes
-                    textBoxTeamName.Text = String.Empty;
-                    textBoxDescription.Text = String.Empty;
-                    textBoxTeamSalary.Text = String.Empty;
-
-                    //                                           Datepicker
-                    datePickerStartDate.SelectedDate = null;
-                    datePickerEndDate.SelectedDate = null;
-
-                    //                                          Buttons
-                    buttonAddTeam.IsEnabled = true;
-                    buttonEditTeam.IsEnabled = false;
-                    buttonAddToTeam.IsEnabled = false;
-                    buttonRemoveFromTeam.IsEnabled = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
-                }
+                    try
+                    {
+                        ReloadDataGridTeams();
+                        ReloadDataGridEmployees();
+                        dataGridTeams.SelectedItem = null;
+                        dataGridEmployees.SelectedItem = null;
+                        textBoxTeamName.Focus();
+                        //                                          TextBoxes
+                        textBoxTeamName.Text = String.Empty;
+                        textBoxDescription.Text = String.Empty;
+                        textBoxTeamSalary.Text = String.Empty;
+                        //                                           Datepicker
+                        datePickerStartDate.SelectedDate = null;
+                        datePickerEndDate.SelectedDate = null;
+                        //                                          Buttons
+                        buttonAddTeam.IsEnabled = true;
+                        buttonEditTeam.IsEnabled = false;
+                        buttonAddToTeam.IsEnabled = false;
+                        buttonRemoveFromTeam.IsEnabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                } 
             }
         }
 

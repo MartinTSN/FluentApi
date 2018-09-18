@@ -260,24 +260,31 @@ namespace FluentApi.Gui
             {
                 if (e.Key == Key.Escape)
                 {
-                    dataGridEmployees.SelectedItem = selectedEmployee = null;
-                    textBoxEmployeeFirstName.Focus();
-                    //                                                             TextBoxes
-                    textBoxEmployeeFirstName.Text = String.Empty;
-                    textBoxEmployeeLastName.Text = String.Empty;
-                    textBoxCPR.Text = String.Empty;
-                    textBoxEmployeeSalary.Text = String.Empty;
-                    textBoxMail.Text = String.Empty;
-                    textBoxPhoneNumber.Text = String.Empty;
-                    //                                                              DatePickers
-                    datePickerEmployeeStartDate.SelectedDate = null;
-                    datePickerEmployeeBirthday.SelectedDate = null;
-                    
-                    //                                                              Buttons
-                    buttonAddEmployee.IsEnabled = true;
-                    buttonUpdateEmployee.IsEnabled = false;
-                    buttonUpdateContactInfo.IsEnabled = false;
-                    buttonAddContactInfo.IsEnabled = false;
+                    try
+                    {
+                        dataGridEmployees.SelectedItem = selectedEmployee = null;
+                        textBoxEmployeeFirstName.Focus();
+                        //                                                             TextBoxes
+                        textBoxEmployeeFirstName.Text = String.Empty;
+                        textBoxEmployeeLastName.Text = String.Empty;
+                        textBoxCPR.Text = String.Empty;
+                        textBoxEmployeeSalary.Text = String.Empty;
+                        textBoxMail.Text = String.Empty;
+                        textBoxPhoneNumber.Text = String.Empty;
+                        //                                                              DatePickers
+                        datePickerEmployeeStartDate.SelectedDate = null;
+                        datePickerEmployeeBirthday.SelectedDate = null;
+
+                        //                                                              Buttons
+                        buttonAddEmployee.IsEnabled = true;
+                        buttonUpdateEmployee.IsEnabled = false;
+                        buttonUpdateContactInfo.IsEnabled = false;
+                        buttonAddContactInfo.IsEnabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
                 }
             }
         }

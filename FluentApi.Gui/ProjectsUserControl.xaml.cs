@@ -340,33 +340,35 @@ namespace FluentApi.Gui
 
         private void DataGrid_Projects_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            if (dataGridProjects.SelectedItem != null)
             {
-                dataGridProjects.SelectedItem = null;
-                dataGridTeams.SelectedItem = null;
-                textBoxProjectName.Focus();
-                //                                                      TextBoxes
-                textBoxProjectName.Text = String.Empty;
-                textBoxDescription.Text = String.Empty;
-                textBoxBudgetLimit.Text = String.Empty;
-                textBoxProjectBudget.Text = String.Empty;
-                textBoxTeamSalary.Text = String.Empty;
-                //                                                      Datepickers
-                datePickerStartDate.SelectedDate = null;
-                datePickerEndDate.SelectedDate = null;
-                //                                                      Buttons
-                buttonAddProject.IsEnabled = true;
-                buttonEditProject.IsEnabled = false;
-                buttonAddToProject.IsEnabled = false;
-                buttonRemoveFromProject.IsEnabled = false;
-
-                try
+                if (e.Key == Key.Escape)
                 {
-                    ReloadDataGridTeams();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    try
+                    {
+                        ReloadDataGridTeams();
+                        dataGridProjects.SelectedItem = null;
+                        dataGridTeams.SelectedItem = null;
+                        textBoxProjectName.Focus();
+                        //                                                      TextBoxes
+                        textBoxProjectName.Text = String.Empty;
+                        textBoxDescription.Text = String.Empty;
+                        textBoxBudgetLimit.Text = String.Empty;
+                        textBoxProjectBudget.Text = String.Empty;
+                        textBoxTeamSalary.Text = String.Empty;
+                        //                                                      Datepickers
+                        datePickerStartDate.SelectedDate = null;
+                        datePickerEndDate.SelectedDate = null;
+                        //                                                      Buttons
+                        buttonAddProject.IsEnabled = true;
+                        buttonEditProject.IsEnabled = false;
+                        buttonAddToProject.IsEnabled = false;
+                        buttonRemoveFromProject.IsEnabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
                 }
             }
         }
