@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentApi.EF;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,17 +17,19 @@ using System.Windows.Shapes;
 namespace FluentApi.Gui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DetailsUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DetailsUserControl : UserControl
     {
-        public MainWindow()
+        protected Model model;
+        private Project selectedProject;
+        private Team selectedTeam;
+        private Employee selectedEmployee;
+
+        public DetailsUserControl()
         {
             InitializeComponent();
-            userControlEmployees.Content = new EmployeeUserControl();
-            userControlTeams.Content = new TeamsUserControl();
-            userControlProjects.Content = new ProjectsUserControl();
-            userControlDetails.Content = new DetailsUserControl();
+
         }
     }
 }
