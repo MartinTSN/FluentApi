@@ -58,20 +58,36 @@ namespace FluentApi.Gui
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedProject = dataGridProjects.SelectedItem as Project;
-            dataGridTeams.ItemsSource = selectedProject.Teams;
-            textBoxProjectBudget.Text = selectedProject.BudgetLimit.ToString();
+            dataGridTeams.ItemsSource = null;
+            dataGridEmployees.ItemsSource = null;
+            textBoxTeamBudget.Text = String.Empty;
+            textBoxEmployeeBudget.Text = String.Empty;
+            if (selectedProject != null)
+            {
+                dataGridTeams.ItemsSource = selectedProject.Teams;
+                textBoxProjectBudget.Text = selectedProject.BudgetLimit.ToString();
+            }
         }
 
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
-            dataGridEmployees.ItemsSource = selectedTeam.Employees;
-            //textBoxTeamBudget.Text = 
+            dataGridEmployees.ItemsSource = null;
+            textBoxEmployeeBudget.Text = String.Empty;
+            if (selectedTeam != null)
+            {
+                dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                textBoxTeamBudget.Text = selectedTeam.Budget.ToString();
+            }
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            if (selectedEmployee != null)
+            {
+                textBoxEmployeeBudget.Text = selectedEmployee.Salary.ToString();
+            }
         }
     }
 }
