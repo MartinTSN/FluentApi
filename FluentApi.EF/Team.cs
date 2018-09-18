@@ -24,9 +24,10 @@ namespace FluentApi.EF
         /// <summary>
         /// Takes the Name value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Throws if the value is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value is under 2 or over 50 characters.</exception>
-        /// <exception cref="FormatException">Thrown when any character is a number.</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        ///// <exception cref="ArgumentNullException">Throws if the value is null.</exception>
+        ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is under 2 or over 50 characters.</exception>
+        ///// <exception cref="FormatException">Thrown when any character is a number.</exception>
         [Required]
         [StringLength(100)]
         public string Name
@@ -60,8 +61,9 @@ namespace FluentApi.EF
         /// <summary>
         /// Takes the Description value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Throws when the value is null.</exception>
-        /// <exception cref="FormatException">Thrown when any character in the value is a number.</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        ///// <exception cref="ArgumentNullException">Throws when the value is null.</exception>
+        ///// <exception cref="FormatException">Thrown when any character in the value is a number.</exception>
         [Required]
         public string Description
         {
@@ -90,8 +92,9 @@ namespace FluentApi.EF
         /// <summary>
         /// Takes the StartDate value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value is in the future.</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
+        ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is in the future.</exception>
         [Column(TypeName = "date")]
         public DateTime StartDate
         {
@@ -120,8 +123,9 @@ namespace FluentApi.EF
         /// <summary>
         /// Takes the ExpectedEndDate value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value is in the past.</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
+        ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is in the past.</exception>
         [Column(TypeName = "date")]
         public DateTime ExpectedEndDate
         {
