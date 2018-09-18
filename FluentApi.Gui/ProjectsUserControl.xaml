@@ -152,7 +152,7 @@
                       StrokeThickness="5"
                       X1="0"
                       Y1="10"
-                      X2="1000"
+                      X2="10000"
                       Y2="10" />
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>

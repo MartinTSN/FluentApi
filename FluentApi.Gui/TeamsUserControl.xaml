@@ -28,7 +28,7 @@
                           SelectionChanged="DataGrid_Teams_SelectionChanged"
                           KeyDown="DataGrid_Teams_KeyDown">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Team Name"
+                        <DataGridTextColumn Header="Team Navn"
                                             Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Beskrivelse"
                                             Binding="{Binding Description}" />
@@ -46,13 +46,13 @@
                           IsReadOnly="True"
                           SelectionChanged="DataGrid_Employees_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Firstname"
+                        <DataGridTextColumn Header="Fornavn"
                                             Binding="{Binding FirstName}" />
-                        <DataGridTextColumn Header="Lastname"
+                        <DataGridTextColumn Header="Efternavn"
                                             Binding="{Binding LastName}" />
-                        <DataGridTextColumn Header="Salary"
+                        <DataGridTextColumn Header="Løn"
                                             Binding="{Binding Salary}" />
-                        <DataGridTextColumn Header="Mail"
+                        <DataGridTextColumn Header="E-Mail"
                                             Binding="{Binding ContactInfo.Email}" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -144,7 +144,7 @@
                       StrokeThickness="5"
                       X1="0"
                       Y1="10"
-                      X2="1000"
+                      X2="10000"
                       Y2="10" />
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
