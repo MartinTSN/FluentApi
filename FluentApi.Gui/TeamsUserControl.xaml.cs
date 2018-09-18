@@ -225,7 +225,7 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxTeamName.Text))
             {
-                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
@@ -233,11 +233,11 @@ namespace FluentApi.Gui
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -265,7 +265,7 @@ namespace FluentApi.Gui
             {
                 if (!Validator.IsNameValid(textBoxTeamName.Text))
                 {
-                    MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
                 {
@@ -273,11 +273,11 @@ namespace FluentApi.Gui
                 }
                 else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
                 {
-                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
                 {
-                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {

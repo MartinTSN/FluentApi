@@ -64,8 +64,15 @@ namespace FluentApi.Gui
             textBoxEmployeeBudget.Text = String.Empty;
             if (selectedProject != null)
             {
-                dataGridTeams.ItemsSource = selectedProject.Teams;
-                textBoxProjectBudget.Text = selectedProject.BudgetLimit.ToString();
+                try
+                {
+                    dataGridTeams.ItemsSource = selectedProject.Teams;
+                    textBoxProjectBudget.Text = selectedProject.BudgetLimit.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
@@ -76,8 +83,15 @@ namespace FluentApi.Gui
             textBoxEmployeeBudget.Text = String.Empty;
             if (selectedTeam != null)
             {
-                dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                textBoxTeamBudget.Text = selectedTeam.Budget.ToString();
+                try
+                {
+                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    textBoxTeamBudget.Text = selectedTeam.Budget.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
 
@@ -86,7 +100,14 @@ namespace FluentApi.Gui
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
             if (selectedEmployee != null)
             {
-                textBoxEmployeeBudget.Text = selectedEmployee.Salary.ToString();
+                try
+                {
+                    textBoxEmployeeBudget.Text = selectedEmployee.Salary.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
         }
     }

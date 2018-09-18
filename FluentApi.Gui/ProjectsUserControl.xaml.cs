@@ -129,7 +129,7 @@ namespace FluentApi.Gui
             bool couldParse = Decimal.TryParse(textBoxBudgetLimit.Text, out decimal d);
             if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
-                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Projekt-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
@@ -172,7 +172,7 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
-                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Projekt-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
@@ -180,15 +180,15 @@ namespace FluentApi.Gui
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxBudgetLimit.Text)))
             {
-                MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {

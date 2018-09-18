@@ -73,31 +73,31 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
             {
-                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Fornavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsNameValid(textBoxEmployeeLastName.Text))
             {
-                MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Efternavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsBirthDayValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault()))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Fødselsdato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEmploymentDateValid(datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsBirthDayEmploymentDateValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault(), datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
             {
-                MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsCPRNumberValid(textBoxCPR.Text))
             {
-                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede CPR-Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxEmployeeSalary.Text)))
             {
-                MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -127,31 +127,31 @@ namespace FluentApi.Gui
             {
                 if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
                 {
-                    MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Fornavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsNameValid(textBoxEmployeeLastName.Text))
                 {
-                    MessageBox.Show("Det indtastede navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Efternavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsBirthDayValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault()))
                 {
-                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Fødselsdato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsEmploymentDateValid(datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
                 {
-                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsBirthDayEmploymentDateValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault(), datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
                 {
-                    MessageBox.Show("Den indtastede dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsCPRNumberValid(textBoxCPR.Text))
                 {
-                    MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede CPR-Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxEmployeeSalary.Text)))
                 {
-                    MessageBox.Show("Det indtastede værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
