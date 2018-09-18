@@ -100,10 +100,13 @@
                           Grid.Row="0"
                           Grid.ColumnSpan="2">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ansat Navn"
+                        <DataGridTextColumn Header="Fornavn"
                                             Binding="{Binding FirstName}" />
-                        <DataGridTextColumn Header="Ansat StartDato"
+                        <DataGridTextColumn Header="Efternavn"
+                                            Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="StartDato"
                                             Binding="{Binding EmploymentDate}" />
+
                     </DataGrid.Columns>
                 </DataGrid>
                 <Label Grid.Row="1"

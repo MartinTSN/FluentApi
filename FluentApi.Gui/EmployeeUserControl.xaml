@@ -23,17 +23,17 @@
                           SelectionChanged="DataGrid_Employees_SelectionChanged"
                           KeyDown="DataGrid_Employees_KeyDown">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Firstname"
+                        <DataGridTextColumn Header="Fornavn"
                                             Binding="{Binding FirstName}" />
-                        <DataGridTextColumn Header="Lastname"
+                        <DataGridTextColumn Header="Efternavn"
                                             Binding="{Binding LastName}" />
-                        <DataGridTextColumn Header="BirthDay"
+                        <DataGridTextColumn Header="Fødselsdato"
                                             Binding="{Binding BirthDay}" />
-                        <DataGridTextColumn Header="Salary"
+                        <DataGridTextColumn Header="Løn"
                                             Binding="{Binding Salary}" />
-                        <DataGridTextColumn Header="Mail"
+                        <DataGridTextColumn Header="E-Mail"
                                             Binding="{Binding ContactInfo.Email}" />
-                        <DataGridTextColumn Header="Telefon"
+                        <DataGridTextColumn Header="TelefonNummer"
                                             Binding="{Binding ContactInfo.Phone}" />
                     </DataGrid.Columns>
                 </DataGrid>
