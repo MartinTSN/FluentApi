@@ -88,6 +88,10 @@ namespace FluentApi.Gui
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            if (selectedTeam != null)
+            {
+                buttonAddToTeam.IsEnabled = true;
+            }
         }
 
         private void ReloadDataGridTeams()
@@ -140,7 +144,7 @@ namespace FluentApi.Gui
                     model.SaveChanges();
                     dataGridTeams.SelectedItem = selectedTeam;
                     dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                    dataGridTeams.SelectedItem = selectedTeam = null;
+                    textBoxTeamSalary.Text = GetTeamSalary().ToString();
                     dataGridEmployees.SelectedItem = selectedEmployee = null;
                     buttonAddToTeam.IsEnabled = false;
                     buttonRemoveFromTeam.IsEnabled = true;
@@ -189,18 +193,24 @@ namespace FluentApi.Gui
                 try
                 {
                     ReloadDataGridTeams();
+                    ReloadDataGridEmployees();
                     dataGridTeams.SelectedItem = null;
                     dataGridEmployees.SelectedItem = null;
+
+                    
+                    textBoxTeamName.Text = String.Empty;
+                    textBoxDescription.Text = String.Empty;
+                    textBoxTeamSalary.Text = String.Empty;
+
+                    datePickerStartDate.SelectedDate = null;
+                    datePickerEndDate.SelectedDate = null;
+                    
+                    textBoxTeamName.Focus();
+
                     buttonAddTeam.IsEnabled = true;
                     buttonEditTeam.IsEnabled = false;
                     buttonAddToTeam.IsEnabled = false;
                     buttonRemoveFromTeam.IsEnabled = false;
-                    textBoxTeamName.Text = String.Empty;
-                    textBoxDescription.Text = String.Empty;
-                    datePickerStartDate.SelectedDate = null;
-                    datePickerEndDate.SelectedDate = null;
-                    textBoxTeamSalary.Text = String.Empty;
-                    textBoxTeamName.Focus();
                 }
                 catch (Exception ex)
                 {

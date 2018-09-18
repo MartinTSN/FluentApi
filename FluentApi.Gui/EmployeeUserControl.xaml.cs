@@ -53,6 +53,7 @@ namespace FluentApi.Gui
                     {
                         textBoxMail.Text = String.Empty;
                         textBoxPhoneNumber.Text = String.Empty;
+                        buttonAddContactInfo.IsEnabled = true;
                         buttonUpdateContactInfo.IsEnabled = false;
                     }
                 }
@@ -107,7 +108,7 @@ namespace FluentApi.Gui
                     newEmployee.LastName = textBoxEmployeeLastName.Text;
                     newEmployee.BirthDay = datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault();
                     newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
-                    newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
+                    newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR.Text;
                     newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
                     model.Employees.Add(newEmployee);
                     model.SaveChanges();
@@ -174,7 +175,7 @@ namespace FluentApi.Gui
                         }
                         if (textBoxCPR.Text != selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4))
                         {
-                            selectedEmployee.CPRNumber = selectedEmployee.BirthDay.ToString("dd") + selectedEmployee.BirthDay.ToString("MM") + selectedEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR;
+                            selectedEmployee.CPRNumber = selectedEmployee.BirthDay.ToString("dd") + selectedEmployee.BirthDay.ToString("MM") + selectedEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR.Text;
                         }
                         model.SaveChanges();
                         ReloadDataGridEmployees();
@@ -243,6 +244,8 @@ namespace FluentApi.Gui
                     selectedEmployee.ContactInfo = newContactInfo;
                     model.SaveChanges();
                     ReloadDataGridEmployees();
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
                 }
                 catch (Exception)
                 {
@@ -258,16 +261,23 @@ namespace FluentApi.Gui
                 if (e.Key == Key.Escape)
                 {
                     dataGridEmployees.SelectedItem = selectedEmployee = null;
-                    buttonAddEmployee.IsEnabled = true;
-                    buttonUpdateEmployee.IsEnabled = false;
+                    textBoxEmployeeFirstName.Focus();
+                    //                                                             TextBoxes
                     textBoxEmployeeFirstName.Text = String.Empty;
                     textBoxEmployeeLastName.Text = String.Empty;
-                    datePickerEmployeeStartDate.SelectedDate = null;
-                    datePickerEmployeeBirthday.SelectedDate = null;
                     textBoxCPR.Text = String.Empty;
                     textBoxEmployeeSalary.Text = String.Empty;
+                    textBoxMail.Text = String.Empty;
+                    textBoxPhoneNumber.Text = String.Empty;
+                    //                                                              DatePickers
+                    datePickerEmployeeStartDate.SelectedDate = null;
+                    datePickerEmployeeBirthday.SelectedDate = null;
+                    
+                    //                                                              Buttons
                     buttonAddEmployee.IsEnabled = true;
-                    textBoxEmployeeFirstName.Focus();
+                    buttonUpdateEmployee.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                    buttonAddContactInfo.IsEnabled = false;
                 }
             }
         }
