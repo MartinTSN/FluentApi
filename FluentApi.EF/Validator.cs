@@ -10,7 +10,15 @@ namespace FluentApi.EF
     {
         public static bool IsEmailValid(string s)
         {
-            if (s.Length < 10 || s.Length > 100)
+            if (String.IsNullOrWhiteSpace(s))
+            {
+                return false;
+            }
+            else if (s.Length < 10 || s.Length > 100)
+            {
+                return false;
+            }
+            else if (!s.Contains("@"))
             {
                 return false;
             }
@@ -19,10 +27,6 @@ namespace FluentApi.EF
                 return false;
             }
             else if (s.EndsWith("@.com") || s.EndsWith("@.net") || s.EndsWith("@.dk"))
-            {
-                return false;
-            }
-            else if (!s.Contains("@"))
             {
                 return false;
             }
