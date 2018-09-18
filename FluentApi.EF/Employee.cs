@@ -22,8 +22,8 @@ namespace FluentApi.EF
         /// <summary>
         /// Person constructor with everything.
         /// </summary>
-        /// <param name="firstName">The firstName</param>
-        /// <param name="lastName">The lastName</param>
+        /// <param name="firstName">A string firstName</param>
+        /// <param name="lastName">A string lastName</param>
         public Person(string firstName, string lastName)
         {
             FirstName = firstName;
@@ -133,13 +133,13 @@ namespace FluentApi.EF
         /// <summary>
         /// Employee constructor with everything
         /// </summary>
-        /// <param name="firstName">The firstName</param>
-        /// <param name="lastName">The lastName</param>
-        /// <param name="birthDay">The birthDay</param>
-        /// <param name="employmentDate">The employmentDate</param>
-        /// <param name="cprNumber">The cprNumber</param>
-        /// <param name="salary">The salary</param>
-        /// <remarks>Inheriths from the person constructor with everything</remarks>
+        /// <param name="firstName">A string firstName</param>
+        /// <param name="lastName">A string lastName</param>
+        /// <param name="birthDay">A datetime birthDay</param>
+        /// <param name="employmentDate">A datetime employmentDate</param>
+        /// <param name="cprNumber">A string cprNumber</param>
+        /// <param name="salary">A decimal salary</param>
+        /// <remarks>Inherits from the person constructor with everything</remarks>
         public Employee(string firstName, string lastName, DateTime birthDay, DateTime employmentDate, string cprNumber, decimal salary)
             : base(firstName, lastName)
         {

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentApi.EF", "FluentApi.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentApi.Gui", "FluentApi.Gui\FluentApi.Gui.csproj", "{81D0A449-AB92-4BF4-B446-0A4FF00743D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentApi.Tests", "Tests\FluentApi.Tests.csproj", "{E1AE4313-BBFE-4EFD-840C-AF5B3984FD7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{81D0A449-AB92-4BF4-B446-0A4FF00743D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81D0A449-AB92-4BF4-B446-0A4FF00743D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81D0A449-AB92-4BF4-B446-0A4FF00743D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1AE4313-BBFE-4EFD-840C-AF5B3984FD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1AE4313-BBFE-4EFD-840C-AF5B3984FD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1AE4313-BBFE-4EFD-840C-AF5B3984FD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1AE4313-BBFE-4EFD-840C-AF5B3984FD7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
