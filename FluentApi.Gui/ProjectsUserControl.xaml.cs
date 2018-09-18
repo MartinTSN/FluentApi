@@ -79,7 +79,7 @@ namespace FluentApi.Gui
                     buttonEditProject.IsEnabled = true;
                     buttonAddProject.IsEnabled = false;
 
-                    textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                    textBoxProjectBudget.Text = GetProjectPayments().ToString();
 
                 }
                 catch (Exception ex)
@@ -263,7 +263,7 @@ namespace FluentApi.Gui
                     model.SaveChanges();
                     dataGridProjects.SelectedItem = selectedProject;
                     dataGridTeams.ItemsSource = selectedProject.Teams;
-                    textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                    textBoxProjectBudget.Text = GetProjectPayments().ToString();
                     dataGridProjects.SelectedItem = selectedProject = null;
                     dataGridTeams.SelectedItem = selectedTeam = null;
                     buttonAddToProject.IsEnabled = false;
@@ -299,7 +299,7 @@ namespace FluentApi.Gui
                     ReloadDataGridTeams();
                     dataGridTeams.ItemsSource = selectedProject.Teams;
                     buttonRemoveFromProject.IsEnabled = false;
-                    textBoxProjectBuget.Text = GetProjectPayments().ToString();
+                    textBoxProjectBudget.Text = GetProjectPayments().ToString();
                     textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
                 }
                 catch (Exception ex)
@@ -349,7 +349,7 @@ namespace FluentApi.Gui
                 textBoxProjectName.Text = String.Empty;
                 textBoxDescription.Text = String.Empty;
                 textBoxBudgetLimit.Text = String.Empty;
-                textBoxProjectBuget.Text = String.Empty;
+                textBoxProjectBudget.Text = String.Empty;
                 textBoxTeamSalary.Text = String.Empty;
                 //                                                      Datepickers
                 datePickerStartDate.SelectedDate = null;
