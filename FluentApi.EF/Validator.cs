@@ -259,6 +259,5 @@ namespace FluentApi.EF
                 return true;
             }
         }
-
     }
 }
