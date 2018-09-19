@@ -164,7 +164,6 @@ namespace FluentApi.EF
 
         }
 
-
         public int Id { get; set; }
 
         /// <summary>
