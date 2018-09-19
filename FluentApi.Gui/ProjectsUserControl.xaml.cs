@@ -34,9 +34,9 @@ namespace FluentApi.Gui
                 ReloadDataGridProject();
                 ReloadDataGridTeams();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
 
@@ -82,9 +82,9 @@ namespace FluentApi.Gui
                     textBoxProjectBudget.Text = GetProjectPayments().ToString();
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -92,7 +92,6 @@ namespace FluentApi.Gui
         private decimal GetProjectPayments()
         {
             decimal projectPayments = 0;
-
             if (selectedProject != null)
             {
                 foreach (Team team in selectedProject.Teams)
@@ -100,7 +99,6 @@ namespace FluentApi.Gui
                     projectPayments += team.Budget;
                 }
             }
-
             return projectPayments;
         }
 
@@ -117,9 +115,9 @@ namespace FluentApi.Gui
                 {
                     textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -129,23 +127,23 @@ namespace FluentApi.Gui
             bool couldParse = Decimal.TryParse(textBoxBudgetLimit.Text, out decimal d);
             if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
-                MessageBox.Show("Det indtastede Projekt-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Projekt-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
-                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsMoneyValid(d))
             {
-                MessageBox.Show("Den indtastede budget-værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede budget-værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -163,7 +161,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme det nye projekt. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme det nye projekt. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -172,23 +170,23 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxProjectName.Text))
             {
-                MessageBox.Show("Det indtastede Projekt-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Projekt-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
-                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxBudgetLimit.Text)))
             {
-                MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -219,7 +217,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere det valgte projekt. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere det valgte projekt. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -231,7 +229,7 @@ namespace FluentApi.Gui
 
             if (selectedTeam.Budget > (selectedProject.BudgetLimit - GetProjectPayments()))
             {
-                MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen", "Fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen. Prøv igen.", "Vælg en anden.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
             else
             {
@@ -254,7 +252,7 @@ namespace FluentApi.Gui
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
 
@@ -269,9 +267,9 @@ namespace FluentApi.Gui
                     buttonAddToProject.IsEnabled = false;
                     buttonRemoveFromProject.IsEnabled = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl under forsøget i at tilføje det valgte team til projektet. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -302,9 +300,9 @@ namespace FluentApi.Gui
                     textBoxProjectBudget.Text = GetProjectPayments().ToString();
                     textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl under forsøget i at fjerne det valgte team fra projektet. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -320,9 +318,9 @@ namespace FluentApi.Gui
                 buttonRemoveFromProject.IsEnabled = false;
                 textBoxTeamSalary.Text = String.Empty;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl under forsøget i at vise alle teams. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
 
@@ -332,9 +330,9 @@ namespace FluentApi.Gui
             {
                 dataGridTeams.ItemsSource = model.Teams.Where(teams => teams.ProjectId == null).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl Under forsøget i at vise alle ledige teams. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
 
@@ -365,9 +363,9 @@ namespace FluentApi.Gui
                         buttonAddToProject.IsEnabled = false;
                         buttonRemoveFromProject.IsEnabled = false;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
             }
