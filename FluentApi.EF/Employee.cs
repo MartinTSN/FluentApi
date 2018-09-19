@@ -8,23 +8,26 @@ namespace FluentApi.EF
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// The Person class.
+    /// </summary>
     public class Person
     {
         /// <summary>
-        /// The Employee FirstName value is stored here.
+        /// The Person firstName value is stored here.
         /// </summary>
         private string firstName;
         /// <summary>
-        /// The Employee LastName value is stored here.
+        /// The Person lastName value is stored here.
         /// </summary>
         private string lastName;
 
         /// <summary>
-        /// Person constructor with everything.
+        /// Person constructor with a firstName and lastName.
         /// </summary>
-        /// <param name="firstName">A string firstName</param>
-        /// <param name="lastName">A string lastName</param>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <param name="firstName">A string firstName.</param>
+        /// <param name="lastName">A string lastName.</param>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         public Person(string firstName, string lastName)
         {
             FirstName = firstName;
@@ -32,19 +35,19 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// A parameterless Person constructor
+        /// A parameterless Person constructor.
         /// </summary>
         public Person()
         {
         }
 
         /// <summary>
-        /// Takes the FirstName value and validates it. Returns an exception if something is wrong.
+        /// Takes the firstName value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
-        ///// <exception cref = "ArgumentNullException" > Thrown when the FirstName is null.</exception>
-        ///// <exception cref = "ArgumentOutOfRangeException" > Throws when the Firstname is under 2 or over 100 characters.</exception>
-        ///// <exception cref = "ArgumentException" > Thrown when the Firstname has a number.</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
+        ///// <exception cref = "ArgumentNullException" > Thrown when the firstName is null.</exception>
+        ///// <exception cref = "ArgumentOutOfRangeException" > Throws when the firstname is under 2 or over 100 characters.</exception>
+        ///// <exception cref = "ArgumentException" > Thrown when the firstname has a number.</exception>
         [StringLength(100)]
         public string FirstName
         {
@@ -75,12 +78,12 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the LastName value and validates it. Returns an exception if something is wrong.
+        /// Takes the lastName value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
-        ///// <exception cref = "ArgumentNullException" > Thrown when the Lastname is null.</exception>
-        ///// <exception cref = "ArgumentOutOfRangeException" > Throws when the Lastname is under 2 or over 100 characters.</exception>
-        ///// <exception cref = "ArgumentException" > Throws when the Lastname has a number.</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
+        ///// <exception cref = "ArgumentNullException" > Thrown when the lastname is null.</exception>
+        ///// <exception cref = "ArgumentOutOfRangeException" > Throws when the lastname is under 2 or over 100 characters.</exception>
+        ///// <exception cref = "ArgumentException" > Throws when the lastname has a number.</exception>
         [StringLength(100)]
         public string LastName
         {
@@ -111,39 +114,41 @@ namespace FluentApi.EF
         }
     }
 
-
+    /// <summary>
+    /// The Employee class. Inherits from Person.
+    /// </summary>
     public partial class Employee : Person
     {
 
         /// <summary>
-        /// The Employee BirthDay/date is stored here.
+        /// The Employee birthDay/Date is stored here.
         /// </summary>
         private DateTime birthDay;
         /// <summary>
-        /// The Employee Hiredate is stored here.
+        /// The Employee employmentDate is stored here.
         /// </summary>
         private DateTime employementDate;
         /// <summary>
-        /// The Employee CPRBnumber is stored here.
+        /// The Employee CPRnumber is stored here.
         /// </summary>
-        /// <remarks>Is used with the ContactInfo Birthday.</remarks>
+        /// <remarks>Is used with the ContactInfo birthDay.</remarks>
         private string cprNumber;
         /// <summary>
-        /// The Employee Salary is stored here.
+        /// The Employee salary is stored here.
         /// </summary>
         private decimal salary;
 
         /// <summary>
-        /// Employee constructor with everything
+        /// Employee constructor with a firstName, lastName, birthDate, employmentDate, cprNumber and a salary.
         /// </summary>
-        /// <param name="firstName">A string firstName</param>
-        /// <param name="lastName">A string lastName</param>
-        /// <param name="birthDay">A datetime birthDay</param>
-        /// <param name="employmentDate">A datetime employmentDate</param>
-        /// <param name="cprNumber">A string cprNumber</param>
-        /// <param name="salary">A decimal salary</param>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
-        /// <remarks>Inherits from the person constructor with everything</remarks>
+        /// <param name="firstName">A string firstName.</param>
+        /// <param name="lastName">A string lastName.</param>
+        /// <param name="birthDay">A datetime birthDay.</param>
+        /// <param name="employmentDate">A datetime employmentDate.</param>
+        /// <param name="cprNumber">A string cprNumber.</param>
+        /// <param name="salary">A decimal salary.</param>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
+        /// <remarks>Inherits from the person constructor with a firstName and lastName.</remarks>
         public Employee(string firstName, string lastName, DateTime birthDay, DateTime employmentDate, string cprNumber, decimal salary)
             : base(firstName, lastName)
         {
@@ -154,9 +159,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// A Parameterless Employee constructor
+        /// A parameterless Employee constructor.
         /// </summary>
-        /// <remarks>Inherits from the parameterless person constructor</remarks>
+        /// <remarks>Inherits from the parameterless Person constructor.</remarks>
         public Employee()
             : base()
         {
@@ -167,9 +172,9 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         /// <summary>
-        /// Takes the BirthDay value and validates it. Returns an exception if something is wrong.
+        /// Takes the birthDay value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is over 70 or under 18.</exception>
         [Column(TypeName = "date")]
@@ -202,9 +207,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the EmployementDate and validates it. Returns an exception if something is wrong.
+        /// Takes the employementDate and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is in the future.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is older than their age.</exception>
@@ -242,11 +247,11 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the CPR Number and validates it. Returns an exception if something is wrong.
+        /// Takes the CPR-Number and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
-        ///// <exception cref="FormatException">Thrown when the last 4 characters is not numbers</exception>
+        ///// <exception cref="FormatException">Thrown when the last 4 characters is not numbers.</exception>
         [Required]
         [StringLength(100)]
         public string CPRNumber
@@ -274,9 +279,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the Salary value and validates it. Returns an exception is something is wrong.
+        /// Takes the salary value and validates it. Returns an exception is something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is negative.</exception>
         [Column(TypeName = "money")]
         public decimal Salary

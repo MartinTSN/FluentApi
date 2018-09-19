@@ -7,13 +7,32 @@ namespace FluentApi.EF
     using System.Data.Entity.Spatial;
     using System.Linq;
 
+    /// <summary>
+    /// The Project class.
+    /// </summary>
     public partial class Project
     {
+        /// <summary>
+        /// The Project-name value is stored here.
+        /// </summary>
         private string name;
+        /// <summary>
+        /// The Project-description value is stored here.
+        /// </summary>
         private string description;
+        /// <summary>
+        /// The Project-startDate value is stored here.
+        /// </summary>
         private DateTime startDate;
+        /// <summary>
+        /// The Project-endDate value is stored here.
+        /// </summary>
         private DateTime endDate;
+        /// <summary>
+        /// The Project-budgetLimit value is stored here.
+        /// </summary>
         private decimal budgetLimit;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
@@ -23,9 +42,9 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         /// <summary>
-        /// Takes the Name value and validates it. Returns an exception if something is wrong.
+        /// Takes the name value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Throws if the value is null.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is under 2 or over 50 characters.</exception>
         ///// <exception cref="FormatException">Thrown when any character is a number.</exception>
@@ -60,9 +79,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the Description value and validates it. Returns an exception if something is wrong.
+        /// Takes the description value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Throws when the value is null.</exception>
         ///// <exception cref="FormatException">Thrown when any character in the value is a number.</exception>
         [Required]
@@ -91,9 +110,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the StartDate value and validates it. Returns an exception if something is wrong.
+        /// Takes the startDate value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is in the future.</exception>
         [Column(TypeName = "date")]
@@ -122,9 +141,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the EndDate value and validates it. Returns an exception if something is wrong.
+        /// Takes the endDate value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is in the past.</exception>
         [Column(TypeName = "date")]
@@ -153,9 +172,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the BudgetLimit value and validates it. Returns an exception if something is wrong.
+        /// Takes the budgetLimit value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is negative.</exception>
         [Column(TypeName = "money")]
         public decimal BudgetLimit

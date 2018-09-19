@@ -7,22 +7,31 @@ namespace FluentApi.EF
     using System.Data.Entity.Spatial;
     using System.Linq;
 
+    /// <summary>
+    /// The ContactInfo class.
+    /// </summary>
     [Table("ContactInfos")]
     public partial class ContactInfo
     {
+        /// <summary>
+        /// The phoneNumber value is stored here.
+        /// </summary>
         private string phone;
+        /// <summary>
+        /// The e-Mail value is stored here.
+        /// </summary>
         private string email;
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         /// <summary>
-        /// Takes the Email value and validates it. Returns an exception if something is wrong.
+        /// Takes the e-Mail value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is under 10 characters.</exception>
-        ///// <exception cref="FormatException">Throws when the mail doesnt end with: .com .net or .dk</exception>
+        ///// <exception cref="FormatException">Throws when the mail doesnt end with: .com .net or .dk.</exception>
         ///// <exception cref="FormatException">Throws when teh mail doesnt have anything between the @ and the domain ending.</exception>
-        /// <exception cref="FormatException">Throws when the mail doesnt contain a @.</exception>
+        //// <exception cref="FormatException">Throws when the mail doesnt contain a @.</exception>
         [StringLength(100)]
         public string Email
         {
@@ -57,9 +66,9 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the Phone value and validates it. Returns an exception if something is wrong.
+        /// Takes the phone value and validates it. Returns an exception if something is wrong.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown when an invalid value is provided</exception>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="FormatException">Throws when any character in the value is not a number.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is under 8 characters long.</exception>
         [StringLength(25)]
