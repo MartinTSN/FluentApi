@@ -33,9 +33,9 @@ namespace FluentApi.Gui
                 ReloadDataGridTeams();
                 ReloadDataGridEmployees();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
 
@@ -67,9 +67,9 @@ namespace FluentApi.Gui
                     buttonEditTeam.IsEnabled = true;
                     buttonAddTeam.IsEnabled = false;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
 
             }
