@@ -42,7 +42,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the firstName value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the firstName value. Validates it if sets. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref = "ArgumentNullException" > Thrown when the firstName is null.</exception>
