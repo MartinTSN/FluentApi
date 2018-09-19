@@ -28,7 +28,7 @@
                         <DataGridTextColumn Header="Efternavn"
                                             Binding="{Binding LastName}" />
                         <DataGridTextColumn Header="Fødselsdato"
-                                            Binding="{Binding BirthDay, StringFormat=d}" />
+                                            Binding="{Binding BirthDay, StringFormat=dd/MM/yyyy}" />
                         <DataGridTextColumn Header="Løn"
                                             Binding="{Binding Salary}" />
                         <DataGridTextColumn Header="E-Mail"
