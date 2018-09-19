@@ -42,7 +42,7 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         /// <summary>
-        /// Takes the name value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the name value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Throws if the value is null.</exception>
@@ -79,7 +79,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the description value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the description value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Throws when the value is null.</exception>
@@ -110,7 +110,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the startDate value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the startDate value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
@@ -141,7 +141,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the expectedEndDate value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the expectedEndDate value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
@@ -172,7 +172,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the budgetLimit value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the budgetLimit value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Thrown when the value is negative.</exception>

@@ -78,7 +78,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the lastName value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the lastName value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref = "ArgumentNullException" > Thrown when the lastname is null.</exception>
@@ -172,7 +172,7 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         /// <summary>
-        /// Takes the birthDay value and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the birthDay value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
@@ -207,7 +207,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the employementDate and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the employementDate. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
@@ -247,7 +247,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the CPR-Number and validates it. Returns an exception if something is wrong.
+        /// Gets or sets the CPR-Number. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentNullException">Thrown when the value is null.</exception>
@@ -279,7 +279,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Takes the salary value and validates it. Returns an exception is something is wrong.
+        /// Gets or sets the salary value. Validates it if set. Returns an exception is something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is negative.</exception>
