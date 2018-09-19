@@ -166,7 +166,7 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <Label Content="Projekt budget: "
+                    <Label Content="Projekt Budget: "
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"
