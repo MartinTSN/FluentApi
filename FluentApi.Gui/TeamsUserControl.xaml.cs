@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FluentApi.EF;
+
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FluentApi.EF;
 
 namespace FluentApi.Gui
 {
@@ -47,6 +39,15 @@ namespace FluentApi.Gui
 
         //                              DataGrid Events
 
+        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            if (selectedTeam != null)
+            {
+                buttonAddToTeam.IsEnabled = true;
+            }
+        }
+
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
@@ -80,15 +81,6 @@ namespace FluentApi.Gui
                     MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
 
-            }
-        }
-
-        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
-            if (selectedTeam != null)
-            {
-                buttonAddToTeam.IsEnabled = true;
             }
         }
 
@@ -127,88 +119,6 @@ namespace FluentApi.Gui
         }
 
         //                              Button Events
-
-        private void Button_ShowAllEmployees_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ReloadDataGridEmployees();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Der skete en uventet fejl under forsøget i at vise alle ansatte. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-            }
-            dataGridTeams.SelectedItem = null;
-            dataGridEmployees.SelectedItem = null;
-            buttonAddToTeam.IsEnabled = false;
-            buttonRemoveFromTeam.IsEnabled = false;
-        }
-
-        private void Button_AddToTeam_Click(object sender, RoutedEventArgs e)
-        {
-            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
-            selectedTeam = dataGridTeams.SelectedItem as Team;
-
-            if (selectedEmployee != null && selectedTeam != null)
-            {
-                try
-                {
-                    foreach (Employee employee in selectedTeam.Employees)
-                    {
-                        if (selectedEmployee != employee)
-                        {
-                            selectedTeam.Employees.Add(selectedEmployee);
-                            break;
-                        }
-                    }
-                    if (selectedTeam.Employees.Count == 0)
-                    {
-                        selectedTeam.Employees.Add(selectedEmployee);
-                    }
-                    model.SaveChanges();
-                    dataGridTeams.SelectedItem = selectedTeam;
-                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                    textBoxTeamSalary.Text = SetTeamSalary().ToString();
-                    dataGridEmployees.SelectedItem = selectedEmployee = null;
-                    buttonAddToTeam.IsEnabled = false;
-                    buttonRemoveFromTeam.IsEnabled = true;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Der skete en uventet fejl under forsøget på at tilføje den valgte ansat til teamet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-                }
-            }
-        }
-
-        private void Button_RemoveFromTeam_Click(object sender, RoutedEventArgs e)
-        {
-            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
-            selectedTeam = dataGridTeams.SelectedItem as Team;
-            if (selectedEmployee != null && selectedTeam != null)
-            {
-                try
-                {
-                    foreach (Employee employee in selectedTeam.Employees)
-                    {
-                        if (selectedEmployee == employee)
-                        {
-                            selectedTeam.Employees.Remove(selectedEmployee);
-                            break;
-                        }
-                    }
-                    model.SaveChanges();
-                    dataGridTeams.SelectedItem = selectedTeam;
-                    dataGridEmployees.SelectedItem = selectedEmployee = null;
-                    ReloadDataGridEmployees();
-                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
-                    buttonRemoveFromTeam.IsEnabled = false;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Der skete en uventet fejl under forsøget i at fjerne den valgte ansat fra holdet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-                }
-            }
-        }
 
         private void Button_AddTeam_Click(object sender, RoutedEventArgs e)
         {
@@ -297,6 +207,88 @@ namespace FluentApi.Gui
                     }
                 }
             }
+        }
+
+        private void Button_AddToTeam_Click(object sender, RoutedEventArgs e)
+        {
+            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+
+            if (selectedEmployee != null && selectedTeam != null)
+            {
+                try
+                {
+                    foreach (Employee employee in selectedTeam.Employees)
+                    {
+                        if (selectedEmployee != employee)
+                        {
+                            selectedTeam.Employees.Add(selectedEmployee);
+                            break;
+                        }
+                    }
+                    if (selectedTeam.Employees.Count == 0)
+                    {
+                        selectedTeam.Employees.Add(selectedEmployee);
+                    }
+                    model.SaveChanges();
+                    dataGridTeams.SelectedItem = selectedTeam;
+                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    textBoxTeamSalary.Text = SetTeamSalary().ToString();
+                    dataGridEmployees.SelectedItem = selectedEmployee = null;
+                    buttonAddToTeam.IsEnabled = false;
+                    buttonRemoveFromTeam.IsEnabled = true;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete en uventet fejl under forsøget på at tilføje den valgte ansat til teamet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
+        }
+
+        private void Button_RemoveFromTeam_Click(object sender, RoutedEventArgs e)
+        {
+            selectedEmployee = dataGridEmployees.SelectedItem as Employee;
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+            if (selectedEmployee != null && selectedTeam != null)
+            {
+                try
+                {
+                    foreach (Employee employee in selectedTeam.Employees)
+                    {
+                        if (selectedEmployee == employee)
+                        {
+                            selectedTeam.Employees.Remove(selectedEmployee);
+                            break;
+                        }
+                    }
+                    model.SaveChanges();
+                    dataGridTeams.SelectedItem = selectedTeam;
+                    dataGridEmployees.SelectedItem = selectedEmployee = null;
+                    ReloadDataGridEmployees();
+                    dataGridEmployees.ItemsSource = selectedTeam.Employees;
+                    buttonRemoveFromTeam.IsEnabled = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete en uventet fejl under forsøget i at fjerne den valgte ansat fra holdet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
+        }
+
+        private void Button_ShowAllEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ReloadDataGridEmployees();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Der skete en uventet fejl under forsøget i at vise alle ansatte. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            dataGridTeams.SelectedItem = null;
+            dataGridEmployees.SelectedItem = null;
+            buttonAddToTeam.IsEnabled = false;
+            buttonRemoveFromTeam.IsEnabled = false;
         }
 
         private void Button_ShowAvailableEmployees_Click(object sender, RoutedEventArgs e)

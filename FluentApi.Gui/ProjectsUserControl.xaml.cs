@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FluentApi.EF;
+
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FluentApi.EF;
 
 namespace FluentApi.Gui
 {
@@ -48,6 +40,25 @@ namespace FluentApi.Gui
 
         //                              DataGrid Events
 
+        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+            if (selectedProject != null)
+            {
+                buttonAddToProject.IsEnabled = true;
+            }
+            if (selectedTeam != null)
+            {
+                try
+                {
+                    textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
+        }
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedProject = dataGridProjects.SelectedItem as Project;
@@ -79,26 +90,6 @@ namespace FluentApi.Gui
 
                     textBoxProjectBudget.Text = GetProjectPayments().ToString();
 
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-                }
-            }
-        }
-
-        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedTeam = dataGridTeams.SelectedItem as Team;
-            if (selectedProject != null)
-            {
-                buttonAddToProject.IsEnabled = true;
-            }
-            if (selectedTeam != null)
-            {
-                try
-                {
-                    textBoxTeamSalary.Text = selectedTeam.Budget.ToString();
                 }
                 catch (Exception)
                 {

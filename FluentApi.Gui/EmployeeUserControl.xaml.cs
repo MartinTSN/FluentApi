@@ -1,4 +1,5 @@
 ﻿using FluentApi.EF;
+
 using System;
 using System.Linq;
 using System.Windows;
@@ -225,6 +226,37 @@ namespace FluentApi.Gui
             }
         }
 
+        private void Button_Add_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (!Validator.IsEmailValid(textBoxMail.Text))
+            {
+                MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (!Validator.IsPhoneValid(textBoxPhoneNumber.Text))
+            {
+                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                try
+                {
+                    ContactInfo newContactInfo = new ContactInfo();
+                    newContactInfo.Email = textBoxMail.Text;
+                    newContactInfo.Phone = textBoxPhoneNumber.Text;
+                    model.ContactInfos.Add(newContactInfo);
+                    selectedEmployee.ContactInfo = newContactInfo;
+                    model.SaveChanges();
+                    ReloadDataGridEmployees();
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye KontaktInformation. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+            }
+        }
+
         private void Button_Update_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (selectedEmployee != null)
@@ -256,37 +288,6 @@ namespace FluentApi.Gui
                     {
                         MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den valgte KontaktInformationen. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
-                }
-            }
-        }
-
-        private void Button_Add_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (!Validator.IsEmailValid(textBoxMail.Text))
-            {
-                MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else if (!Validator.IsPhoneValid(textBoxPhoneNumber.Text))
-            {
-                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                try
-                {
-                    ContactInfo newContactInfo = new ContactInfo();
-                    newContactInfo.Email = textBoxMail.Text;
-                    newContactInfo.Phone = textBoxPhoneNumber.Text;
-                    model.ContactInfos.Add(newContactInfo);
-                    selectedEmployee.ContactInfo = newContactInfo;
-                    model.SaveChanges();
-                    ReloadDataGridEmployees();
-                    buttonAddContactInfo.IsEnabled = false;
-                    buttonUpdateContactInfo.IsEnabled = true;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye KontaktInformation. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
