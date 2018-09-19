@@ -13,20 +13,20 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0"
-                  Margin="10"
-                  Header=" Oversigt ">
+                  Header=" Oversigt "
+                  Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <DataGrid Margin="10"
-                          x:Name="dataGridTeams"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
+                <DataGrid AutoGenerateColumns="False"
                           Grid.Row="0"
+                          IsReadOnly="True"
+                          KeyDown="DataGrid_Teams_KeyDown"
+                          Margin="10"
                           SelectionChanged="DataGrid_Teams_SelectionChanged"
-                          KeyDown="DataGrid_Teams_KeyDown">
+                          x:Name="dataGridTeams">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team Navn"
                                             Binding="{Binding Name}" />
@@ -37,14 +37,13 @@
                         <DataGridTextColumn Header="Slut Dato"
                                             Binding="{Binding ExpectedEndDate,StringFormat=dd/MM/yyyy}" />
                     </DataGrid.Columns>
-
                 </DataGrid>
-                <DataGrid Margin="10"
-                          x:Name="dataGridEmployees"
-                          AutoGenerateColumns="False"
+                <DataGrid AutoGenerateColumns="False"
                           Grid.Row="1"
                           IsReadOnly="True"
-                          SelectionChanged="DataGrid_Employees_SelectionChanged">
+                          Margin="10"
+                          SelectionChanged="DataGrid_Employees_SelectionChanged"
+                          x:Name="dataGridEmployees">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Fornavn"
                                             Binding="{Binding FirstName}" />
@@ -84,8 +83,8 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="1"
+                    <TextBox Grid.Column="1"
+                             Margin="3"
                              Text="{Binding TeamName}"
                              x:Name="textBoxTeamName" />
                     <Label Content="Beskrivelse: "
@@ -93,9 +92,9 @@
                            Grid.Row="1"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="1"
+                    <TextBox Grid.Column="1"
                              Grid.Row="1"
+                             Margin="3"
                              Text="{Binding Description}"
                              x:Name="textBoxDescription" />
                     <Label Content="StartDato: "
@@ -103,10 +102,10 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <DatePicker Grid.Column="3"
+                    <DatePicker FirstDayOfWeek="Monday"
+                                Grid.Column="3"
                                 Grid.Row="0"
                                 Margin="3"
-                                FirstDayOfWeek="Monday"
                                 SelectedDate="{Binding StartDate}"
                                 x:Name="datePickerStartDate" />
                     <Label Content="Forventet SlutDato: "
@@ -114,26 +113,26 @@
                            Grid.Row="1"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <DatePicker Grid.Column="3"
+                    <DatePicker FirstDayOfWeek="Monday"
+                                Grid.Column="3"
                                 Grid.Row="1"
                                 Margin="3"
-                                FirstDayOfWeek="Monday"
                                 SelectedDate="{Binding ExpectedEndDate}"
                                 x:Name="datePickerEndDate" />
-                    <Button Grid.Row="2"
+                    <Button Click="Button_EditTeam_Click"
+                            Grid.Row="2"
                             Grid.Column="2"
-                            Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonEditTeam"
-                            Click="Button_EditTeam_Click">
+                            Margin="3"
+                            x:Name="buttonEditTeam">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Rediger Team</TextBlock>
                     </Button>
-                    <Button Grid.Row="2"
+                    <Button Click="Button_AddTeam_Click"
+                            Grid.Row="2"
                             Grid.Column="3"
                             Margin="3"
-                            x:Name="buttonAddTeam"
-                            Click="Button_AddTeam_Click">
+                            x:Name="buttonAddTeam">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Tilføj Team</TextBlock>
                     </Button>
@@ -162,43 +161,43 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="3"
+                    <TextBox Grid.Column="3"
                              Grid.Row="0"
                              IsReadOnly="True"
+                             Margin="3"
                              Text="{Binding Budget}"
                              x:Name="textBoxTeamSalary" />
-                    <Button Grid.Row="2"
+                    <Button Click="Button_AddToTeam_Click"
+                            Grid.Row="2"
                             Grid.Column="2"
-                            Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonAddToTeam"
-                            Click="Button_AddToTeam_Click">
+                            Margin="3"
+                            x:Name="buttonAddToTeam">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Tilføj Ansat til Team</TextBlock>
                     </Button>
-                    <Button Grid.Row="2"
+                    <Button Click="Button_RemoveFromTeam_Click"
+                            Grid.Row="2"
                             Grid.Column="3"
-                            Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonRemoveFromTeam"
-                            Click="Button_RemoveFromTeam_Click">
+                            Margin="3"
+                            x:Name="buttonRemoveFromTeam">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Fjern Ansat fra Team</TextBlock>
                     </Button>
-                    <Button Grid.Row="2"
+                    <Button Click="Button_ShowAllEmployees_Click"
+                            Grid.Row="2"
                             Grid.Column="0"
                             Margin="3"
-                            x:Name="buttonShowAllEmployees"
-                            Click="Button_ShowAllEmployees_Click">
+                            x:Name="buttonShowAllEmployees">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Vis alle Ansatte</TextBlock>
                     </Button>
-                    <Button Grid.Row="1"
+                    <Button Click="Button_ShowAvailableEmployees_Click"
+                            Grid.Row="1"
                             Grid.Column="0"
                             Margin="3"
-                            x:Name="buttonShowAvailableEmployees"
-                            Click="Button_ShowAvailableEmployees_Click">
+                            x:Name="buttonShowAvailableEmployees">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Vis alle ledige Ansatte</TextBlock>
                     </Button>

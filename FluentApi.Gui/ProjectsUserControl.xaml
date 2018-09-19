@@ -13,20 +13,20 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0"
-                  Margin="10"
-                  Header=" Oversigt ">
+                  Header=" Oversigt "
+                  Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <DataGrid Margin="10"
-                          x:Name="dataGridProjects"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
+                <DataGrid AutoGenerateColumns="False"
                           Grid.Row="0"
+                          IsReadOnly="True"
+                          KeyDown="DataGrid_Projects_KeyDown"
+                          Margin="10"
                           SelectionChanged="DataGrid_Projects_SelectionChanged"
-                          KeyDown="DataGrid_Projects_KeyDown">
+                          x:Name="dataGridProjects">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Projekt Navn"
                                             Binding="{Binding Name}" />
@@ -38,12 +38,12 @@
                                             Binding="{Binding EndDate,StringFormat=ddd/MM/yyyy}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <DataGrid Margin="10"
-                          x:Name="dataGridTeams"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
+                <DataGrid AutoGenerateColumns="False"
                           Grid.Row="1"
-                          SelectionChanged="DataGrid_Teams_SelectionChanged">
+                          IsReadOnly="True"
+                          Margin="10"
+                          SelectionChanged="DataGrid_Teams_SelectionChanged"
+                          x:Name="dataGridTeams">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team Navn"
                                             Binding="{Binding Name}" />
@@ -83,8 +83,8 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="1"
+                    <TextBox Grid.Column="1"
+                             Margin="3"
                              Text="{Binding TeamName}"
                              x:Name="textBoxProjectName" />
                     <Label Content="Beskrivelse: "
@@ -92,9 +92,9 @@
                            Grid.Row="1"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="1"
+                    <TextBox Grid.Column="1"
                              Grid.Row="1"
+                             Margin="3"
                              Text="{Binding Description}"
                              x:Name="textBoxDescription" />
                     <Label Content="StartDato: "
@@ -102,10 +102,10 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <DatePicker Grid.Column="3"
+                    <DatePicker FirstDayOfWeek="Monday"
+                                Grid.Column="3"
                                 Grid.Row="0"
                                 Margin="3"
-                                FirstDayOfWeek="Monday"
                                 SelectedDate="{Binding StartDate}"
                                 x:Name="datePickerStartDate" />
                     <Label Content="Forventet SlutDato: "
@@ -113,10 +113,10 @@
                            Grid.Row="1"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <DatePicker Grid.Column="3"
+                    <DatePicker FirstDayOfWeek="Monday"
+                                Grid.Column="3"
                                 Grid.Row="1"
                                 Margin="3"
-                                FirstDayOfWeek="Monday"
                                 SelectedDate="{Binding EndDate}"
                                 x:Name="datePickerEndDate" />
                     <Label Content="Budget Grænse: "
@@ -129,20 +129,20 @@
                              Grid.Row="2"
                              Text="{Binding BudgetLimit}"
                              x:Name="textBoxBudgetLimit" />
-                    <Button Grid.Row="2"
+                    <Button Click="Button_EditProject_Click"
+                            Grid.Row="2"
                             Grid.Column="2"
-                            Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonEditProject"
-                            Click="Button_EditProject_Click">
+                            Margin="3"
+                            x:Name="buttonEditProject">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Rediger Projekt</TextBlock>
                     </Button>
-                    <Button Grid.Row="2"
+                    <Button Click="Button_AddProject_Click"
+                            Grid.Row="2"
                             Grid.Column="3"
                             Margin="3"
-                            x:Name="buttonAddProject"
-                            Click="Button_AddProject_Click">
+                            x:Name="buttonAddProject">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Tilføj Projekt</TextBlock>
                     </Button>
@@ -171,24 +171,24 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="1"
+                    <TextBox Grid.Column="1"
                              Grid.Row="0"
                              IsReadOnly="True"
+                             Margin="3"
                              x:Name="textBoxProjectBudget" />
-                    <Button Grid.Row="2"
+                    <Button Click="Button_ShowAllTeams_Click"
+                            Grid.Row="2"
                             Grid.Column="0"
                             Margin="3"
-                            x:Name="buttonShowAllTeams"
-                            Click="Button_ShowAllTeams_Click">
+                            x:Name="buttonShowAllTeams">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Vis alle Teams</TextBlock>
                     </Button>
-                    <Button Grid.Row="1"
+                    <Button Click="Button_ShowAvailableTeams_Click"
+                            Grid.Row="1"
                             Grid.Column="0"
                             Margin="3"
-                            x:Name="buttonShowAvailableTeams"
-                            Click="Button_ShowAvailableTeams_Click">
+                            x:Name="buttonShowAvailableTeams">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Vis alle ledige Teams</TextBlock>
                     </Button>
@@ -197,27 +197,27 @@
                            Grid.Row="0"
                            HorizontalAlignment="Right"
                            Margin="3" />
-                    <TextBox Margin="3"
-                             Grid.Column="3"
+                    <TextBox Grid.Column="3"
                              Grid.Row="0"
                              IsReadOnly="True"
+                             Margin="3"
                              Text="{Binding Team.Budget}"
                              x:Name="textBoxTeamSalary" />
-                    <Button Grid.Row="2"
+                    <Button Click="Button_AddToProject_Click"
+                            Grid.Row="2"
                             Grid.Column="2"
-                            Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonAddToProject"
-                            Click="Button_AddToProject_Click">
+                            Margin="3"
+                            x:Name="buttonAddToProject">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Tilføj Team til projekt</TextBlock>
                     </Button>
-                    <Button Grid.Row="2"
+                    <Button Click="Button_RemoveFromProject_Click"
+                            Grid.Row="2"
                             Grid.Column="3"
-                            Margin="3"
                             IsEnabled="False"
-                            x:Name="buttonRemoveFromProject"
-                            Click="Button_RemoveFromProject_Click">
+                            Margin="3"
+                            x:Name="buttonRemoveFromProject">
                         <TextBlock TextAlignment="Center"
                                    TextWrapping="Wrap">Fjern Team fra Projekt</TextBlock>
                     </Button>

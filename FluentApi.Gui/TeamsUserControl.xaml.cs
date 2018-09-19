@@ -22,7 +22,13 @@ namespace FluentApi.Gui
     public partial class TeamsUserControl : UserControl
     {
         protected Model model;
+        /// <summary>
+        /// The currently selected team.
+        /// </summary>
         private Team selectedTeam;
+        /// <summary>
+        /// The currently selected employee.
+        /// </summary>
         private Employee selectedEmployee;
         public TeamsUserControl()
         {
@@ -38,6 +44,8 @@ namespace FluentApi.Gui
                 MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
+
+        //                              DataGrid Events
 
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -75,17 +83,6 @@ namespace FluentApi.Gui
             }
         }
 
-        private decimal SetTeamSalary()
-        {
-            selectedTeam.Budget = 0;
-            foreach (Employee employee in selectedTeam.Employees)
-            {
-                selectedTeam.Budget += employee.Salary;
-            }
-            model.SaveChanges();
-            return selectedTeam.Budget;
-        }
-
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmployee = dataGridEmployees.SelectedItem as Employee;
@@ -95,15 +92,41 @@ namespace FluentApi.Gui
             }
         }
 
-        private void ReloadDataGridTeams()
+        private void DataGrid_Teams_KeyDown(object sender, KeyEventArgs e)
         {
-            dataGridTeams.ItemsSource = model.Teams.ToList();
+            if (dataGridTeams.SelectedItem != null)
+            {
+                if (e.Key == Key.Escape)
+                {
+                    try
+                    {
+                        ReloadDataGridTeams();
+                        ReloadDataGridEmployees();
+                        dataGridTeams.SelectedItem = null;
+                        dataGridEmployees.SelectedItem = null;
+                        textBoxTeamName.Focus();
+                        //                                          TextBoxes
+                        textBoxTeamName.Text = String.Empty;
+                        textBoxDescription.Text = String.Empty;
+                        textBoxTeamSalary.Text = String.Empty;
+                        //                                           Datepicker
+                        datePickerStartDate.SelectedDate = null;
+                        datePickerEndDate.SelectedDate = null;
+                        //                                          Buttons
+                        buttonAddTeam.IsEnabled = true;
+                        buttonEditTeam.IsEnabled = false;
+                        buttonAddToTeam.IsEnabled = false;
+                        buttonRemoveFromTeam.IsEnabled = false;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                }
+            }
         }
 
-        private void ReloadDataGridEmployees()
-        {
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
-        }
+        //                              Button Events
 
         private void Button_ShowAllEmployees_Click(object sender, RoutedEventArgs e)
         {
@@ -184,40 +207,6 @@ namespace FluentApi.Gui
                 {
                     MessageBox.Show("Der skete en uventet fejl under forsøget i at fjerne den valgte ansat fra holdet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
-            }
-        }
-
-        private void DataGrid_Teams_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (dataGridTeams.SelectedItem != null)
-            {
-                if (e.Key == Key.Escape)
-                {
-                    try
-                    {
-                        ReloadDataGridTeams();
-                        ReloadDataGridEmployees();
-                        dataGridTeams.SelectedItem = null;
-                        dataGridEmployees.SelectedItem = null;
-                        textBoxTeamName.Focus();
-                        //                                          TextBoxes
-                        textBoxTeamName.Text = String.Empty;
-                        textBoxDescription.Text = String.Empty;
-                        textBoxTeamSalary.Text = String.Empty;
-                        //                                           Datepicker
-                        datePickerStartDate.SelectedDate = null;
-                        datePickerEndDate.SelectedDate = null;
-                        //                                          Buttons
-                        buttonAddTeam.IsEnabled = true;
-                        buttonEditTeam.IsEnabled = false;
-                        buttonAddToTeam.IsEnabled = false;
-                        buttonRemoveFromTeam.IsEnabled = false;
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-                    }
-                } 
             }
         }
 
@@ -322,5 +311,41 @@ namespace FluentApi.Gui
                 MessageBox.Show("Der skete en uventet fejl under forsøget på at vise alle ledige ansatte. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
+
+        //                                  Methods
+
+        /// <summary>
+        /// Refils the DataGridTeams with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Teams is null.</exception>
+        private void ReloadDataGridTeams()
+        {
+            dataGridTeams.ItemsSource = model.Teams.ToList();
+        }
+
+        /// <summary>
+        /// Refils the DataGridEmployees with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Employees is null.</exception>
+        private void ReloadDataGridEmployees()
+        {
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
+
+        /// <summary>
+        /// Sets the TeamSalary to every employee's salary put together.
+        /// </summary>
+        /// <returns>The selected team's budget.</returns>
+        private decimal SetTeamSalary()
+        {
+            selectedTeam.Budget = 0;
+            foreach (Employee employee in selectedTeam.Employees)
+            {
+                selectedTeam.Budget += employee.Salary;
+            }
+            model.SaveChanges();
+            return selectedTeam.Budget;
+        }
+
     }
 }

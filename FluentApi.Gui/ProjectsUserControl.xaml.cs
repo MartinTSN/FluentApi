@@ -22,7 +22,13 @@ namespace FluentApi.Gui
     public partial class ProjectsUserControl : UserControl
     {
         protected Model model;
+        /// <summary>
+        /// The currently selected project.
+        /// </summary>
         private Project selectedProject;
+        /// <summary>
+        /// The currently selected team.
+        /// </summary>
         private Team selectedTeam;
 
         public ProjectsUserControl()
@@ -40,15 +46,7 @@ namespace FluentApi.Gui
             }
         }
 
-        private void ReloadDataGridProject()
-        {
-            dataGridProjects.ItemsSource = model.Projects.ToList();
-        }
-
-        private void ReloadDataGridTeams()
-        {
-            dataGridTeams.ItemsSource = model.Teams.ToList();
-        }
+        //                              DataGrid Events
 
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -89,19 +87,6 @@ namespace FluentApi.Gui
             }
         }
 
-        private decimal GetProjectPayments()
-        {
-            decimal projectPayments = 0;
-            if (selectedProject != null)
-            {
-                foreach (Team team in selectedProject.Teams)
-                {
-                    projectPayments += team.Budget;
-                }
-            }
-            return projectPayments;
-        }
-
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
@@ -121,6 +106,43 @@ namespace FluentApi.Gui
                 }
             }
         }
+
+        private void DataGrid_Projects_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dataGridProjects.SelectedItem != null)
+            {
+                if (e.Key == Key.Escape)
+                {
+                    try
+                    {
+                        ReloadDataGridTeams();
+                        dataGridProjects.SelectedItem = null;
+                        dataGridTeams.SelectedItem = null;
+                        textBoxProjectName.Focus();
+                        //                                                      TextBoxes
+                        textBoxProjectName.Text = String.Empty;
+                        textBoxDescription.Text = String.Empty;
+                        textBoxBudgetLimit.Text = String.Empty;
+                        textBoxProjectBudget.Text = String.Empty;
+                        textBoxTeamSalary.Text = String.Empty;
+                        //                                                      Datepickers
+                        datePickerStartDate.SelectedDate = null;
+                        datePickerEndDate.SelectedDate = null;
+                        //                                                      Buttons
+                        buttonAddProject.IsEnabled = true;
+                        buttonEditProject.IsEnabled = false;
+                        buttonAddToProject.IsEnabled = false;
+                        buttonRemoveFromProject.IsEnabled = false;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                }
+            }
+        }
+        
+        //                          Button Events
 
         private void Button_AddProject_Click(object sender, RoutedEventArgs e)
         {
@@ -250,7 +272,7 @@ namespace FluentApi.Gui
                             selectedProject.Teams.Add(selectedTeam);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
@@ -335,40 +357,42 @@ namespace FluentApi.Gui
                 MessageBox.Show("Der skete en uventet fejl Under forsøget i at vise alle ledige teams. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
+        
+        //                                      Methods
 
-        private void DataGrid_Projects_KeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        /// Refils the DataGridProject with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Project is null.</exception>
+        private void ReloadDataGridProject()
         {
-            if (dataGridProjects.SelectedItem != null)
+            dataGridProjects.ItemsSource = model.Projects.ToList();
+        }
+
+        /// <summary>
+        /// Refils the DataGridTeams with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Teams is null.</exception>
+        private void ReloadDataGridTeams()
+        {
+            dataGridTeams.ItemsSource = model.Teams.ToList();
+        }
+
+        /// <summary>
+        /// Gets the Total amount it costs to have every team in the project running.
+        /// </summary>
+        /// <returns>The total costs of the projects teams.</returns>
+        private decimal GetProjectPayments()
+        {
+            decimal projectPayments = 0;
+            if (selectedProject != null)
             {
-                if (e.Key == Key.Escape)
+                foreach (Team team in selectedProject.Teams)
                 {
-                    try
-                    {
-                        ReloadDataGridTeams();
-                        dataGridProjects.SelectedItem = null;
-                        dataGridTeams.SelectedItem = null;
-                        textBoxProjectName.Focus();
-                        //                                                      TextBoxes
-                        textBoxProjectName.Text = String.Empty;
-                        textBoxDescription.Text = String.Empty;
-                        textBoxBudgetLimit.Text = String.Empty;
-                        textBoxProjectBudget.Text = String.Empty;
-                        textBoxTeamSalary.Text = String.Empty;
-                        //                                                      Datepickers
-                        datePickerStartDate.SelectedDate = null;
-                        datePickerEndDate.SelectedDate = null;
-                        //                                                      Buttons
-                        buttonAddProject.IsEnabled = true;
-                        buttonEditProject.IsEnabled = false;
-                        buttonAddToProject.IsEnabled = false;
-                        buttonRemoveFromProject.IsEnabled = false;
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-                    }
+                    projectPayments += team.Budget;
                 }
             }
+            return projectPayments;
         }
     }
 }

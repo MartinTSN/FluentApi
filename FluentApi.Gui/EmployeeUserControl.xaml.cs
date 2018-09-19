@@ -13,6 +13,9 @@ namespace FluentApi.Gui
     public partial class EmployeeUserControl : UserControl
     {
         protected Model model;
+        /// <summary>
+        /// The currently selected employee.
+        /// </summary>
         private Employee selectedEmployee;
 
         public EmployeeUserControl()
@@ -26,6 +29,43 @@ namespace FluentApi.Gui
             catch (Exception)
             {
                 MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+        }
+
+        //                                      DataGrid Events
+
+        private void DataGrid_Employees_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (dataGridEmployees.SelectedItem != null)
+            {
+                if (e.Key == Key.Escape)
+                {
+                    try
+                    {
+                        dataGridEmployees.SelectedItem = selectedEmployee = null;
+                        textBoxEmployeeFirstName.Focus();
+                        //                                                             TextBoxes
+                        textBoxEmployeeFirstName.Text = String.Empty;
+                        textBoxEmployeeLastName.Text = String.Empty;
+                        textBoxCPR.Text = String.Empty;
+                        textBoxEmployeeSalary.Text = String.Empty;
+                        textBoxMail.Text = String.Empty;
+                        textBoxPhoneNumber.Text = String.Empty;
+                        //                                                              DatePickers
+                        datePickerEmployeeStartDate.SelectedDate = null;
+                        datePickerEmployeeBirthday.SelectedDate = null;
+
+                        //                                                              Buttons
+                        buttonAddEmployee.IsEnabled = true;
+                        buttonUpdateEmployee.IsEnabled = false;
+                        buttonUpdateContactInfo.IsEnabled = false;
+                        buttonAddContactInfo.IsEnabled = false;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                }
             }
         }
 
@@ -64,10 +104,7 @@ namespace FluentApi.Gui
             }
         }
 
-        private void ReloadDataGridEmployees()
-        {
-            dataGridEmployees.ItemsSource = model.Employees.ToList();
-        }
+        //                          Button Events
 
         private void Button_Create_Employee_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -254,40 +291,7 @@ namespace FluentApi.Gui
             }
         }
 
-        private void DataGrid_Employees_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (dataGridEmployees.SelectedItem != null)
-            {
-                if (e.Key == Key.Escape)
-                {
-                    try
-                    {
-                        dataGridEmployees.SelectedItem = selectedEmployee = null;
-                        textBoxEmployeeFirstName.Focus();
-                        //                                                             TextBoxes
-                        textBoxEmployeeFirstName.Text = String.Empty;
-                        textBoxEmployeeLastName.Text = String.Empty;
-                        textBoxCPR.Text = String.Empty;
-                        textBoxEmployeeSalary.Text = String.Empty;
-                        textBoxMail.Text = String.Empty;
-                        textBoxPhoneNumber.Text = String.Empty;
-                        //                                                              DatePickers
-                        datePickerEmployeeStartDate.SelectedDate = null;
-                        datePickerEmployeeBirthday.SelectedDate = null;
-
-                        //                                                              Buttons
-                        buttonAddEmployee.IsEnabled = true;
-                        buttonUpdateEmployee.IsEnabled = false;
-                        buttonUpdateContactInfo.IsEnabled = false;
-                        buttonAddContactInfo.IsEnabled = false;
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
-                    }
-                }
-            }
-        }
+        //                          TextBox Events
 
         private void TextBox_EmployeeFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -417,5 +421,17 @@ namespace FluentApi.Gui
                 }
             }
         }
+
+        //                              Methods
+
+        /// <summary>
+        /// Refils the DataGridEmployees with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Employees is null.</exception>
+        private void ReloadDataGridEmployees()
+        {
+            dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
+
     }
 }
