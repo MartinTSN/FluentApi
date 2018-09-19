@@ -23,9 +23,9 @@ namespace FluentApi.Gui
             {
                 ReloadDataGridEmployees();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", e.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
 
@@ -59,7 +59,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at vælge personen. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at vælge personen. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -73,31 +73,31 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
             {
-                MessageBox.Show("Det indtastede Fornavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Fornavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsNameValid(textBoxEmployeeLastName.Text))
             {
-                MessageBox.Show("Det indtastede Efternavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Efternavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsBirthDayValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault()))
             {
-                MessageBox.Show("Den indtastede Fødselsdato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Fødselsdato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEmploymentDateValid(datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
             {
-                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsBirthDayEmploymentDateValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault(), datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
             {
-                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsCPRNumberValid(textBoxCPR.Text))
             {
-                MessageBox.Show("Det indtastede CPR-Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede CPR-Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxEmployeeSalary.Text)))
             {
-                MessageBox.Show("Det indtastede Penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -116,7 +116,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye ansatte. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye ansatte. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -127,31 +127,31 @@ namespace FluentApi.Gui
             {
                 if (!Validator.IsNameValid(textBoxEmployeeFirstName.Text))
                 {
-                    MessageBox.Show("Det indtastede Fornavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Fornavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsNameValid(textBoxEmployeeLastName.Text))
                 {
-                    MessageBox.Show("Det indtastede Efternavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Efternavn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsBirthDayValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault()))
                 {
-                    MessageBox.Show("Den indtastede Fødselsdato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Fødselsdato er ikke gyldigt. Man må kun være 18-70 år gammel. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsEmploymentDateValid(datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
                 {
-                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Må kun være efter år 1950 og inden imorgen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsBirthDayEmploymentDateValid(datePickerEmployeeBirthday.SelectedDate.GetValueOrDefault(), datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault()))
                 {
-                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være efter den valgte fødselsdag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsCPRNumberValid(textBoxCPR.Text))
                 {
-                    MessageBox.Show("Det indtastede CPR-Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede CPR-Nummer er ikke gyldigt. Må kun indeholde tal. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsMoneyValid(Decimal.Parse(textBoxEmployeeSalary.Text)))
                 {
-                    MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -182,7 +182,7 @@ namespace FluentApi.Gui
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den valgte ansat. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den valgte ansat. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
             }
@@ -194,11 +194,11 @@ namespace FluentApi.Gui
             {
                 if (!Validator.IsEmailValid(textBoxMail.Text))
                 {
-                    MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsPhoneValid(textBoxPhoneNumber.Text))
                 {
-                    MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -217,7 +217,7 @@ namespace FluentApi.Gui
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den Kontaktinformationen. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere den valgte KontaktInformationen. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
             }
@@ -227,11 +227,11 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsEmailValid(textBoxMail.Text))
             {
-                MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsPhoneValid(textBoxPhoneNumber.Text))
             {
-                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -249,7 +249,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye Kontaktinformation. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme den nye KontaktInformation. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -281,9 +281,9 @@ namespace FluentApi.Gui
                         buttonUpdateContactInfo.IsEnabled = false;
                         buttonAddContactInfo.IsEnabled = false;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
             }
