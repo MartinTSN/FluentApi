@@ -197,6 +197,9 @@ namespace FluentApi.EF
             }
         }
 
+        /// <summary>
+        /// Every Team in the Project.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Team> Teams { get; set; }
     }

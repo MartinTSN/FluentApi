@@ -195,6 +195,9 @@ namespace FluentApi.EF
 
         public int? ProjectId { get; set; }
 
+        /// <summary>
+        /// Every Employee in the Team.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
 
