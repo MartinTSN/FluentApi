@@ -298,7 +298,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxEmployeeFirstName.Text == String.Empty)
+                if (String.IsNullOrEmpty(textBoxEmployeeFirstName.Text))
                 {
                     buttonAddEmployee.IsEnabled = false;
                     buttonUpdateEmployee.IsEnabled = false;
@@ -318,7 +318,7 @@ namespace FluentApi.Gui
 
         private void TextBox_EmployeeLastName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBoxEmployeeLastName.Text == String.Empty)
+            if (String.IsNullOrEmpty(textBoxEmployeeLastName.Text))
             {
                 buttonAddEmployee.IsEnabled = false;
                 buttonUpdateEmployee.IsEnabled = false;
@@ -339,7 +339,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxMail.Text == String.Empty)
+                if (String.IsNullOrEmpty(textBoxMail.Text))
                 {
                     buttonAddContactInfo.IsEnabled = false;
                     buttonUpdateContactInfo.IsEnabled = false;
@@ -361,7 +361,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxPhoneNumber.Text == String.Empty)
+                if (String.IsNullOrEmpty(textBoxPhoneNumber.Text))
                 {
                     buttonAddContactInfo.IsEnabled = false;
                     buttonUpdateContactInfo.IsEnabled = false;
@@ -383,7 +383,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxEmployeeSalary.Text == String.Empty)
+                if (String.IsNullOrEmpty(textBoxEmployeeSalary.Text))
                 {
                     buttonAddContactInfo.IsEnabled = false;
                     buttonUpdateContactInfo.IsEnabled = false;
@@ -405,7 +405,7 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
-                if (textBoxCPR.Text == String.Empty)
+                if (String.IsNullOrEmpty(textBoxCPR.Text))
                 {
                     buttonAddContactInfo.IsEnabled = false;
                     buttonUpdateContactInfo.IsEnabled = false;
@@ -433,6 +433,5 @@ namespace FluentApi.Gui
         {
             dataGridEmployees.ItemsSource = model.Employees.ToList();
         }
-
     }
 }

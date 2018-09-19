@@ -338,6 +338,5 @@ namespace FluentApi.Gui
             model.SaveChanges();
             return selectedTeam.Budget;
         }
-
     }
 }
