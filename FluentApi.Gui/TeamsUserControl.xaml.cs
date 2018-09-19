@@ -111,9 +111,9 @@ namespace FluentApi.Gui
             {
                 ReloadDataGridEmployees();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl under forsøget i at vise alle ansatte. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
             dataGridTeams.SelectedItem = null;
             dataGridEmployees.SelectedItem = null;
@@ -150,9 +150,9 @@ namespace FluentApi.Gui
                     buttonAddToTeam.IsEnabled = false;
                     buttonRemoveFromTeam.IsEnabled = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl under forsøget på at tilføje den valgte ansat til teamet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -180,9 +180,9 @@ namespace FluentApi.Gui
                     dataGridEmployees.ItemsSource = selectedTeam.Employees;
                     buttonRemoveFromTeam.IsEnabled = false;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Der skete en uventet fejl. Prøv igen.", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete en uventet fejl under forsøget i at fjerne den valgte ansat fra holdet. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -213,9 +213,9 @@ namespace FluentApi.Gui
                         buttonAddToTeam.IsEnabled = false;
                         buttonRemoveFromTeam.IsEnabled = false;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 } 
             }
@@ -225,19 +225,19 @@ namespace FluentApi.Gui
         {
             if (!Validator.IsNameValid(textBoxTeamName.Text))
             {
-                MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
             {
-                MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
             {
-                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -254,7 +254,7 @@ namespace FluentApi.Gui
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme det nye team. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at gemme det nye team. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -265,19 +265,19 @@ namespace FluentApi.Gui
             {
                 if (!Validator.IsNameValid(textBoxTeamName.Text))
                 {
-                    MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsDescriptionValid(textBoxDescription.Text))
                 {
-                    MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede beskrivelse er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsStartDateValid(datePickerStartDate.SelectedDate.Value))
                 {
-                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Start-dato er ikke gyldigt. Skal være inden imorgen. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else if (!Validator.IsEndDateValid(datePickerEndDate.SelectedDate.Value))
                 {
-                    MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -304,7 +304,7 @@ namespace FluentApi.Gui
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere det valgte team. Prøv igen", "Uventet fejl", MessageBoxButton.OK, MessageBoxImage.Stop);
+                        MessageBox.Show("Der skete desværre en uventet fejl under forsøget på at opdatere det valgte team. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
             }
@@ -317,9 +317,9 @@ namespace FluentApi.Gui
                 dataGridEmployees.ItemsSource = model.Employees.Where(employees => employees.TeamId == null).ToList();
                 selectedEmployee = null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Der skete en uventet fejl. Prøv igen eller genstart programmet", ex.Message, MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Der skete en uventet fejl under forsøget på at vise alle ledige ansatte. Prøv igen eller genstart programmet.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
     }
