@@ -93,6 +93,8 @@ namespace FluentApi.EF
             }
         }
 
+        public string Address { get; set; }
+
         public virtual Employee Employee { get; set; }
     }
 }

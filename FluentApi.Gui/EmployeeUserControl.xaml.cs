@@ -52,6 +52,9 @@ namespace FluentApi.Gui
                         textBoxEmployeeSalary.Text = String.Empty;
                         textBoxMail.Text = String.Empty;
                         textBoxPhoneNumber.Text = String.Empty;
+                        textBoxAddress.Text = String.Empty;
+                        textBoxWorkMail.Text = String.Empty;
+                        textBoxWorkPhoneNumber.Text = String.Empty;
                         //                                                              DatePickers
                         datePickerEmployeeStartDate.SelectedDate = null;
                         datePickerEmployeeBirthday.SelectedDate = null;
@@ -91,11 +94,13 @@ namespace FluentApi.Gui
                     {
                         textBoxMail.Text = selectedEmployee.ContactInfo.Email;
                         textBoxPhoneNumber.Text = selectedEmployee.ContactInfo.Phone;
+                        textBoxAddress.Text = selectedEmployee.ContactInfo.Address;
                     }
                     else
                     {
                         textBoxMail.Text = String.Empty;
                         textBoxPhoneNumber.Text = String.Empty;
+                        textBoxAddress.Text = String.Empty;
                         buttonAddContactInfo.IsEnabled = true;
                         buttonUpdateContactInfo.IsEnabled = false;
                     }
@@ -253,6 +258,10 @@ namespace FluentApi.Gui
             {
                 MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else if (!Validator.IsAddressValid(textBoxAddress.Text))
+            {
+                MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             else
             {
                 try
@@ -260,6 +269,7 @@ namespace FluentApi.Gui
                     ContactInfo newContactInfo = new ContactInfo();
                     newContactInfo.Email = textBoxMail.Text;
                     newContactInfo.Phone = textBoxPhoneNumber.Text;
+                    newContactInfo.Address = textBoxAddress.Text;
                     model.ContactInfos.Add(newContactInfo);
                     selectedEmployee.ContactInfo = newContactInfo;
                     model.SaveChanges();
@@ -286,6 +296,10 @@ namespace FluentApi.Gui
                 {
                     MessageBox.Show("Det indtastede Nummer er ikke gyldigt. Må kun bestå af tal og skal være over 8 cifre lang. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+                else if (!Validator.IsAddressValid(textBoxAddress.Text))
+                {
+                    MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 else
                 {
                     try
@@ -297,6 +311,10 @@ namespace FluentApi.Gui
                         if (textBoxPhoneNumber.Text != selectedEmployee.ContactInfo.Phone)
                         {
                             selectedEmployee.ContactInfo.Phone = textBoxPhoneNumber.Text;
+                        }
+                        if (textBoxAddress.Text != selectedEmployee.ContactInfo.Address)
+                        {
+                            selectedEmployee.ContactInfo.Address = textBoxAddress.Text;
                         }
                         model.SaveChanges();
                         ReloadDataGridEmployees();

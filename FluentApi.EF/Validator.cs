@@ -62,6 +62,18 @@ namespace FluentApi.EF
             }
         }
 
+        public static bool IsAddressValid(string address)
+        {
+            if (String.IsNullOrWhiteSpace(address))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         /// <summary>
         /// Checks if the provided name is valid.
         /// </summary>
