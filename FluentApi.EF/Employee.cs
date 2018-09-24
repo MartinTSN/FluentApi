@@ -301,6 +301,12 @@ namespace FluentApi.EF
 
         public int? TeamId { get; set; }
 
+        [StringLength(100)]
+        public string WorkMail { get; set; }
+
+        [StringLength(25)]
+        public string WorkPhone { get; set; }
+
         public virtual ContactInfo ContactInfo { get; set; }
 
         public virtual Team Team { get; set; }

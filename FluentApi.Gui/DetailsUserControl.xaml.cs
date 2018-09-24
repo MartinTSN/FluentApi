@@ -40,15 +40,20 @@ namespace FluentApi.Gui
 
             if (selectedProject != null)
             {
+                textBoxProjectTeamSalary.Text = String.Empty;
                 textBoxProjectSalary.Text = GetProjectPayments().ToString();
-                if (selectedTeam != null)
-                {
-                    textBoxProjectTeamSalary.Text = selectedTeam.Budget.ToString();
-                }
-                else
-                {
-                    dataGridTeams.ItemsSource = selectedProject.Teams;
-                }
+                dataGridTeams.ItemsSource = selectedProject.Teams;
+
+            }
+        }
+
+        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+
+            if (selectedTeam != null)
+            {
+                textBoxProjectTeamSalary.Text = selectedTeam.Budget.ToString();
             }
         }
 
@@ -79,11 +84,10 @@ namespace FluentApi.Gui
             return projectPayments;
         }
 
-        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedTeam = dataGridTeams.SelectedItem as Team;
-        }
-
+        /// <summary>
+        /// Gets the total amount it costs to have every project running.
+        /// </summary>
+        /// <returns>The total cost of every project.</returns>
         private decimal GetAllPayments()
         {
             decimal allPayments = 0;
