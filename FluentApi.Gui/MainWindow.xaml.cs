@@ -27,6 +27,16 @@ namespace FluentApi.Gui
             userControlTeams.Content = new TeamsUserControl();
             userControlProjects.Content = new ProjectsUserControl();
             userControlDetails.Content = new DetailsUserControl();
+            
+        }
+
+        private void OnTabSelected(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as TabItem;
+            if (tab != null)
+            {
+                userControlDetails.Content = new DetailsUserControl();
+            }
         }
     }
 }

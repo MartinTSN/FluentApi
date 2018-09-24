@@ -45,6 +45,7 @@
             </TabItem>
             <TabItem Header="Detaljer"
                      Padding="15,5"
+                     Selector.Selected="OnTabSelected"
                      x:Name="tabItemDetails">
                 <UserControl x:Name="userControlDetails" />
             </TabItem>
