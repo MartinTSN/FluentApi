@@ -198,6 +198,15 @@
                              IsReadOnly="True"
                              Text="{Binding WorkPhone}"
                              x:Name="textBoxWorkPhoneNumber" />
+                    <Label Content="Addresse: "
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           HorizontalAlignment="Right" />
+                    <TextBox Grid.Column="1"
+                             Grid.Row="2"
+                             Margin="3"
+                             Text="{Binding ContactInfo.Address}"
+                             x:Name="textBoxAddress" />
                     <Button Click="Button_Add_ContactInfo_Click"
                             Content="Gem Ny"
                             Grid.Column="2"

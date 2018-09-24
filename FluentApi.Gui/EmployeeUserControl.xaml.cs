@@ -232,7 +232,6 @@ namespace FluentApi.Gui
                         {
                             selectedEmployee.WorkPhone = textBoxWorkPhoneNumber.Text;
                         }
-                        
                         model.SaveChanges();
                         ReloadDataGridEmployees();
                     }
