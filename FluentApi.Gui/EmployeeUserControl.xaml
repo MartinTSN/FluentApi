@@ -31,10 +31,10 @@
                                             Binding="{Binding BirthDay, StringFormat=dd/MM/yyyy}" />
                         <DataGridTextColumn Header="Løn"
                                             Binding="{Binding Salary}" />
-                        <DataGridTextColumn Header="E-Mail"
-                                            Binding="{Binding ContactInfo.Email}" />
-                        <DataGridTextColumn Header="TelefonNummer"
-                                            Binding="{Binding ContactInfo.Phone}" />
+                        <DataGridTextColumn Header="Arbejds Mail"
+                                            Binding="{Binding WorkEmail}" />
+                        <DataGridTextColumn Header="Arbejds TelefonNummer"
+                                            Binding="{Binding WorkPhone}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
