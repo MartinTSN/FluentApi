@@ -39,6 +39,10 @@
                      Padding="15,5">
                 <UserControl x:Name="userControlProjects" />
             </TabItem>
+            <TabItem Header="Detaljer"
+                     Padding="15,5">
+                <UserControl x:Name="userControlDetails" />
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

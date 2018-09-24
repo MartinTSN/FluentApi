@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="FluentApi.Gui.DetailsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FluentApi.Gui"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="1"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      Margin="10"
+                      x:Name="dataGridProjects">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Projekt Navn"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Beskrivelse"
+                                        Binding="{Binding Description}" />
+                    <DataGridTextColumn Header="Start Dato"
+                                        Binding="{Binding StartDate,StringFormat=dd/MM/yyyy}" />
+                    <DataGridTextColumn Header="Slut Dato"
+                                        Binding="{Binding EndDate,StringFormat=ddd/MM/yyyy}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Margin="10, 5, 5, 5"
+                   VerticalAlignment="Center"
+                   Content="Alle projekters Løn: " />
+            <TextBox Grid.Column="1"
+                     Margin="10,30"
+                     IsReadOnly="True"
+                     x:Name="textBoxAllProjectsSalary" />
+            <Label Grid.Column="2"
+                   Margin="10, 5, 5, 5"
+                   VerticalAlignment="Center"
+                   Content="Valgte projekts Løn: " />
+            <TextBox Grid.Column="3"
+                     Margin="10,30"
+                     IsReadOnly="True"
+                     x:Name="textBoxProjectSalary" />
+            <Label Grid.Column="4"
+                   Margin="10, 5, 5, 5"
+                   VerticalAlignment="Center"
+                   Content="Valgte projekts team løn: " />
+            <TextBox Grid.Column="5"
+                     Margin="10,30"
+                     IsReadOnly="True"
+                     x:Name="textBoxProjectTeamSalary" />
+        </Grid>
+    </Grid>
+</UserControl>

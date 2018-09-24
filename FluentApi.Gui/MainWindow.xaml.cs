@@ -26,6 +26,7 @@ namespace FluentApi.Gui
             userControlEmployees.Content = new EmployeeUserControl();
             userControlTeams.Content = new TeamsUserControl();
             userControlProjects.Content = new ProjectsUserControl();
+            userControlDetails.Content = new DetailsUserControl();
         }
     }
 }
