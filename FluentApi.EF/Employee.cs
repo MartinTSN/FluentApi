@@ -133,7 +133,13 @@ namespace FluentApi.EF
         /// The Employee salary is stored here.
         /// </summary>
         private decimal salary;
+        /// <summary>
+        /// The Employee workMail is stored here.
+        /// </summary>
         private string workMail;
+        /// <summary>
+        /// The Employee workPhone is stored here.
+        /// </summary>
         private string workPhone;
 
         /// <summary>

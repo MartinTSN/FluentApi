@@ -18,6 +18,10 @@ namespace FluentApi.EF
         /// The e-Mail value is stored here.
         /// </summary>
         private string email;
+        /// <summary>
+        /// The address value is stored here.
+        /// </summary>
+        private string address;
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
@@ -93,7 +97,25 @@ namespace FluentApi.EF
             }
         }
 
-        public string Address { get; set; }
+        /// <summary>
+        /// Gets or sets the addres value. Validates it if set. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                if (!Validator.IsAddressValid(value))
+                {
+                    throw new ArgumentException("Invalid value provided");
+                }
+                address = value;
+            }
+        }
 
         public virtual Employee Employee { get; set; }
     }
