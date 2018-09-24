@@ -414,6 +414,28 @@ namespace FluentApi.Gui
             }
         }
 
+        private void TextBox_Address_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (selectedEmployee != null)
+            {
+                if (String.IsNullOrEmpty(textBoxAddress.Text))
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else if (selectedEmployee.ContactInfo == null)
+                {
+                    buttonAddContactInfo.IsEnabled = true;
+                    buttonUpdateContactInfo.IsEnabled = false;
+                }
+                else
+                {
+                    buttonAddContactInfo.IsEnabled = false;
+                    buttonUpdateContactInfo.IsEnabled = true;
+                }
+            }
+        }
+
         private void TextBox_EmployeeSalary_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (selectedEmployee != null)
