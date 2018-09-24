@@ -31,6 +31,17 @@ namespace FluentApi.Gui
             }
         }
 
+        private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedProject = dataGridProjects.SelectedItem as Project;
+
+            if (selectedProject != null)
+            {
+                textBoxProjectSalary.Text = GetProjectPayments().ToString();
+                textBoxProjectTeamSalary.Text = "0";
+                dataGridTeams.ItemsSource = selectedProject.Teams;
+            }
+        }
 
         /// <summary>
         /// Refils the DataGridProject with data.
@@ -39,6 +50,23 @@ namespace FluentApi.Gui
         private void ReloadDataGridProject()
         {
             dataGridProjects.ItemsSource = model.Projects.ToList();
+        }
+
+        /// <summary>
+        /// Gets the Total amount it costs to have every team in the project running.
+        /// </summary>
+        /// <returns>The total costs of the projects teams.</returns>
+        private decimal GetProjectPayments()
+        {
+            decimal projectPayments = 0;
+            if (selectedProject != null)
+            {
+                foreach (Team team in selectedProject.Teams)
+                {
+                    projectPayments += team.Budget;
+                }
+            }
+            return projectPayments;
         }
     }
 }

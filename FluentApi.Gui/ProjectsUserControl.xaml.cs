@@ -59,6 +59,7 @@ namespace FluentApi.Gui
                 }
             }
         }
+
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedProject = dataGridProjects.SelectedItem as Project;

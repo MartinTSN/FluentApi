@@ -26,23 +26,29 @@
                         Text="Klar."
                         x:Name="textBlockStatusBar" />
         </StatusBar>
-        <TabControl Margin="2">
+        <TabControl Margin="2"
+                    x:Name="tabControl">
             <TabItem Header="Ansatte"
-                     Padding="15,5">
+                     Padding="15,5"
+                     x:Name="tabItemEmployees">
                 <UserControl x:Name="userControlEmployees" />
             </TabItem>
             <TabItem Header="Hold"
-                     Padding="15,5">
+                     Padding="15,5"
+                     x:Name="tabItemTeams">
                 <UserControl x:Name="userControlTeams" />
             </TabItem>
             <TabItem Header="Projekter"
-                     Padding="15,5">
+                     Padding="15,5"
+                     x:Name="tabItemProjects">
                 <UserControl x:Name="userControlProjects" />
             </TabItem>
             <TabItem Header="Detaljer"
-                     Padding="15,5">
+                     Padding="15,5"
+                     x:Name="tabItemDetails">
                 <UserControl x:Name="userControlDetails" />
             </TabItem>
+
         </TabControl>
     </DockPanel>
 </Window>

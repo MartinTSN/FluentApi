@@ -14,15 +14,16 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1.5*" />
                 <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Column="1"
+            <DataGrid Grid.Column="0"
                       IsReadOnly="True"
                       AutoGenerateColumns="False"
                       Margin="10"
-                      x:Name="dataGridProjects">
+                      x:Name="dataGridProjects"
+                      SelectionChanged="DataGrid_Projects_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Projekt Navn"
                                         Binding="{Binding Name}" />
@@ -31,9 +32,24 @@
                     <DataGridTextColumn Header="Start Dato"
                                         Binding="{Binding StartDate,StringFormat=dd/MM/yyyy}" />
                     <DataGridTextColumn Header="Slut Dato"
-                                        Binding="{Binding EndDate,StringFormat=ddd/MM/yyyy}" />
+                                        Binding="{Binding EndDate,StringFormat=dd/MM/yyyy}" />
                 </DataGrid.Columns>
-
+            </DataGrid>
+            <DataGrid Grid.Column="2"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      Margin="10"
+                      x:Name="dataGridTeams">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Team Navn"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Beskrivelse"
+                                        Binding="{Binding Description}" />
+                    <DataGridTextColumn Header="Start Dato"
+                                        Binding="{Binding StartDate,StringFormat=dd/MM/yyyy}" />
+                    <DataGridTextColumn Header="Slut Dato"
+                                        Binding="{Binding ExpectedEndDate,StringFormat=dd/MM/yyyy}" />
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <Grid Grid.Row="1">
