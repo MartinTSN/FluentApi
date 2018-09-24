@@ -495,7 +495,7 @@ namespace FluentApi.Gui
         /// Generates a random phoneNumber.
         /// </summary>
         /// <returns>A phone number.</returns>
-        private string GeneratePhoneNumber()
+        private static string GeneratePhoneNumber()
         {
             Random number = new Random();
             string phoneNumber = "";

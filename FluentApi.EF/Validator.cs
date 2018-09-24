@@ -62,6 +62,11 @@ namespace FluentApi.EF
             }
         }
 
+        /// <summary>
+        /// Checks if the provided address is valid.
+        /// </summary>
+        /// <param name="address">A string address.</param>
+        /// <returns>Returns false if the validation isn't correct, true otherwise.</returns>
         public static bool IsAddressValid(string address)
         {
             if (String.IsNullOrWhiteSpace(address))
