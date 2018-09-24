@@ -17,6 +17,8 @@ namespace FluentApi.Gui
 
         private Project selectedProject;
 
+        private Team selectedTeam;
+
         public DetailsUserControl()
         {
             InitializeComponent();
@@ -24,6 +26,7 @@ namespace FluentApi.Gui
             try
             {
                 ReloadDataGridProject();
+                textBoxAllProjectsSalary.Text = GetAllPayments().ToString();
             }
             catch (Exception)
             {
@@ -38,8 +41,14 @@ namespace FluentApi.Gui
             if (selectedProject != null)
             {
                 textBoxProjectSalary.Text = GetProjectPayments().ToString();
-                textBoxProjectTeamSalary.Text = "0";
-                dataGridTeams.ItemsSource = selectedProject.Teams;
+                if (selectedTeam != null)
+                {
+                    textBoxProjectTeamSalary.Text = selectedTeam.Budget.ToString();
+                }
+                else
+                {
+                    dataGridTeams.ItemsSource = selectedProject.Teams;
+                }
             }
         }
 
@@ -66,7 +75,30 @@ namespace FluentApi.Gui
                     projectPayments += team.Budget;
                 }
             }
+
             return projectPayments;
+        }
+
+        private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedTeam = dataGridTeams.SelectedItem as Team;
+        }
+
+        private decimal GetAllPayments()
+        {
+            decimal allPayments = 0;
+
+
+            foreach (Project project in model.Projects.ToList())
+            {
+                decimal projectPayments = 0;
+                foreach (Team team in project.Teams)
+                {
+                    projectPayments += team.Budget;
+                }
+                allPayments += projectPayments;
+            }
+            return allPayments;
         }
     }
 }

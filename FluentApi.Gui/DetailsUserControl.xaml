@@ -39,7 +39,8 @@
                       IsReadOnly="True"
                       AutoGenerateColumns="False"
                       Margin="10"
-                      x:Name="dataGridTeams">
+                      x:Name="dataGridTeams"
+                      SelectionChanged="DataGrid_Teams_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Team Navn"
                                         Binding="{Binding Name}" />
