@@ -260,7 +260,7 @@ namespace FluentApi.Gui
             }
             else if (!Validator.IsAddressValid(textBoxAddress.Text))
             {
-                MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Husk at ZIP skal stå bagerst. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -298,7 +298,7 @@ namespace FluentApi.Gui
                 }
                 else if (!Validator.IsAddressValid(textBoxAddress.Text))
                 {
-                    MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Husk at ZIP skal stå bagerst Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {

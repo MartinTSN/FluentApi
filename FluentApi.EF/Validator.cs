@@ -68,6 +68,14 @@ namespace FluentApi.EF
             {
                 return false;
             }
+            else if (address.Length < 7)
+            {
+                return false;
+            }
+            else if (!address.Substring(address.Length -4).All(Char.IsNumber))
+            {
+                return false;
+            }
             else
             {
                 return true;
