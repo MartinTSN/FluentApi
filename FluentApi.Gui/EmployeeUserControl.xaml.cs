@@ -211,6 +211,10 @@ namespace FluentApi.Gui
                         {
                             selectedEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
                         }
+                        if (textBoxEmployeeSalary.Text != selectedEmployee.Salary.ToString())
+                        {
+                            selectedEmployee.Salary = textBoxEmployeeSalary.Text;
+                        }
                         if (textBoxCPR.Text != selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4))
                         {
                             selectedEmployee.CPRNumber = selectedEmployee.BirthDay.ToString("dd") + selectedEmployee.BirthDay.ToString("MM") + selectedEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR.Text;
