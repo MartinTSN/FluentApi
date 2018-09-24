@@ -133,6 +133,8 @@ namespace FluentApi.EF
         /// The Employee salary is stored here.
         /// </summary>
         private decimal salary;
+        private string workMail;
+        private string workPhone;
 
         /// <summary>
         /// Employee constructor with a firstName, lastName, birthDate, employmentDate, cprNumber and a salary.
@@ -301,11 +303,48 @@ namespace FluentApi.EF
 
         public int? TeamId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Work e-Mail value. Validates it if set. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         [StringLength(100)]
-        public string WorkMail { get; set; }
+        public string WorkMail
+        {
+            get
+            {
+                return workMail;
+            }
+            set
+            {
 
+                if (!Validator.IsEmailValid(value))
+                {
+                    throw new ArgumentException("Invalid value provided");
+                }
+                workMail = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the work phone value. Validates it if set. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         [StringLength(25)]
-        public string WorkPhone { get; set; }
+        public string WorkPhone
+        {
+            get
+            {
+                return workPhone;
+            }
+            set
+            {
+                if (!Validator.IsPhoneValid(value))
+                {
+                    throw new ArgumentException("Invalid value provided");
+                }
+                workPhone = value;
+            }
+        }
 
         public virtual ContactInfo ContactInfo { get; set; }
 

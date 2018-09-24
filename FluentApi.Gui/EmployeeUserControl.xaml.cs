@@ -85,6 +85,8 @@ namespace FluentApi.Gui
                     datePickerEmployeeStartDate.SelectedDate = selectedEmployee.EmploymentDate;
                     textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
                     textBoxCPR.Text = selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4);
+                    textBoxWorkMail.Text = selectedEmployee.WorkMail;
+                    textBoxWorkPhoneNumber.Text = selectedEmployee.WorkPhone;
                     if (selectedEmployee.ContactInfo != null)
                     {
                         textBoxMail.Text = selectedEmployee.ContactInfo.Email;
@@ -148,6 +150,13 @@ namespace FluentApi.Gui
                     newEmployee.EmploymentDate = datePickerEmployeeStartDate.SelectedDate.GetValueOrDefault();
                     newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR.Text;
                     newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
+                    newEmployee.WorkPhone = GeneratePhoneNumber();
+                    newEmployee.WorkMail = textBoxEmployeeFirstName.Text.Substring(0, 2).ToUpper() +
+                        textBoxEmployeeLastName.Text.Substring(textBoxEmployeeLastName.Text.Length - 2).ToUpper() +
+                        newEmployee.WorkPhone.Substring(newEmployee.WorkPhone.Length - 4) +
+                        "@aspit.dk";
+
+
                     model.Employees.Add(newEmployee);
                     model.SaveChanges();
                     ReloadDataGridEmployees();
@@ -219,6 +228,11 @@ namespace FluentApi.Gui
                         {
                             selectedEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
                         }
+                        if (textBoxWorkPhoneNumber.Text != selectedEmployee.WorkPhone)
+                        {
+                            selectedEmployee.WorkPhone = textBoxWorkPhoneNumber.Text;
+                        }
+                        
                         model.SaveChanges();
                         ReloadDataGridEmployees();
                     }
@@ -436,6 +450,21 @@ namespace FluentApi.Gui
         private void ReloadDataGridEmployees()
         {
             dataGridEmployees.ItemsSource = model.Employees.ToList();
+        }
+
+        /// <summary>
+        /// Generates a random phoneNumber.
+        /// </summary>
+        /// <returns>A phone number.</returns>
+        private string GeneratePhoneNumber()
+        {
+            Random number = new Random();
+            string phoneNumber = "";
+            for (int i = 1; i < 11; i++)
+            {
+                phoneNumber += number.Next(0, 9).ToString();
+            }
+            return phoneNumber;
         }
     }
 }

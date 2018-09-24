@@ -22,7 +22,7 @@ namespace FluentApi.EF
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the e-Mail value. Validates it if set. Returns an exception if something is wrong.
+        /// Gets or sets the personal e-Mail value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="ArgumentOutOfRangeException">Throws when the value is under 10 characters.</exception>
@@ -63,7 +63,7 @@ namespace FluentApi.EF
         }
 
         /// <summary>
-        /// Gets or sets the phone value. Validates it if set. Returns an exception if something is wrong.
+        /// Gets or sets the personal phone value. Validates it if set. Returns an exception if something is wrong.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         ///// <exception cref="FormatException">Throws when any character in the value is not a number.</exception>
