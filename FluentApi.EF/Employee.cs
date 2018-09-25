@@ -151,15 +151,19 @@ namespace FluentApi.EF
         /// <param name="employmentDate">A datetime employmentDate.</param>
         /// <param name="cprNumber">A string cprNumber.</param>
         /// <param name="salary">A decimal salary.</param>
+        /// <param name="workMail">A string mail.</param>
+        /// <param name="workPhone">A string phoneNumber</param>
         /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
         /// <remarks>Inherits from the person constructor with a firstName and lastName.</remarks>
-        public Employee(string firstName, string lastName, DateTime birthDay, DateTime employmentDate, string cprNumber, decimal salary)
+        public Employee(string firstName, string lastName, DateTime birthDay, DateTime employmentDate, string cprNumber, decimal salary, string workMail, string workPhone)
             : base(firstName, lastName)
         {
             BirthDay = birthDay;
             EmploymentDate = employmentDate;
             CPRNumber = cprNumber;
             Salary = salary;
+            WorkMail = workMail;
+            WorkPhone = workPhone;
         }
 
         /// <summary>
