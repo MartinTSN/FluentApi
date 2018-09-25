@@ -218,6 +218,14 @@ namespace FluentApi.EF
             }
         }
 
+        //public static bool IsMonthlyPaid(bool monthly, bool hourly)
+        //{
+        //    if ()
+        //    {
+
+        //    }
+        //}
+
         /// <summary>
         /// Checks if the provided description is valid.
         /// </summary>

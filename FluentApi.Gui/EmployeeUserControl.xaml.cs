@@ -64,6 +64,8 @@ namespace FluentApi.Gui
                         buttonUpdateEmployee.IsEnabled = false;
                         buttonUpdateContactInfo.IsEnabled = false;
                         buttonAddContactInfo.IsEnabled = false;
+                        radioButtonHourly.IsChecked = false;
+                        radioButtonMonthly.IsChecked = false;
                     }
                     catch (Exception)
                     {
@@ -90,6 +92,16 @@ namespace FluentApi.Gui
                     textBoxCPR.Text = selectedEmployee.CPRNumber.Substring(selectedEmployee.CPRNumber.Length - 4);
                     textBoxWorkMail.Text = selectedEmployee.WorkMail;
                     textBoxWorkPhoneNumber.Text = selectedEmployee.WorkPhone;
+                    if (selectedEmployee.IsHourlyPaid == false)
+                    {
+                        radioButtonMonthly.IsChecked = true;
+                        radioButtonHourly.IsChecked = false;
+                    }
+                    else
+                    {
+                        radioButtonHourly.IsChecked = true;
+                        radioButtonMonthly.IsChecked = false;
+                    }
                     if (selectedEmployee.ContactInfo != null)
                     {
                         textBoxMail.Text = selectedEmployee.ContactInfo.Email;
@@ -144,6 +156,10 @@ namespace FluentApi.Gui
             {
                 MessageBox.Show("Det indtastede Penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else if (radioButtonHourly.IsChecked == false && radioButtonMonthly.IsChecked == false)
+            {
+                MessageBox.Show("Du har ikke valgt om personen er time-lønnet eller måned-lønnet. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             else
             {
                 try
@@ -160,7 +176,14 @@ namespace FluentApi.Gui
                         textBoxEmployeeLastName.Text.Substring(textBoxEmployeeLastName.Text.Length - 2).ToUpper() +
                         newEmployee.WorkPhone.Substring(newEmployee.WorkPhone.Length - 4) +
                         "@aspit.dk";
-
+                    if (radioButtonMonthly.IsChecked == true)
+                    {
+                        newEmployee.IsHourlyPaid = false;
+                    }
+                    if (radioButtonHourly.IsChecked == true)
+                    {
+                        newEmployee.IsHourlyPaid = true;
+                    }
 
                     model.Employees.Add(newEmployee);
                     model.SaveChanges();
@@ -205,6 +228,10 @@ namespace FluentApi.Gui
                 {
                     MessageBox.Show("Det indtastede penge værdi er ikke gyldigt. Må kun indeholde tal og skal være positiv. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+                else if (radioButtonHourly.IsChecked == false && radioButtonMonthly.IsChecked == false)
+                {
+                    MessageBox.Show("Du har ikke valgt om personen er time-lønnet eller måned-lønnet. Prøv igen.", "Indtastningsfejl", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 else
                 {
                     try
@@ -236,6 +263,14 @@ namespace FluentApi.Gui
                         if (textBoxWorkPhoneNumber.Text != selectedEmployee.WorkPhone)
                         {
                             selectedEmployee.WorkPhone = textBoxWorkPhoneNumber.Text;
+                        }
+                        if (radioButtonMonthly.IsChecked == true)
+                        {
+                            selectedEmployee.IsHourlyPaid = false;
+                        }
+                        if (radioButtonHourly.IsChecked == true)
+                        {
+                            selectedEmployee.IsHourlyPaid = true;
                         }
                         model.SaveChanges();
                         ReloadDataGridEmployees();

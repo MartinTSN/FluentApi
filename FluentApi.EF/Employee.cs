@@ -356,6 +356,8 @@ namespace FluentApi.EF
             }
         }
 
+        public bool IsHourlyPaid { get; set; }
+
         public virtual ContactInfo ContactInfo { get; set; }
 
         public virtual Team Team { get; set; }
