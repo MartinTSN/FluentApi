@@ -73,6 +73,7 @@ namespace FluentApi.Gui
                     datePickerStartDate.SelectedDate = selectedTeam.StartDate;
                     datePickerEndDate.SelectedDate = selectedTeam.ExpectedEndDate;
                     textBoxTeamSalary.Text = SetTeamSalary().ToString();
+                    textBoxAddress.Text = selectedTeam.Address;
                     buttonEditTeam.IsEnabled = true;
                     buttonAddTeam.IsEnabled = false;
                 }
@@ -101,6 +102,7 @@ namespace FluentApi.Gui
                         textBoxTeamName.Text = String.Empty;
                         textBoxDescription.Text = String.Empty;
                         textBoxTeamSalary.Text = String.Empty;
+                        textBoxAddress.Text = String.Empty;
                         //                                           Datepicker
                         datePickerStartDate.SelectedDate = null;
                         datePickerEndDate.SelectedDate = null;
@@ -138,6 +140,10 @@ namespace FluentApi.Gui
             {
                 MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else if (!Validator.IsAddressValid(textBoxAddress.Text))
+            {
+                MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Husk at ZIP skal stå bagerst. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             else
             {
                 try
@@ -147,6 +153,7 @@ namespace FluentApi.Gui
                     newTeam.Description = textBoxDescription.Text;
                     newTeam.StartDate = datePickerStartDate.SelectedDate.Value;
                     newTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
+                    newTeam.Address = textBoxAddress.Text;
                     model.Teams.Add(newTeam);
                     model.SaveChanges();
                     ReloadDataGridTeams();
@@ -178,6 +185,10 @@ namespace FluentApi.Gui
                 {
                     MessageBox.Show("Den indtastede Slut-dato er ikke gyldigt. Skal være efter idag. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+                else if (!Validator.IsAddressValid(textBoxAddress.Text))
+                {
+                    MessageBox.Show("Den indtastede Addresse er ikke gyldigt. Husk at ZIP skal stå bagerst. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 else
                 {
                     try
@@ -197,6 +208,10 @@ namespace FluentApi.Gui
                         if (datePickerEndDate.SelectedDate != selectedTeam.ExpectedEndDate)
                         {
                             selectedTeam.ExpectedEndDate = datePickerEndDate.SelectedDate.Value;
+                        }
+                        if (textBoxAddress.Text != selectedTeam.Address)
+                        {
+                            selectedTeam.Address = textBoxAddress.Text;
                         }
                         model.SaveChanges();
                         ReloadDataGridTeams();

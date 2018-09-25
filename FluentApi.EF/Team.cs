@@ -30,6 +30,10 @@ namespace FluentApi.EF
         /// The Team-budget value is stored here.
         /// </summary>
         private decimal budget;
+        /// <summary>
+        /// The Team-address value is stored here.
+        /// </summary>
+        private string address;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Team()
@@ -188,6 +192,26 @@ namespace FluentApi.EF
                     throw new ArgumentException("Invalid value provided");
                 }
                 budget = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the addres value. Validates it if set. Returns an exception if something is wrong.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when an invalid value is provided.</exception>
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                if (!Validator.IsAddressValid(value))
+                {
+                    throw new ArgumentException("Invalid value provided");
+                }
+                address = value;
             }
         }
 
