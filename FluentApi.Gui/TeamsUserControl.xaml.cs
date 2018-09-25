@@ -124,6 +124,10 @@ namespace FluentApi.Gui
 
         private void Button_AddTeam_Click(object sender, RoutedEventArgs e)
         {
+            if (textBoxAddress.Text.EndsWith(" "))
+            {
+                textBoxAddress.Text = textBoxAddress.Text.TrimEnd(' ');
+            }
             if (!Validator.IsNameValid(textBoxTeamName.Text))
             {
                 MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -169,6 +173,10 @@ namespace FluentApi.Gui
         {
             if (selectedTeam != null)
             {
+                if (textBoxAddress.Text.EndsWith(" "))
+                {
+                    textBoxAddress.Text = textBoxAddress.Text.TrimEnd(' ');
+                }
                 if (!Validator.IsNameValid(textBoxTeamName.Text))
                 {
                     MessageBox.Show("Det indtastede Team-navn er ikke gyldigt. Må kun indeholde bogstaver og mellemrum. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);

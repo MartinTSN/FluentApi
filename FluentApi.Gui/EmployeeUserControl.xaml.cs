@@ -250,6 +250,10 @@ namespace FluentApi.Gui
 
         private void Button_Add_ContactInfo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (textBoxAddress.Text.EndsWith(" "))
+            {
+                textBoxAddress.Text = textBoxAddress.Text.TrimEnd(' ');
+            }
             if (!Validator.IsEmailValid(textBoxMail.Text))
             {
                 MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -288,6 +292,10 @@ namespace FluentApi.Gui
         {
             if (selectedEmployee != null)
             {
+                if (textBoxAddress.Text.EndsWith(" "))
+                {
+                    textBoxAddress.Text = textBoxAddress.Text.TrimEnd(' ');
+                }
                 if (!Validator.IsEmailValid(textBoxMail.Text))
                 {
                     MessageBox.Show("Den indtastede mail er ikke gyldigt. Skal have @, en domæneslutning og noget i mellem de 2. Prøv igen.", "Indtastningsfejl.", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -499,7 +507,7 @@ namespace FluentApi.Gui
         {
             Random number = new Random();
             string phoneNumber = "";
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 9; i++)
             {
                 phoneNumber += number.Next(0, 9).ToString();
             }

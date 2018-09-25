@@ -32,7 +32,7 @@
                         <DataGridTextColumn Header="Løn"
                                             Binding="{Binding Salary}" />
                         <DataGridTextColumn Header="Arbejds Mail"
-                                            Binding="{Binding WorkEmail}" />
+                                            Binding="{Binding WorkMail}" />
                         <DataGridTextColumn Header="Arbejds TelefonNummer"
                                             Binding="{Binding WorkPhone}" />
                     </DataGrid.Columns>

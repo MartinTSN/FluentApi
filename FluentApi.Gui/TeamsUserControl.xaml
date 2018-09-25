@@ -52,7 +52,7 @@
                         <DataGridTextColumn Header="Løn"
                                             Binding="{Binding Salary}" />
                         <DataGridTextColumn Header="E-Mail"
-                                            Binding="{Binding ContactInfo.Email}" />
+                                            Binding="{Binding WorkMail}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
