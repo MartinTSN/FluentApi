@@ -183,6 +183,7 @@ namespace FluentApi.Gui
                     if (radioButtonHourly.IsChecked == true)
                     {
                         newEmployee.IsHourlyPaid = true;
+                        newEmployee.HoursWorked = 0.0m;
                     }
 
                     model.Employees.Add(newEmployee);
@@ -271,6 +272,10 @@ namespace FluentApi.Gui
                         if (radioButtonHourly.IsChecked == true)
                         {
                             selectedEmployee.IsHourlyPaid = true;
+                            if (selectedEmployee.HoursWorked == null)
+                            {
+                                selectedEmployee.HoursWorked = 0.0m;
+                            }
                         }
                         model.SaveChanges();
                         ReloadDataGridEmployees();
