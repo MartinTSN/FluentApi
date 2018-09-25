@@ -23,10 +23,9 @@
                 <DataGrid AutoGenerateColumns="False"
                           Grid.Row="0"
                           IsReadOnly="True"
-                          KeyDown="DataGrid_Teams_KeyDown"
                           Margin="10"
-                          SelectionChanged="DataGrid_Teams_SelectionChanged"
-                          x:Name="dataGridTeams">
+                          x:Name="dataGridTeams"
+                          SelectionChanged="DataGrid_Teams_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team Navn"
                                             Binding="{Binding Name}" />
@@ -38,7 +37,8 @@
                           IsReadOnly="True"
                           Grid.Row="1"
                           Margin="10"
-                          x:Name="dataGridEmployees">
+                          x:Name="dataGridEmployees"
+                          SelectionChanged="DataGrid_Employees_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Fornavn"
                                             Binding="{Binding FirstName}" />
@@ -109,6 +109,22 @@
                          Margin="3"
                          Text="{Binding Salary}"
                          x:Name="textBoxEmployeeHoursWorked" />
+                <Button Grid.Row="2"
+                        Grid.Column="2"
+                        Margin="3"
+                        x:Name="buttonEditEmployee"
+                        Click="Button_EditEmployee_Click">
+                    <TextBlock TextAlignment="Center"
+                               TextWrapping="Wrap">Rediger Ansat</TextBlock>
+                </Button>
+                <Button Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="3"
+                        x:Name="buttonShowAllTeams"
+                        Click="ButtonShowAll_Teams_Click">
+                    <TextBlock TextAlignment="Center"
+                               TextWrapping="Wrap">Vis alle Teams</TextBlock>
+                </Button>
             </Grid>
         </GroupBox>
     </Grid>

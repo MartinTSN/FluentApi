@@ -77,7 +77,7 @@ namespace FluentApi.EF
             {
                 return false;
             }
-            else if (!address.Substring(address.Length -4).All(Char.IsNumber))
+            else if (!address.Substring(address.Length - 4).All(Char.IsNumber))
             {
                 return false;
             }
@@ -218,13 +218,21 @@ namespace FluentApi.EF
             }
         }
 
-        //public static bool IsMonthlyPaid(bool monthly, bool hourly)
-        //{
-        //    if ()
-        //    {
-
-        //    }
-        //}
+        public static bool IsTimeValid(decimal time)
+        {
+            if (time < 0.0m)
+            {
+                return false;
+            }
+            else if (time > 632.0m)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         /// <summary>
         /// Checks if the provided description is valid.
