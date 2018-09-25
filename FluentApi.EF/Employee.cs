@@ -358,6 +358,9 @@ namespace FluentApi.EF
 
         public bool IsHourlyPaid { get; set; }
 
+        [Column("HoursWorked")]
+        public decimal? HoursWorked { get; set; }
+
         public virtual ContactInfo ContactInfo { get; set; }
 
         public virtual Team Team { get; set; }

@@ -24,6 +24,10 @@ namespace FluentApi.EF
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Employee>()
+                .Property(e => e.HoursWorked)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Employee>()
                 .HasOptional(e => e.ContactInfo)
                 .WithRequired(e => e.Employee);
 
