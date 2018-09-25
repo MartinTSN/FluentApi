@@ -43,9 +43,14 @@
                      x:Name="tabItemProjects">
                 <UserControl x:Name="userControlProjects" />
             </TabItem>
+            <TabItem Padding="15,5"
+                     Header="TidsRegistering"
+                     Selector.Selected="OnTabSelectedTime">
+                <UserControl x:Name="userControlTime" />
+            </TabItem>
             <TabItem Header="Detaljer"
                      Padding="15,5"
-                     Selector.Selected="OnTabSelected"
+                     Selector.Selected="OnTabSelectedDetails"
                      x:Name="tabItemDetails">
                 <UserControl x:Name="userControlDetails" />
             </TabItem>
