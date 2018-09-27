@@ -356,7 +356,14 @@ namespace FluentApi.Gui
             selectedTeam.Budget = 0;
             foreach (Employee employee in selectedTeam.Employees)
             {
-                selectedTeam.Budget += employee.Salary;
+                if (employee.IsHourlyPaid == true)
+                {
+                    selectedTeam.Budget += employee.Salary * employee.HoursWorked.Value;
+                }
+                else
+                {
+                    selectedTeam.Budget += employee.Salary;
+                }
             }
             model.SaveChanges();
             return selectedTeam.Budget;

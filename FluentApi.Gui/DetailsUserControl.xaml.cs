@@ -14,9 +14,13 @@ namespace FluentApi.Gui
     public partial class DetailsUserControl : UserControl
     {
         protected Model model;
-
+        /// <summary>
+        /// The currently selected project.
+        /// </summary>
         private Project selectedProject;
-
+        /// <summary>
+        /// The currently selected team.
+        /// </summary>
         private Team selectedTeam;
 
         public DetailsUserControl()
@@ -56,6 +60,8 @@ namespace FluentApi.Gui
                 textBoxProjectTeamSalary.Text = selectedTeam.Budget.ToString();
             }
         }
+
+        //                                              Methods
 
         /// <summary>
         /// Refils the DataGridProject with data.

@@ -37,24 +37,6 @@ namespace FluentApi.Gui
             }
         }
 
-        /// <summary>
-        /// Refils the DataGridEmployees with data.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when the model.Employees is null.</exception>
-        private void ReloadDataGridEmployees()
-        {
-            dataGridEmployees.ItemsSource = model.Employees.Where(employee => employee.IsHourlyPaid == true).Where(employee => employee.TeamId != null).ToList();
-        }
-
-        /// <summary>
-        /// Refils the DataGridTeams with data.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when the model.Teams is null.</exception>
-        private void ReloadDataGridTeams()
-        {
-            dataGridTeams.ItemsSource = model.Teams.Where(team => team.Employees.Count != 0).Where(team => team.Employees.Where(employee => employee.IsHourlyPaid == true).ToList().Count > 0).ToList();
-        }
-
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
@@ -75,6 +57,8 @@ namespace FluentApi.Gui
                 textBoxEmployeeSalary.Text = selectedEmployee.Salary.ToString();
             }
         }
+
+        //                                      Buttons
 
         private void Button_EditEmployee_Click(object sender, RoutedEventArgs e)
         {
@@ -127,6 +111,26 @@ namespace FluentApi.Gui
             {
                 MessageBox.Show("Der skete en uventet fejl under forsøget i at vise alle teams. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
+        }
+
+        //                                                  Methods
+
+        /// <summary>
+        /// Refils the DataGridEmployees with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Employees is null.</exception>
+        private void ReloadDataGridEmployees()
+        {
+            dataGridEmployees.ItemsSource = model.Employees.Where(employee => employee.IsHourlyPaid == true).Where(employee => employee.TeamId != null).ToList();
+        }
+
+        /// <summary>
+        /// Refils the DataGridTeams with data.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when the model.Teams is null.</exception>
+        private void ReloadDataGridTeams()
+        {
+            dataGridTeams.ItemsSource = model.Teams.Where(team => team.Employees.Count != 0).Where(team => team.Employees.Where(employee => employee.IsHourlyPaid == true).ToList().Count > 0).ToList();
         }
     }
 }
