@@ -106,6 +106,7 @@ namespace FluentApi.Gui
                 textBoxEmployeeLastName.Text = String.Empty;
                 textBoxEmployeeHoursWorked.Text = String.Empty;
                 textBoxEmployeeSalary.Text = String.Empty;
+                dataGridEmployees.ItemsSource = null;
             }
             catch (Exception)
             {
