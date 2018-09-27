@@ -177,9 +177,9 @@ namespace FluentApi.Gui
                         newEmployee.WorkPhone = GeneratePhoneNumber();
                     }
                     newEmployee.WorkMail = textBoxEmployeeFirstName.Text.Substring(0, 2).ToUpper() +
-                        textBoxEmployeeLastName.Text.Substring(textBoxEmployeeLastName.Text.Length - 2).ToUpper() +
-                        newEmployee.WorkPhone.Substring(newEmployee.WorkPhone.Length - 4) +
-                        "@aspit.dk";
+                     textBoxEmployeeLastName.Text.Substring(textBoxEmployeeLastName.Text.Length - 2).ToUpper() +
+                     newEmployee.WorkPhone.Substring(newEmployee.WorkPhone.Length - 4) +
+                     "@aspit.dk";
                     if (model.Employees.Any(employee => employee.WorkMail == newEmployee.WorkMail))
                     {
                         newEmployee.WorkMail = textBoxEmployeeFirstName.Text.Substring(0, 2).ToUpper() +

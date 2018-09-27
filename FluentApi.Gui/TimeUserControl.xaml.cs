@@ -84,7 +84,6 @@ namespace FluentApi.Gui
                         {
                             selectedEmployee.HoursWorked = Decimal.Parse(textBoxEmployeeHoursWorked.Text);
                         }
-
                         if (selectedTeam != null)
                         {
                             selectedTeam.Budget = 0;

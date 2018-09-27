@@ -63,7 +63,6 @@ namespace FluentApi.Gui
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedProject = dataGridProjects.SelectedItem as Project;
-
             if (selectedTeam != null)
             {
                 buttonAddToProject.IsEnabled = true;
@@ -88,9 +87,7 @@ namespace FluentApi.Gui
                     textBoxBudgetLimit.Text = selectedProject.BudgetLimit.ToString();
                     buttonEditProject.IsEnabled = true;
                     buttonAddProject.IsEnabled = false;
-
                     textBoxProjectBudget.Text = GetProjectPayments().ToString();
-
                 }
                 catch (Exception)
                 {
@@ -133,7 +130,7 @@ namespace FluentApi.Gui
                 }
             }
         }
-        
+
         //                          Button Events
 
         private void Button_AddProject_Click(object sender, RoutedEventArgs e)
@@ -240,7 +237,6 @@ namespace FluentApi.Gui
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
             selectedProject = dataGridProjects.SelectedItem as Project;
-
             if (selectedTeam.Budget > (selectedProject.BudgetLimit - GetProjectPayments()))
             {
                 MessageBox.Show("Du kan ikke tilføje et team som gør at bugettet går over grænsen. Prøv igen.", "Vælg en anden.", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -269,7 +265,6 @@ namespace FluentApi.Gui
                         MessageBox.Show("Der skete en uventet fejl. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
                     }
                 }
-
                 try
                 {
                     model.SaveChanges();
@@ -292,7 +287,6 @@ namespace FluentApi.Gui
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
             selectedProject = dataGridProjects.SelectedItem as Project;
-
             if (selectedTeam != null && selectedProject != null)
             {
                 foreach (Team team in selectedProject.Teams)
@@ -349,7 +343,7 @@ namespace FluentApi.Gui
                 MessageBox.Show("Der skete en uventet fejl Under forsøget i at vise alle ledige teams. Prøv igen.", "Uventet fejl.", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
-        
+
         //                                      Methods
 
         /// <summary>

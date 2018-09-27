@@ -41,20 +41,17 @@ namespace FluentApi.Gui
         private void DataGrid_Projects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedProject = dataGridProjects.SelectedItem as Project;
-
             if (selectedProject != null)
             {
                 textBoxProjectTeamSalary.Text = String.Empty;
                 textBoxProjectSalary.Text = GetProjectPayments().ToString();
                 dataGridTeams.ItemsSource = selectedProject.Teams;
-
             }
         }
 
         private void DataGrid_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTeam = dataGridTeams.SelectedItem as Team;
-
             if (selectedTeam != null)
             {
                 textBoxProjectTeamSalary.Text = selectedTeam.Budget.ToString();
@@ -86,7 +83,6 @@ namespace FluentApi.Gui
                     projectPayments += team.Budget;
                 }
             }
-
             return projectPayments;
         }
 
@@ -97,8 +93,6 @@ namespace FluentApi.Gui
         private decimal GetAllPayments()
         {
             decimal allPayments = 0;
-
-
             foreach (Project project in model.Projects.ToList())
             {
                 decimal projectPayments = 0;
