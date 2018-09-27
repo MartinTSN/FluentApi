@@ -218,6 +218,11 @@ namespace FluentApi.EF
             }
         }
 
+        /// <summary>
+        /// Checks if the provided amount of time is valid.
+        /// </summary>
+        /// <param name="time">A decimal time value.</param>
+        /// <returns>Returns false if the validation isn't correct, true otherwise.</returns>
         public static bool IsTimeValid(decimal time)
         {
             if (time < 0.0m)

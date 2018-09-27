@@ -172,10 +172,21 @@ namespace FluentApi.Gui
                     newEmployee.CPRNumber = newEmployee.BirthDay.ToString("dd") + newEmployee.BirthDay.ToString("MM") + newEmployee.BirthDay.ToString("yy") + "-" + textBoxCPR.Text;
                     newEmployee.Salary = Decimal.Parse(textBoxEmployeeSalary.Text);
                     newEmployee.WorkPhone = GeneratePhoneNumber();
+                    while (model.Employees.Any(employee => employee.WorkPhone == newEmployee.WorkPhone))
+                    {
+                        newEmployee.WorkPhone = GeneratePhoneNumber();
+                    }
                     newEmployee.WorkMail = textBoxEmployeeFirstName.Text.Substring(0, 2).ToUpper() +
                         textBoxEmployeeLastName.Text.Substring(textBoxEmployeeLastName.Text.Length - 2).ToUpper() +
                         newEmployee.WorkPhone.Substring(newEmployee.WorkPhone.Length - 4) +
                         "@aspit.dk";
+                    if (model.Employees.Any(employee => employee.WorkMail == newEmployee.WorkMail))
+                    {
+                        newEmployee.WorkMail = textBoxEmployeeFirstName.Text.Substring(0, 2).ToUpper() +
+                           textBoxEmployeeLastName.Text.Substring(textBoxEmployeeLastName.Text.Length - 2).ToUpper() +
+                           GeneratePhoneNumber().Substring(GeneratePhoneNumber().ToString().Length - 4) +
+                           "@aspit.dk";
+                    }
                     if (radioButtonMonthly.IsChecked == true)
                     {
                         newEmployee.IsHourlyPaid = false;
@@ -185,7 +196,6 @@ namespace FluentApi.Gui
                         newEmployee.IsHourlyPaid = true;
                         newEmployee.HoursWorked = 0.0m;
                     }
-
                     model.Employees.Add(newEmployee);
                     model.SaveChanges();
                     ReloadDataGridEmployees();

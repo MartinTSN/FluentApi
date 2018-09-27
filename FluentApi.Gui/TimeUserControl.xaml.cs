@@ -84,6 +84,22 @@ namespace FluentApi.Gui
                         {
                             selectedEmployee.HoursWorked = Decimal.Parse(textBoxEmployeeHoursWorked.Text);
                         }
+
+                        if (selectedTeam != null)
+                        {
+                            selectedTeam.Budget = 0;
+                            foreach (Employee employee in selectedTeam.Employees)
+                            {
+                                if (employee.IsHourlyPaid == true)
+                                {
+                                    selectedTeam.Budget += employee.Salary * employee.HoursWorked.Value;
+                                }
+                                else
+                                {
+                                    selectedTeam.Budget += employee.Salary;
+                                }
+                            }
+                        }
                         model.SaveChanges();
                         dataGridEmployees.ItemsSource = selectedTeam.Employees.Where(employee => employee.IsHourlyPaid == true);
                     }
