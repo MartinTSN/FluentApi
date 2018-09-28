@@ -132,7 +132,7 @@ namespace FluentApi.Gui
         //                                                  Methods
 
         /// <summary>
-        /// Refils the DataGridEmployees with data.
+        /// Refils the DataGridEmployees with employees that is hourly paid and is on a team.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown when the model.Employees is null.</exception>
         private void ReloadDataGridEmployees()
@@ -141,7 +141,7 @@ namespace FluentApi.Gui
         }
 
         /// <summary>
-        /// Refils the DataGridTeams with data.
+        /// Refils the DataGridTeams with teams that have a employee thats hourly paid.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown when the model.Teams is null.</exception>
         private void ReloadDataGridTeams()
