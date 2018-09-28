@@ -349,6 +349,7 @@ namespace FluentApi.Gui
         /// <summary>
         /// Sets the TeamSalary to every employee's salary put together.
         /// </summary>
+        /// <remarks>If an employee is hourly paid it's the employee's pay times the amount of hours.</remarks>
         /// <returns>The selected team's budget.</returns>
         private decimal SetTeamSalary()
         {

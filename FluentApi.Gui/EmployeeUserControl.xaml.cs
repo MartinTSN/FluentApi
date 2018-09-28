@@ -550,7 +550,7 @@ namespace FluentApi.Gui
         }
 
         /// <summary>
-        /// Generates a random phoneNumber.
+        /// Generates a random 8 digit phoneNumber.
         /// </summary>
         /// <returns>A phone number.</returns>
         private static string GeneratePhoneNumber()
