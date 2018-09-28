@@ -47,5 +47,10 @@ namespace FluentApi.Gui
                 userControlTime.Content = new TimeUserControl();
             }
         }
+
+        private void MenuItem_Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
